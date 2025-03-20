@@ -35,6 +35,22 @@ The alternative currency in which the fare and taxes amount needs to be displaye
 
 The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. Please refer to the "Highlights" section below for further information.
 
+**`realTimeBaggage`  **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+
+Whether to request realtime luggage price:
+
+0: False
+
+1: True
+
+Default: 0
+
+**`maxResponseTime`  **<mark style="color:blue;">**int**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+
+The maximum response time for the API, in milliseconds. The API will return an accurate quote within this duration. If the processing exceeds this duration, the system will return a standard quote directly.
+
+Default: 15000
+
 **`requestSource` **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
 
  The tag to identify which channel does this traffic come from.
@@ -47,7 +63,9 @@ For example: SkyScanner,Google,Oganic search,etc…
 {
   "cid": "ttxzp62405",
   "routingIdentifier": "EXsU8XSpfLYTSaQTVCjrJMJvG/ysDtKYfq1WIi9iKV3RuKGQWRYoLHwlk3d3nfx3CfcndJLEJ0OelZh4CJOznF9aTBiw3WJrCv1w5tPrnLqsrzEwGf6LU4JnimIHlZ8g9Mbw9o1UAsRxu28yDTH1sxCUiQXhe9aQqCnWwMFh28gA/nj6IKNh5/yz0GWbBL6s1yDekyABUkLWmuWriKG76AcSFeTleOVJEjXfFd3mUvpZJe1wsRs5TI/Nma2Sz/cOdhAjhrTIFnOMJEKInVplSW3JYquYRVlKPNaFSuoF5K7IHGWlTR0X2vJysOfDQQZWR7Qv1wj0wUrE1kfV4vUrurLMbC/8XlxjYBc7iz9giHkbTb9r/K5/eabN+BX2cuBjtcmNH0T9SwZdxpCXnsjGxdC6wjGifmzacvdkADFsgfWzqaR6+aEfwt4jQKkit64X8IoXcz9XqDadvtpoFyrQz1tXYb6UK8+doiventK1gdc8oJQnVwpWZNzAt1C0KiFMpLq+sZhmvMISTO8EV73ewgLIMtqPFERy6YPlLhv9P5f1GEmT5TthTQ==",
-  "displayCurrency": "PHP"
+  "displayCurrency": "PHP",
+  "realtimeLuggage": 1,
+  "maxResponseTime": 5000
 }
 ```
 {% endtab %}
