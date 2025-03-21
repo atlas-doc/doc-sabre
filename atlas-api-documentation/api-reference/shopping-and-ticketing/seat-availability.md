@@ -14,9 +14,13 @@ Verify function should be called in prior to this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **sessionId **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Identifier of the search response.
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier for retrieving seat map information.  
+- **Constraints:** Must be a valid UUID.  
+- **Default:** None  
+- **Example:** "eb3c94a7-ede4-4675-a7bb-a99ba1e10223"  
 
     **Please note that the sessionID needs to be the same throughout the order.**
 
@@ -35,102 +39,166 @@ Verify function should be called in prior to this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **segmentIndex **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
+## **cabins**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of cabin details per segment.  
+- **Constraints:** Must contain at least one cabin entry.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    Flight segment for which seat map is returned.
-*   **cabin **<mark style="color:blue;">**Object**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **cabins.segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Flight segment for which seat map is returned.
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** 1  
 
-    This is a list and will be repeated once for upper deck and once for the main deck when the requested cabin is spread across the upper and main deck.
-*   **deck **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **cabins.cabin**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Cabin details, including deck and seat arrangement. This is a list and will be repeated once for upper deck and once for the main deck when the requested cabin is spread across the upper and main deck.
+- **Constraints:** Must contain valid seat information.  
+- **Default:** None  
+- **Example:** {...}  
 
-    “Upper deck”: Upper deck
+### **cabin.deck**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Deck level of the cabin.  
 
-    “Main”: Main deck (default)
-*   **cabinClass **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  Valid values:
 
-    Service grade of the fare
+  “Upper deck”: Upper deck
 
-    1 : Economy
+  “Main”: Main deck (default)
+- **Constraints:** Must be a valid deck name.  
+- **Default:** "main"  
+- **Example:** "main"  
 
-    2 : Business
+### **cabin.cabinClass**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:**  Service grade of the fare.
 
-    3 : First Class
+  Valid values:
 
-    4:  Premium Economy
-*   **cabinLayout **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  1 : Economy
 
-    Cabin layout detail.
-*   **columns **<mark style="color:blue;">**Object**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  2 : Business
 
-    Contains columns and seat information for seat display purposes. Returns the characteristics for each column.
-*   **designator **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  3 : First Class
 
-    identify a seat column position on an aircraft
+  4:  Premium Economy
+- **Constraints:** Must be a positive integer.  
+- **Default:** 1  
+- **Example:** 1  
 
-    **Example**: A,B,C,D,E,F
-*   **characteristics **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **cabin.cabinLayout**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Layout of the cabin, including seat rows and columns.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** {...}  
 
-    Characteristics of column
+### **cabinLayout.columns**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of column identifiers and their characteristics. Contains columns and seat information for seat display purposes. Returns the characteristics for each column.  
+- **Constraints:** Must contain at least one column entry.  
+- **Default:** None  
+- **Example:** [{"designator": "A", "characteristics": "W"}]  
 
-    A: column by the aisle
+#### **cabinLayout.columns.designator**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Column designator for seat arrangement. This identifies a seat column position on an aircraft.  
+- **Constraints:** Must be a valid character.  
+- **Default:** None  
+- **Example:** "F"  
 
-    M: middle column
+#### **cabinLayout.columns.characteristics**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Characteristics of the seat column.
 
-    W: column by the window
-*   **rows **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  Valid values:
 
-    Contains rows and seat information for seat display purposes. Returns the starting end row position for each column.
-*   **first **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-    Contains rows and seat information for seat display purposes. Returns the starting end row position for each column.
+  A: column by the aisle
 
-    First row number
+  M: middle column  
 
-    **Example**: 20
-*   **last **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  W: column by the window
+- **Constraints:** Must be a valid identifier (e.g., W for Window, A for Aisle).  
+- **Default:** None  
+- **Example:** "A"  
 
-    last row number
 
-    **Example**: 43
-*   **exitRowPosition **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **cabinLayout.rows**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Defines the first and last row numbers in the cabin.  
+- **Constraints:** Must contain valid row numbers.  
+- **Default:** None  
+- **Example:** {"first": 4, "last": 20}  
 
-    Returns the exit row information, if applicable. This must be returned regardless of whether exit row seats are open or are returned as valid seats.
-*   **first **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **cabinLayout.exitRowPositions**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** Returns the exit row information, if applicable. This must be returned regardless of whether exit row seats are open or are returned as valid seats.
+- **Constraints:** Must contain valid row numbers.  
+- **Default:** None  
+- **Example:** [{"first": 4, "last": 5}]  
 
-    Exit seat starting row position
+### **cabin.rows**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of seat rows and their characteristics.  
+- **Constraints:** Must contain at least one row.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    **Example**: 29
-*   **last **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+#### **rows.number**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Seat row number in the cabin.  
+- **Constraints:** Must be a valid row number.  
+- **Default:** None  
+- **Example:** 4  
 
-    Exit seat ending row position
+### **rows.seats**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of seats in the row with their details.  
+- **Constraints:** Must contain at least one seat.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    **Example**: 30
-*   **rows **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **seats.column**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Column identifier for the seat.  
+- **Constraints:** Must be a valid column designator.  
+- **Default:** None  
+- **Example:** "A"  
 
-    Seat row, containing individual Seat instances.
-*   **number **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **seats.seatStatus**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Availability status of the seat.  
+- **Constraints:** "F" for free, "O" for occupied.  
+- **Default:** None  
+- **Example:** "F"  
 
-    Seat row number.
+### **seats.seatCharacteristics**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** Characteristics of the seat (e.g., Window, Aisle).
 
-    **Example**: 2
-*   **seat **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:green;">**Required**</mark>
+    Valid values:
 
-    Seat column to identify a particular seat position on an aircraft.
-*   **column **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Seat column.
-
-    **Example**: A
-*   **seatStatus **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Seat status
-
-    F: Free
-
-    O: Occupied
-*   **seatCharacteristics **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Seat Characteristic
-    
     A: Aisle seat
     
     E: Exit and emergency exit
@@ -145,37 +213,86 @@ Verify function should be called in prior to this call.
     
     V：Seat to be left vacant or offered last
     
-    W:  Window seat
+    W:  Window seat  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** ["W", "L", "E"]  
+
+**Example**: refer to IATA definition from codeset 9825, reference 825
     
-    **Example**: refer to IATA definition from codeset 9825, reference 825
-    
-    **Document link**: https://pnr.lt/Failai/Code set Directory v13 2.pdf
-*   **price **<mark style="color:blue;">**Decimal**</mark>**  **<mark style="color:green;">**Required**</mark>
+**Document link**: https://pnr.lt/Failai/Code set Directory v13 2.pdf
 
-    Price of the seat
-*   **currency **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **seats.price**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the seat.
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 23.52  
 
-    Currency of the price.
-*   **vendorPrice **<mark style="color:blue;">**Decimal**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **seats.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency for the seat price.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None
+- **Example:** "USD"  
 
-    The price charged by the vendor for the seat.
-*   **vendorCurrency **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **seats.vendorPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the seat from the vendor.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 593907.25  
 
-    The currency in which your customers will do transaction with you.
-*   **productCode **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **seats.vendorCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Vendor's currency for the seat price.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** "VND"  
+- **Example:** "VND"  
 
-    Ancillary product code of seat, used in order
+### **seats.productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique product code for the seat selection. For seat, the format is SCI_SEAT_seatNumber_carrier_depAirport_arrAirport 
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "SCI_SEAT_4A_VJ_HND_SGN"  
 
-    For seat, the format is SCI_SEAT_seatNumber_carrier_depAirport_arrAirport
-    
-    **Example**: SCI_SEAT_C3_FR_KRK_LTN
-*   **displayPrice **<mark style="color:blue;">**Decimal**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **seats.displayCurrency**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Currency used for displaying seat price in the display currancy.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** null  
+- **Example:** "USD"  
 
-    Display price of the seat
-*   **displayCurrency **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **seats.displayPrice**
+- **Type:** Float  
+- **Required:** No  
+- **Description:** Seat price displayed in the display currency.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** null  
+- **Example:** 50.35  
 
-    Display price of the seat
+## **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code.  
+- **Constraints:** 0 indicates success.  
+- **Default:** 0  
+- **Example:** 0  
 
+## **msg**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Response message.  
+- **Constraints:** None  
+- **Default:** "success"  
+- **Example:** "success"
 {% endtab %}
 
 {% tab title="Samples" %}
