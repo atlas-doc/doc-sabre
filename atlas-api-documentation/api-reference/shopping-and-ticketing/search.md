@@ -1151,6 +1151,64 @@ F: Free for refund
 - **Default:** "USD"  
 - **Example:** "USD"  
 
+
+
+## **vendorFare**
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Vendor-specific fare details.  
+- **Constraints:** Can be null if not available.  
+- **Default:** null  
+- **Example:** null  
+
+## **bundleOptions**
+- **Type:** Array  
+- **Required:** No  
+- **Description:** Available fare bundle options.  
+- **Constraints:** Can be empty if no bundle options are available.  
+- **Default:** []  
+- **Example:** []  
+
+## **links**
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Links to additional resources related to the booking.  
+- **Constraints:** Can be null if no links are available.  
+- **Default:** null  
+- **Example:** null  
+
+## **separateBookings**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** Indicates if the booking is split into multiple reservations.  
+- **Constraints:** true or false.  
+- **Default:** false  
+- **Example:** false  
+
+## **refreshTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Timestamp of when the data was last refreshed in cache.  
+- **Constraints:** Must be in ISO 8601 format.  
+- **Default:** None  
+- **Example:** "2025-03-21T06:37:46Z"  
+
+## **displayFare**
+- **Type:** Object  
+- **Required:** YNo 
+- **Description:** Pricing details displayed to the user in the display fare currency.  
+- **Constraints:** Must contain a valid currency field.  
+- **Default:** None  
+- **Example:** { "currency": "PHP" }  
+
+### **displayFare.currency**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Currency in which the fare is displayed.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** "PHP"  
+- **Example:** "PHP"  
+
 {% endtab %}
 
 {% tab title="Samples" %}
