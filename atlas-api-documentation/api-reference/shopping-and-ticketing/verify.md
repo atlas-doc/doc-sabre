@@ -19,53 +19,65 @@ The `search` function should be called prior to this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **routingIdentifier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-    The unique identifier for a particular route.
+## **cid**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier for the request.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "xxxxxxxxxx"  
 
-    This is received from search response.
+## **routingIdentifier**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Encrypted identifier representing the routing details.  
+- **Constraints:** Must be a valid encoded string.  
+- **Default:** None  
+- **Example:** "EXsU8XSpfLYTSaQTVCjrJMJvG/...TthTQ=="  
 
-    Validity: 6 hrs
+## **displayCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. Please refer to the "Highlights" section in fare search menu for further information.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** "PHP"  
+- **Example:** "PHP"  
 
-    **displayCurrency array **Optional
+## **realtimeLuggage**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Whether to request realtime luggage price.
 
-The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. Please refer to the "Highlights" section in fare search menu for further information.
+  Valid values:
 
-**`displayCurrency`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  0: False
 
-The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. Please refer to the "Highlights" section below for further information.
+  1: True
 
-**`realTimeBaggage`  **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  Default: 0
+- **Constraints:** 1 for true, 0 for false.  
+- **Default:** 1  
+- **Example:** 1  
 
-Whether to request realtime luggage price:
+## **maxResponseTime**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** MThe maximum response time for the API, in milliseconds. The API will return an accurate quote within this duration. If the processing exceeds this duration, the system will return a standard quote directly. 
+- **Constraints:** Must be a positive integer.  
+- **Default:** 15000  
+- **Example:** 5000
 
-0: False
-
-1: True
-
-Default: 0
-
-**`maxResponseTime`  **<mark style="color:blue;">**int**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-The maximum response time for the API, in milliseconds. The API will return an accurate quote within this duration. If the processing exceeds this duration, the system will return a standard quote directly.
-
-Default: 15000
-
-**`requestSource` **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
- The tag to identify which channel does this traffic come from.
-
-For example: SkyScanner,Google,Oganic search,etc…
 {% endtab %}
 
 {% tab title="Samples" %}
 ```
 {
-  "cid": "ttxzp62405",
-  "routingIdentifier": "EXsU8XSpfLYTSaQTVCjrJMJvG/ysDtKYfq1WIi9iKV3RuKGQWRYoLHwlk3d3nfx3CfcndJLEJ0OelZh4CJOznF9aTBiw3WJrCv1w5tPrnLqsrzEwGf6LU4JnimIHlZ8g9Mbw9o1UAsRxu28yDTH1sxCUiQXhe9aQqCnWwMFh28gA/nj6IKNh5/yz0GWbBL6s1yDekyABUkLWmuWriKG76AcSFeTleOVJEjXfFd3mUvpZJe1wsRs5TI/Nma2Sz/cOdhAjhrTIFnOMJEKInVplSW3JYquYRVlKPNaFSuoF5K7IHGWlTR0X2vJysOfDQQZWR7Qv1wj0wUrE1kfV4vUrurLMbC/8XlxjYBc7iz9giHkbTb9r/K5/eabN+BX2cuBjtcmNH0T9SwZdxpCXnsjGxdC6wjGifmzacvdkADFsgfWzqaR6+aEfwt4jQKkit64X8IoXcz9XqDadvtpoFyrQz1tXYb6UK8+doiventK1gdc8oJQnVwpWZNzAt1C0KiFMpLq+sZhmvMISTO8EV73ewgLIMtqPFERy6YPlLhv9P5f1GEmT5TthTQ==",
-  "displayCurrency": "PHP",
-  "realtimeLuggage": 1,
-  "maxResponseTime": 5000
+    "cid": "ttxzp62405",
+    "routingIdentifier": "EXsU8XSpfLYTSaQTVCjrJMJvG/ysDtKYfq1WIi9iKV3RuKGQWRYoLHwlk3d3nfx3CfcndJLEJ0OelZh4CJOznF9aTBiw3WJrCv1w5tPrnLqsrzEwGf6LU4JnimIHlZ8g9Mbw9o1UAsRxu28yDTH1sxCUiQXhe9aQqCnWwMFh28gA/nj6IKNh5/yz0GWbBL6s1yDekyABUkLWmuWriKG76AcSFeTleOVJEjXfFd3mUvpZJe1wsRs5TI/Nma2Sz/cOdhAjhrTIFnOMJEKInVplSW3JYquYRVlKPNaFSuoF5K7IHGWlTR0X2vJysOfDQQZWR7Qv1wj0wUrE1kfV4vUrurLMbC/8XlxjYBc7iz9giHkbTb9r/K5/eabN+BX2cuBjtcmNH0T9SwZdxpCXnsjGxdC6wjGifmzacvdkADFsgfWzqaR6+aEfwt4jQKkit64X8IoXcz9XqDadvtpoFyrQz1tXYb6UK8+doiventK1gdc8oJQnVwpWZNzAt1C0KiFMpLq+sZhmvMISTO8EV73ewgLIMtqPFERy6YPlLhv9P5f1GEmT5TthTQ==",
+    "displayCurrency": "PHP",
+    "realtimeLuggage": 1,
+    "maxResponseTime": 5000
 }
 ```
 {% endtab %}
@@ -75,117 +87,282 @@ For example: SkyScanner,Google,Oganic search,etc…
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>
 
-    0: success
+## **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier for the booking response.  
+- **Constraints:** Must be a valid UUID.  
+- **Default:** None  
+- **Example:** "c8ba1074-0c3c-47f2-9b86-f99e5d4e6e2e"  
 
-    1: request data format error 
+## **maxSeats**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Maximum number of seats available for booking.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** 4  
 
-    2: route is forbidden
+## **routing**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Routing details for the selected itinerary.  
+- **Constraints:** Must contain valid routing details.  
+- **Default:** None  
+- **Example:** {...}  
 
-    3: unauthorized access
-*   **msg **<mark style="color:blue;">**string**</mark>
+*(This is identical to the search.do API response. Please refer the Search API for details.)*
 
-    Error message
-    
-    The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to         check the result.
-*   **sessionId **<mark style="color:blue;">**string**</mark>
+## **rule**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Rules related to baggage, refunds, and changes.  
+- **Constraints:** Must contain at least one applicable rule.  
+- **Default:** None  
+- **Example:** {...}  
 
-    The unique identifier for this verification.
+*(This is identical to the search.do API response. Please refer the Search API for details.)*
 
-    It is required when you call order function to make a reservation to identify which flight and fare the client is choosing.
-*   **maxSeats **<mark style="color:blue;">**int**</mark>
+## **ancillaryProductElements**
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of ancillary products available for purchase.  
+- **Constraints:** Can be empty if no ancillary products are offered.  
+- **Default:** []  
+- **Example:** []  
 
-    Remaining seats for the fare;
+*(This is identical to the search.do API response. Please refer the Search API for details.)*
 
-    Please refer this element and prevent the end-users to choose more passengers than seat count.
-*   **routing Object<**[**Routing Element**](search.md#route-element-schema)**>**
+## **vendorFare**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Pricing details provided by the vendor.  
+- **Constraints:** Must contain valid currency and price details.  
+- **Default:** None  
+- **Example:** {...}  
 
-    Route and fare details. The structure is also Routing Elements, same as search response
-*   **bookingRequirement**                    **Object**<[<mark style="color:blue;">**Booking**</mark>](order.md#paxticketinfo-schema)<mark style="color:blue;">**Requirement**</mark>> <mark style="color:blue;"></mark>                                                           &#x20;
+*(Existing fields for vendorFare remain unchanged)*
 
-    The description for booking info schema.
+## **links**
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of links related to the booking, such as terms and conditions.  
+- **Constraints:** Can be empty if no links are available.  
+- **Default:** []  
+- **Example:** [{"carrier": "F9", "kind": "terms", "link": "https://www.flyfrontier.com/legal/contract-of-carriage?mobile=true", "description": "Carrier terms and conditions"}]  
 
-    * [<mark style="color:blue;">**Booking**</mark>](order.md#paxticketinfo-schema)<mark style="color:blue;">**Requirement**</mark>
-      * #### <mark style="color:blue;">passenger</mark>                  Object<[PassengerRequirement](order.md#PassengerElement)>&#x20;
-        *   **passengerType        Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
+## **separateBookings**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** Indicates whether the booking consists of separate reservations.  
+- **Constraints:** true or false.  
+- **Default:** false  
+- **Example:** false  
 
-            *   **type**                   <mark style="color:blue;">**int**</mark>
+## **refreshTime**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Timestamp of the last data refresh in the cache.  
+- **Constraints:** Must be in ISO 8601 format or null if not available.  
+- **Default:** null  
+- **Example:** null  
 
-            &#x20;    The data type of this element
-            * **required**             <mark style="color:blue;">**boolean**</mark>
+## **displayFare**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Pricing details displayed to the user.  
+- **Constraints:** Must contain valid currency and price breakdowns.  
+- **Default:** None  
+- **Example:** {...}  
 
-            &#x20;             Identify if this element is required during booking
+*(Existing fields for displayFare remain unchanged)*
 
-            * **decription** <mark style="color:blue;">**string**</mark>
+## **ancillarySupported**
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of supported ancillary products.  
+- **Constraints:** Can be empty if no ancillaries are supported.  
+- **Default:** []  
+- **Example:** ["seat"]  
 
-            &#x20;      The remark of this element for this booking
-        * **name                         Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **gender                      Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **birthday                    Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **nationality                 Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **cardType                   Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **cardNum                   Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **cardExpired              Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**
-        * **cardIssuePlace         Object<**<mark style="color:blue;">**RequirementSchema**</mark>**>**    
+## **bookingRequirement**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Passenger booking requirements including personal details.  
+- **Constraints:** Must contain required fields for passenger booking.  
+- **Default:** None  
+- **Example:** {...}  
 
+### **bookingRequirement.passenger**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Passenger-specific details required for booking.  
+- **Constraints:** Must contain necessary fields for passenger identification.  
+- **Default:** None  
+- **Example:** {...}  
 
+#### **bookingRequirement.passenger.birthday**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's date of birth.  
+- **Constraints:** Must follow YYYY-MM-DD format.  
+- **Default:** None  
+- **Example:** "1990-01-01"  
 
-*   **priceChange**                    **Object**<mark style="color:blue;"></mark>
+#### **bookingRequirement.passenger.cardIssuePlace**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Place where the passenger's identification card was issued.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "USA"  
 
-    **IsPriceChange **<mark style="color:blue;">**boolean**</mark>
+#### **bookingRequirement.passenger.cardNum**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Identification card number of the passenger.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "A12345678"  
 
-    true: there is price change
-    
-    false: there is no price change
-    
-    **originalAdultPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original adult fare price returned in search response
-    
-    **originalAdultTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original adult tax returned in search response
-    
-    **originalChildPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original child fare price returned in search response
-    
-    **originalChildTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original child tax returned in search response
-    
-    **originalInfantPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original infant fare price returned in search response
-    
-    **originalInfantTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Original infant tax returned in search response
+#### **bookingRequirement.passenger.passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Type of passenger (e.g., adult, child, infant).  
+- **Constraints:** 0 = Adult, 1 = Child, 2 = Infant.  
+- **Default:** None  
+- **Example:** 0  
 
-    **newAdultPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Adult fare with price change (if any) returned in verify response
-    
-    **newAdultTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Adult tax with price change (if any) returned in verify response
-    
-    **newChildPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Child fare with price change (if any) returned in verify response
-    
-    **newChildTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Child tax with price change (if any) returned in verify response
-    
-    **newInfantPrice  **<mark style="color:blue;">**decimal**</mark>
-    
-    Infant fare with price change (if any) returned in verify response
-    
-    **newInfantTax  **<mark style="color:blue;">**decimal**</mark>
-    
-    Infant tax with price change (if any) returned in verify response
+#### **bookingRequirement.passenger.gender**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's gender.  
+- **Constraints:** "M" for Male, "F" for Female.  
+- **Default:** None  
+- **Example:** "M"  
+
+#### **bookingRequirement.passenger.nationality**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's nationality.  
+- **Constraints:** Must be a valid country code (ISO 3166-1 alpha-3).  
+- **Default:** None  
+- **Example:** "USA"  
+
+#### **bookingRequirement.passenger.cardExpired**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Expiration date of the passenger's identification card.  
+- **Constraints:** Must follow YYYY-MM-DD format.  
+- **Default:** None  
+- **Example:** "2030-12-31"  
+
+#### **bookingRequirement.passenger.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Full name of the passenger.  
+- **Constraints:** Maximum length: 30 characters for first name, 30 characters for last name.  
+- **Default:** None  
+- **Example:** "John Doe"  
+
+#### **bookingRequirement.passenger.cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of identification card used.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "Passport"  
+
+## **priceChange**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Indicates if there has been a change in ticket price.  
+- **Constraints:** Must contain original and new price details.  
+- **Default:** None  
+- **Example:** {...}  
+
+## **priceChange**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Indicates if there has been a change in ticket pricing.  
+- **Constraints:** Must contain original and new price details.  
+- **Default:** None  
+- **Example:** {...}  
+
+### **priceChange.isPriceChange**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates whether the ticket price has changed.  
+- **Constraints:** true for price change, false for no change.  
+- **Default:** false  
+- **Example:** false  
+
+### **priceChange.originalAdultPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original price for an adult ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 40.85  
+
+### **priceChange.originalAdultTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original tax for an adult ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 0.13  
+
+### **priceChange.originalChildPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original price for a child ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 40.85  
+
+### **priceChange.originalChildTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original tax for a child ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 0.13  
+
+### **priceChange.originalInfantPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original price for an infant ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 10.00  
+
+### **priceChange.originalInfantTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Original tax for an infant ticket.  
+- **Constraints:** Must be a non-negative value.  
+- **Default:** None  
+- **Example:** 0.00  
+
+*(Fields for new prices remain similar to original prices.)*
+
+## **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Status code of the response.  
+- **Constraints:** Must be a valid status code.  
+- **Default:** 0  
+- **Example:** 0  
+
+## **msg**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
+- **Constraints:** Must be a valid message string.  
+- **Default:** "success"  
+- **Example:** "success" 
     
 {% endtab %}
 
