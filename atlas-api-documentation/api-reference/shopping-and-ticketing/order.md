@@ -18,186 +18,268 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **ifSeatOccupied **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **ifSeatOccupied**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Defines the seat assignment strategy if the preferred seat is already occupied.  
+- **Constraints:** Must be "SIMILAR_SEAT" or another predefined strategy.  
 
-    Configuration of ordering when the seat is occupied.
-    
-    SIMILAR_SEAT: Default, select a similar seat automatically
+  Valid values:
 
-    STOP_SEAT: Stop seat and continue ticketing
+  SIMILAR_SEAT: Default, select a similar seat automatically
 
-    STOP_TICKET: Stop ticketing and cancel the order
+  STOP_SEAT: Stop seat and continue ticketing
 
-*   **sessionId **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+  STOP_TICKET: Stop ticketing and cancel the order
+- **Default:** SIMILAR_SEAT  
+- **Example:** "SIMILAR_SEAT"  
 
-    Identifier of the search response.
-*   **passengers Array<**<mark style="color:blue;">**PassengerElement**</mark>**> **<mark style="color:green;">**Required**</mark>
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier for the booking request.  
+- **Constraints:** Must be a valid UUID.  
+- **Default:** None  
+- **Example:** "43c3c07e-2b05-4fc9-8832-29a71075a097"  
 
-    Passengers' information.
+## **passengers** (Array)
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of passengers included in the booking. Each passenger object contains their personal details and ancillaries.  
+- **Constraints:** Must contain at least one passenger object.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-**Passengers **<mark style="color:blue;">**array**</mark>** **<mark>**Passenger Element**</mark> 
-      
-*   **name **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's full name in uppercase format.  
+- **Constraints:** Must follow "LASTNAME/FIRSTNAME MIDDLENAME" format.  
+- **Default:** None  
+- **Example:** "TEST/ONE"  
 
-    LastName/FirstName MiddleName.
-*   **passengerType **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Passenger type.  
+- **Constraints:** 0 = Adult, 1 = Child, 2 = Infant.  
+- **Default:** None  
+- **Example:** 0  
 
-    0 ADT
+### **passengers.birthday**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's date of birth in YYYYMMDD format.  
+- **Constraints:** Must be a valid date.  
+- **Default:** None  
+- **Example:** "19900101"  
 
-    1 CHD
-          
-    2 INF
-*   **birthday **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.gender**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's gender.  
+- **Constraints:** "M" for Male, "F" for Female.  
+- **Default:** None  
+- **Example:** "M"  
 
-    Birthday, Format: YYYYMMDD
-*   **gender **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.cardNum**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Identification card number.  
+- **Constraints:** None.  
+- **Default:** None  
+- **Example:** "00000001"  
 
-    M : Male
+### **passengers.cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of identification card.  
+- **Constraints:** Must be a valid card type (e.g., "PP" for passport).  
 
-    F : Female
-*   **cardNum **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+  Valid values:
 
-    Passenger id card number
-*   **cardType **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+  PP - Passport
 
-    Passenger id card type：
+  GA - Hong Kong Macau Pass for China mainland citizens
 
-    PP - Passport
+  TW - Taiwan Pass for China mainland citizens
 
-    GA - Hong Kong Macau Pass for China mainland citizens
+  TB - China mainland pass for Taiwanese
 
-    TW - Taiwan Pass for China mainland citizens
+  HY - International Seaman's Certificate
+- **Default:** None  
+- **Example:** "PP"  
 
-    TB - China mainland pass for Taiwanese
+### **passengers.cardIssuePlace**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Country where the identification card was issued.  
+- **Constraints:** Must be a valid ISO country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-    HY - International Seaman's Certificate
-*   **cardIssuePlace **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.cardExpired**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Expiration date of the identification card in YYYYMMDD format.  
+- **Constraints:** Must be a future date.  
+- **Default:** None  
+- **Example:** "20301231"  
 
-    Card issue country，IATA code of country
-*   **cardExpired **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.nationality**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's nationality.  
+- **Constraints:** Must be a valid ISO country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-    Card expire date，Format：YYYYMMDD
-*   **nationality **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **passengers.ffpCardNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Frequent flyer program card number.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "123456"  
 
-    Nationality，IATA code of country
-*   **ffpCardNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **passengers.ffpCarrier**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Frequent flyer program carrier code.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "JT"  
 
-    Frequent flyer card number.
-*   **ffpCarrier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **passengers.ancillaries** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** Additional services selected by the passenger.  
+- **Constraints:** Can be empty if no ancillaries are selected.  
+- **Default:** []  
+- **Example:** [{...}]  
 
-    Frequent flyer card issuing airline.
-*   **ancillaries Array<**<mark style="color:blue;">**AncillaryElement**</mark>**> **<mark style="color:green;">**Required**</mark>
+#### **passengers.ancillaries.productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code representing the ancillary service. This is received from routing element in the search/revalidation response.
+- **Constraints:** Must be a valid product code.  
+- **Default:** None  
+- **Example:** "BAG_5J_PH-PH_1_1P_20KG"  
 
-    Ancillaries selection for the specific passenger
+#### **passengers.ancillaries.segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Segment to which the ancillary applies.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** 1  
 
-* <mark style="color:blue;">**AncillaryElement**</mark>
-*   **productCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+## **contact** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contact details for the booking.  
+- **Constraints:** Must include at least an email or phone number.  
+- **Default:** None  
+- **Example:** {...}  
 
-    Ancillary product code
+### **contact.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Contact person's name.  
+- **Constraints:** Format : LastName/FirstName MiddleName
+- **Default:** None  
+- **Example:** "Way/Su"  
 
-    Got from routing element in the search/revalidation response.
-*   **segmentIndex **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **contact.email**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Contact email address.  
+- **Constraints:** Must be a valid email format.  
+- **Default:** None  
+- **Example:** "xxxxxxxxx@xxx.com"  
 
-    Segment sequence
-*   **offerId **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **contact.mobile**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Contact phone number.  
+- **Constraints:** Must include country code. Format: XXXX(digital country code)-XXXXXXXX(phone number). Example: 0001-87291810, 0086-13928109091, 0971-19201998  
+- **Default:** None  
+- **Example:** "0065-81234567"  
 
-    unique identifier for this ancillary's offer.
-*   **contact Object<**<mark style="color:blue;">**ContactElement**</mark>**> **<mark style="color:green;">**Required**</mark>
+### **requestSource**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The tag to identify which channel does this traffic come from. (e.g., website, mobile app).  
+- **Default:** ""  
+- **Example:** "Organic"  
 
-    Contact's information.
+### **allowGenerateMultipleOrders**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** Allows multiple orders to be generated if a cheaper fare is found.  
+- **Default:** false  
+- **Example:** false  
 
-* <mark style="color:blue;">**ContactElement**</mark>
-*   **name **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Contact name, please follow this format : LastName/FirstName MiddleName
-*   **address **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Contact address.
-*   **postcode **<mark style="color:orange;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    Contact post code.
-*   **email **<mark style="color:orange;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    Contact email.
-*   **mobile **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Contact mobile, please follow this format : XXXX(digital country code)-XXXXXXXX(phone number), here're the examples: 0001-87291810, 0086-13928109091, 0971-19201998
-*   **requestSource **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    The tag to identify which channel does this traffic come from.
-*   **allowGenerateMultipleOrders **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Multiple orders would be generated if a cheaper fare is found.    
-*   **useAtlasMailForContact **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    The tag denoting whether to use Atlas email id for contact information.
-    
-    true: Use Atlas email as contact email.
-    
-    false: Use customer email as contact email.
+### **useAtlasMailForContact**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** The tag denoting whether to use Atlas email id for contact information. true: Use Atlas email as contact email; false: Use customer email as contact email.
+- **Default:** false  
+- **Example:** false  
     
 {% endtab %}
 
 {% tab title="Samples" %}
 ```
 {
-"ifSeatOccupied": "SIMILAR_SEAT",
-"sessionId": "43c3c07e-2b05-4fc9-8832-29a71075a097",
-    "passengers": [
+  "sessionId": "2ef08340-d311-41e0-9078-b7589dafbd59",
+  "offerId": null,
+  "orderNo": null,
+  "passengers": [
+    {
+      "name": "LATIFI/KARIM",
+      "passengerType": 0,
+      "birthday": "19980102",
+      "gender": "M",
+      "cardNum": null,
+      "cardType": null,
+      "cardIssuePlace": null,
+      "cardExpired": null,
+      "nationality": null,
+      "paxRecordId": null,
+      "ffpCardNo": null,
+      "ffpCarrier": null,
+      "ancillaries": [
         {
-            "name": "TEST/ONE",
-            "passengerType": 0,
-            "birthday": "19900101",
-            "gender": "M",
-            "cardNum": "00000001",
-            "cardType": "PP",
-            "cardIssuePlace": "SG",
-            "cardExpired": "20301231",
-            "nationality": "SG",
-            "ffpCardNo": "123456",
-            "ffpCarrier": "JT",
-            "ancillaries":[ 
-                { 
-                "productCode":"BAG_5J_PH-PH_1_1P_20KG", 
-                "segmentIndex":1 
-                },
-                { 
-                "productCode":"BAG_5J_PH-PH_1_1P_20KG", 
-                "segmentIndex":2 
-                },
-                {
-                    "segmentIndex": 1,
-                    "productCode": "SCI_SEAT_2B_F9_PHL_LAS"
-                },
-                {
-                    "segmentIndex": 2,
-                    "productCode": "SCI_SEAT_27A_F9_LAS_ORD"
-                }
-            ]
-        },
-        {
-            "name": "YAO/SAHA",
-            "passengerType": 1,
-            "birthday": "20140101",
-            "gender": "F",
-            "cardNum": "00000001",
-            "cardType": "PP",
-            "cardIssuePlace": "SG",
-            "cardExpired": "20301231",
-            "nationality": "SG",
-            "ancillaries": []
+          "productCode": "SCI_BAG_1PC_20KG",
+          "segmentIndex": 1
         }
-    ],
-    "contact": {
-        "name": "Way/Su",
-        "address": null,
-        "postcode": null,
-        "email": "xxxxxxxxx@xxx.com",
-        "mobile": "0065-81234567"
-    },
-    "requestSource": "",
-    "allowGenerateMultipleOrders": false,
-    "useAtlasMailForContact":false
+      ]
+    }
+  ],
+  "contact": {
+    "name": "LATIFI/KARIM",
+    "address": null,
+    "postcode": null,
+    "email": "KARIM.LATIFI2016@GMAIL.COM",
+    "mobile": "0046-771407000"
+  },
+  "baggagePiece": 0,
+  "baggageWeight": 0,
+  "passengerBaggages": null,
+  "useAtlasMailForContact": false,
+  "allowGenerateMultipleOrders": false,
+  "locale": null,
+  "ifSeatOccupied": null,
+  "skipDuplicateCheck": false,
+  "cid": "ttxzp62405",
+  "requestSource": null,
+  "channel": null,
+  "mainChannel": null,
+  "subChannelID": null,
+  "requestOwner": null,
+  "isSourceReliable": null,
+  "requestIp": "34.69.44.134"
 }
 ```
 {% endtab %}
@@ -215,147 +297,662 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>
+### **ifSeatOccupied**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Defines the seat assignment strategy if the preferred seat is already occupied.  
+- **Constraints:** Must be "SIMILAR_SEAT" or another predefined strategy.  
 
-    0: success
+  Valid values:
 
-    2: System error
+  SIMILAR_SEAT: Default, select a similar seat automatically
 
-    6: Price change
-*   **msg **<mark style="color:blue;">**string**</mark>
+  STOP_SEAT: Stop seat and continue ticketing
 
-    Error message
-    
-    The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to         check the result.
-*   **sessionId **<mark style="color:blue;">**string**</mark>
+  STOP_TICKET: Stop ticketing and cancel the order
+- **Default:** SIMILAR_SEAT  
+- **Example:** "SIMILAR_SEAT"  
 
-    Same value got from order request
-*   **duplicateOrders **<mark style="color:blue;">**string**</mark>
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier for tracking the booking response.  
+- **Constraints:** Must be a valid UUID.  
+- **Default:** None  
+- **Example:** "1b7712ae-a94e-44b2-b4e9-574c07d2f3dc"  
 
-    Order number with which this order is a duplicate of. Please note that only orders created in the last 10 days will be checked for duplicate information.
-*   **orderNo **<mark style="color:blue;">**string**</mark>
+### **offerId**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Unique identifier for the offer associated with the booking.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
 
-    Order number
-*   **totalPrice **<mark style="color:blue;">**decimal**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique order number assigned to the booking.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "AXWKQ20250324134909925"  
 
-    Total fare of this order in the currency TheAtlas settled with you.
-*   **totalTransactionFee **<mark style="color:blue;">**decimal**</mark>
+### **originalOrderNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Original order number if applicable.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
 
-    Total technical fees for this order in the currency TheAtlas settled with you.
-*   **currency **<mark style="color:blue;">**string**</mark>
+### **ticketOrderNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Ticket order number assigned after booking confirmation.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
 
-    The currency TheAtlas settled with you.
-*   **vendorTotalPrice **<mark style="color:blue;">**decimal**</mark>
+### **totalPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Total price of the booking.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 110.8  
 
-    Total fare of this order in the vendor's currency, reference for you to generate the specific credit card.
-*   **vendorCurrency **<mark style="color:blue;">**string**</mark>
+### **totalTransactionFee**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Total transaction fee applied to the booking.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 1  
 
-    Vendor's currency.
-*   **tktLimitTime **<mark style="color:blue;">**string**</mark>
+### **currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency in which the total price is displayed.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-    Payment deadline for this order. This time will be displayed in SGT (GMT +8)
-*   **pnrCode **<mark style="color:blue;">**string**</mark>
-    
-    The pnrCode is the single reference for the booking. This is the Atlas PNR. 
-*   **paxTicketInfos Array<**[**PAXTicketInfo**](order.md#paxticketinfo-schema)**>**
+### **vendorTotalPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** The total price charged by the vendor.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 102  
 
-    Ticket information for passengers
+### **vendorCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency in which the vendor price is charged.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "EUR"  
 
-    * #### [**PAXTicketInfo**](order.md#paxticketinfo-schema)
-      *   **name **<mark style="color:blue;">**string**</mark>
+### **tktLimitTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Ticketing deadline time for completing the booking. This time will be displayed in SGT (GMT +8).
+- **Constraints:** Must be in "YYYY-MM-DD HH:MM:SS" format.  
+- **Default:** None  
+- **Example:** "2025-03-24 14:19:10"  
 
-          LastName/FirstName MiddleName.
-      *   **passengerType **<mark style="color:blue;">**int**</mark>
+### **pnrCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR.
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "AZQB6O"  
 
-          0 ADT
+### **includeExtraBaggage**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Indicates whether extra baggage is included in the booking.  
+- **Constraints:** 0 = No, 1 = Yes.  
+- **Default:** 0  
+- **Example:** 0  
 
-          1 CHD
-          
-          2 INF
-      *   **birthday **<mark style="color:blue;">**string**</mark>
+### **paxTicketInfos** (Array)
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of passenger details including tickets and ancillaries.  
+- **Constraints:** Must contain at least one passenger object.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-          Birthday, Format: YYYYMMDD
-      *   **gender **<mark style="color:blue;">**string**</mark>
+#### **paxTicketInfos.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's full name.  
+- **Constraints:** Must follow "LASTNAME/FIRSTNAME MIDDLENAME" format.  
+- **Default:** None  
+- **Example:** "LATIFI/KARIM"  
 
-          M : Male
+#### **paxTicketInfos.passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Passenger type.  
+- **Constraints:** 0 = Adult, 1 = Child, 2 = Infant.  
+- **Default:** None  
+- **Example:** 0  
 
-          F : Female
-      *   **cardNum **<mark style="color:blue;">**string**</mark>
+#### **paxTicketInfos.birthday**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's date of birth in YYYYMMDD format.  
+- **Constraints:** Must be a valid date.  
+- **Default:** None  
+- **Example:** "19980102"  
 
-          Passenger id card number
-      *   **cardType **<mark style="color:blue;">**string**</mark>
+#### **paxTicketInfos.gender**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's gender.  
+- **Constraints:** "M" for Male, "F" for Female.  
+- **Default:** None  
+- **Example:** "M"  
 
-          Passenger id card type：
+#### **paxTicketInfos.cardNum**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Identification card number.  
+- **Constraints:** Can be empty or null.  
+- **Default:** None  
+- **Example:** ""  
 
-          PP - Passport
+### **paxTicketInfos.cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of identification card.  
+- **Constraints:** Must be a valid card type (e.g., "PP" for passport).  
 
-          GA - Hong Kong Macau Pass for China mainland citizens
+  Valid values:
 
-          TW - Taiwan Pass for China mainland citizens
+  PP - Passport
 
-          TB - China mainland pass for Taiwanese
+  GA - Hong Kong Macau Pass for China mainland citizens
 
-          HY - International Seaman's Certificate
-      *   **cardIssuePlace **<mark style="color:blue;">**string**</mark>
+  TW - Taiwan Pass for China mainland citizens
 
-          Card issue country，ISO code of country
-      *   **cardExpired **<mark style="color:blue;">**string**</mark>
+  TB - China mainland pass for Taiwanese
 
-          Card expire date，Format：YYYYMMDD
-      *   **nationality **<mark style="color:blue;">**string**</mark>
+  HY - International Seaman's Certificate
+- **Default:** None  
+- **Example:** "PP"  
 
-          Nationality，IATA code of country
-      *   **ticketNos Array<**<mark style="color:blue;">**string**</mark>**>**
+### **paxTicketInfos.cardIssuePlace**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Country where the identification card was issued.  
+- **Constraints:** Must be a valid ISO country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-          Ticket numbers
-      *   **airlinePNRs Array<**<mark style="color:blue;">**string**</mark>**>**
+### **paxTicketInfos.cardExpired**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Expiration date of the identification card in YYYYMMDD format.  
+- **Constraints:** Must be a future date.  
+- **Default:** None  
+- **Example:** "20301231"  
 
-          AirlinePNRs. The array count would be the same as ticketnos count
-      *   **ancillaries Array<**<mark style="color:blue;">**AncillaryElement**</mark>**>**
+### **paxTicketInfos.nationality**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's nationality.  
+- **Constraints:** Must be a valid ISO country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-          Ancillaries selection for the specific passenger
+#### **paxTicketInfos.contactEmails**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of passenger contact email addresses.  
+- **Constraints:** Must contain valid email format.  
+- **Default:** None  
+- **Example:** ["KARIM.LATIFI2016@GMAIL.COM"]  
 
-          * [**AncillaryElement**](order.md#undefined)
-            *   **productCode **<mark style="color:blue;">**string**</mark>
+#### **paxTicketInfos.contactPhones**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of passenger contact phone numbers.  
+- **Constraints:** Must be a valid phone number format with country code.  
+- **Default:** None  
+- **Example:** ["0046-771407000"]  
 
-                Ancillary product code;
+## **Ancillaries** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** Additional services purchased by the passenger, such as baggage and seat selection.  
+- **Constraints:** Can be empty if no ancillaries are selected.  
+- **Default:** []  
+- **Example:** [{...}]  
 
-                Got from routing element in the search/revalidation response.
-            *   **segmentIndex **<mark style="color:blue;">**int**</mark>
+### **ancillaries.productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code representing the ancillary service. This is received from routing element in the search/revalidation response.
+- **Constraints:** Must be a valid product code.  
+- **Default:** None  
+- **Example:** "BAG_5J_PH-PH_1_1P_20KG"  
 
-                Segment sequence
-            *   **offerId **<mark style="color:blue;">**string**</mark>
+### **ancillaries.segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Segment to which the ancillary applies.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** 1  
 
-                unique identifier for this ancillary's offer.
-            *   **productType **<mark style="color:orange;">**integer**</mark>
+### **ancillaries.offerId**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Offer identifier for the ancillary service.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** AXOG123845861644119681  
 
-                Ancillary product type.
-     
-                1: Standard Check-in baggage
-     
-                2: Cabin Baggage Overhead Locker
-     
-                6: Seat
-            
-            *   **auxSeatElement **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **ancillaries.buyMethod**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Purchase method for the ancillary service.  
+- **Constraints:** Must be a valid string representation.  
+- **Default:** None  
+- **Example:** "0"  
 
-                Configuration of ordering when the seat is occupied
+### **ancillaries.ancillaryPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the ancillary product.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 38.02  
 
-                SIMILAR_SEAT: Default, select a similar seat automatically
+### **ancillaries.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency of the ancillary price.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-                STOP_SEAT: Stop seat and continue ticketing
+### **ancillaries.vendorPrice**
+- **Type:** Float  
+- **Required:** No  
+- **Description:** Vendor's price for the ancillary product.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
 
-                STOP_TICKET: Stop ticketing and cancel the order
-            *   **row **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Optional**</mark>
-                Seat row
+### **ancillaries.vendorCurrency**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Currency used by the vendor for the ancillary.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
 
-                **Example**: 27
-            
-            *   **column **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Optional**</mark>
-                Seat column
+### **ancillaries.productType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of ancillary product.  
 
-                **Example**: A
-*   **routing Object<**[**RouteElement**](broken-reference/)**>**
+  Valid values:
+
+  1: Standard Check-in baggage
+
+  2: Cabin Baggage Overhead Locker
+
+  6: Seat
+- **Constraints:** Must be a valid string representation.  
+- **Default:** None  
+- **Example:** "1"  
+
+### **ancillaries.displayCurrency**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Display currency for the ancillary price.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
+
+### **ancillaries.displayPrice**
+- **Type:** Float  
+- **Required:** No  
+- **Description:** Price for the ancillary in display currency .  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
+
+## **Ancillaries: Baggage Details**
+
+### **auxBaggageElement** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Details about the baggage included in the ancillary.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** {...}  
+
+#### **auxBaggageElement.piece**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of baggage pieces allowed.  
+- **Constraints:** Must be a non-negative integer.  
+- **Default:** None  
+- **Example:** 1  
+
+#### **auxBaggageElement.weight**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Weight allowance per baggage piece in kg.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 20  
+
+#### **auxBaggageElement.isAllWeight**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates whether the total weight is distributed among all pieces.  
+- **Constraints:** true or false.  
+- **Default:** true  
+- **Example:** true  
+
+#### **auxBaggageElement.size**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Dimensions of the baggage, if applicable.  
+- **Constraints:** Can be empty.  
+- **Default:** ""  
+- **Example:** ""  
+
+### **auxSeatElement** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Details about the seat selection included in the ancillary.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** {...}  
+
+#### **auxSeatElement.row**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Row number of the selected seat.  
+- **Constraints:** Must be a valid row number.  
+- **Default:** None  
+- **Example:** "8"  
+
+#### **auxSeatElement.column**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Column identifier of the selected seat.  
+- **Constraints:** Must be a valid column designator.  
+- **Default:** None  
+- **Example:** "A"  
+
+
+### **vendorFare** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Details of vendor-specific pricing for different passenger types.  
+- **Constraints:** Must contain valid pricing details.  
+- **Default:** None  
+- **Example:** {...}  
+
+#### **vendorFare.vendorAdultPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for an adult passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 44.88  
+
+#### **vendorFare.vendorAdultTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for an adult passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0.12  
+
+#### **vendorFare.vendorChildPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for a child passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 44.88  
+
+#### **vendorFare.vendorChildTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for a child passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0.12  
+
+#### **vendorFare.vendorInfantPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for an infant passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 30  
+
+#### **vendorFare.vendorInfantTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for an infant passenger.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0  
+
+#### **vendorFare.vendorCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency in which vendor pricing is displayed.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "EUR"  
+
+### **bundleOptions** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** Available fare bundles for selection.  
+- **Constraints:** Can be empty.  
+- **Default:** []  
+- **Example:** []  
+
+### **links** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of additional resources like terms and conditions.  
+- **Constraints:** Can contain null values.  
+- **Default:** []  
+- **Example:** [{...}]  
+
+#### **links.carrier**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Carrier associated with the link.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
+
+#### **links.kind**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of link provided.  
+- **Constraints:** Must be a valid string.  
+- **Default:** None  
+- **Example:** "terms"  
+
+#### **links.link**
+- **Type:** String  
+- **Required:** No  
+- **Description:** URL of the resource.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
+
+#### **links.description**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Description of the linked resource.  
+- **Constraints:** Must be a valid string.  
+- **Default:** None  
+- **Example:** "Carrier terms and conditions"  
+
+### **separateBookings**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates whether the bookings are processed separately.  
+- **Constraints:** true or false.  
+- **Default:** false  
+- **Example:** false  
+
+### **displayFare** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Breakdown of the total fare in the display currency to the user.  
+- **Constraints:** Must contain valid pricing details.  
+- **Default:** None  
+- **Example:** {...}  
+
+#### **displayFare.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The currency used for display fare.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "EUR"  
+
+#### **displayFare.exchangeRate**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** The exchange rate applied to convert the fare to the display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** 1  
+- **Example:** 1  
+
+#### **displayFare.adultPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for an adult passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 44.88  
+
+#### **displayFare.adultTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for an adult passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0.12  
+
+#### **displayFare.childPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for a child passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 44.88  
+
+#### **displayFare.childTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for a child passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0.12  
+
+#### **displayFare.infantPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price for an infant passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 30  
+
+#### **displayFare.infantTax**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Tax applied for an infant passenger in display currency.  
+- **Constraints:** Must be a positive float value.  
+- **Default:** None  
+- **Example:** 0  
+
+### **paymentOptions** (Array)
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of available payment methods and associated fees.  
+- **Constraints:** Must contain at least one valid payment option.  
+- **Default:** None  
+- **Example:** [{...}]  
+
+#### **paymentOptions.paymentMethod**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Payment method identifier. 
+
+  Valid values:
+
+  1: Pre-payment
+
+  3: VCC
+
+  5: MOR
+- **Constraints:** Must be a valid payment method.  
+- **Default:** None  
+- **Example:** 1  
+
+#### **paymentOptions.serviceFee** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Atlas transaction fee associated with the payment method.  
+- **Constraints:** Must contain valid fee details.  
+- **Default:** None  
+- **Example:** {...}  
+
+#### **paymentOptions.ticketFare** (Object)
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Fare amount deducted from a specific payment source.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** {...}  
+
+#### **paymentOptions.paymentFee** (Object)
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Additional payment fee charged for that payment option. Example: VCC surcharge.
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** {...}  
+
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code.  
+- **Constraints:** 0 indicates success.  
+- **Default:** 0  
+- **Example:** 0  
+
+### **msg**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Response message.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
+
+*   #### **routing** (Object)
 
     Route and fare details. The structure is also Routing Elements, same as search response
 {% endtab %}
@@ -363,444 +960,660 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 {% tab title="Samples" %}
 ```
 {
-    "sessionId": "57f7b429-bc89-40a6-af0a-af167c43a82a",
-    "orderNo": "TESTJ20230825173736982",
-    "originalOrderNo": null,
-    "ticketOrderNo": null,
-    "totalPrice": 30.48,
-    "totalTransactionFee": 0.00,
-    "currency": "USD",
-    "vendorTotalPrice": 1.00,
-    "vendorCurrency": "EUR",
-    "tktLimitTime": "2023-08-25 18:27:37",
-    "pnrCode": "KBAYFJ",
-    "includeExtraBaggage": 0,
-    "paxTicketInfos": [
+  "sessionId": "o_412ae4b089b54a7eae80e10a99c6b956",
+  "offerId": "o_412ae4b089b54a7eae80e10a99c6b956_1",
+  "orderNo": "AJZWC20250324144008152",
+  "originalOrderNo": null,
+  "ticketOrderNo": null,
+  "totalPrice": 26.19,
+  "totalTransactionFee": 0.5,
+  "currency": "EUR",
+  "vendorTotalPrice": 511.44,
+  "vendorCurrency": "ZAR",
+  "tktLimitTime": "2025-03-24 15:10:08",
+  "pnrCode": "EGZOT3",
+  "includeExtraBaggage": 0,
+  "paxTicketInfos": [
+    {
+      "name": "Chamapiwa/Sailus",
+      "passengerType": 0,
+      "birthday": "19820211",
+      "gender": "M",
+      "cardNum": "8202116215181",
+      "cardType": "PP",
+      "cardIssuePlace": null,
+      "cardExpired": "",
+      "nationality": null,
+      "ticketNos": [],
+      "airlinePNRs": [],
+      "contactEmails": [
+        "sailus.chamapiwa@transnet.net"
+      ],
+      "contactPhones": [
+        "0027-794177059"
+      ],
+      "ancillaries": [
         {
-            "name": "shao/tingjun",
-            "passengerType": 0,
-            "birthday": "19910105",
-            "gender": "M",
-            "cardNum": "330226199101051272",
-            "cardType": "PP",
-            "cardIssuePlace": "CN",
-            "cardExpired": "20220413",
-            "nationality": "CN",
-            "ticketNos": [],
-            "airlinePNRs": [],
-            "contactEmails": [
-                "manuelafellingerfx@msbzt.com"
-            ],
-            "contactPhones": [
-                "8615951711432"
-            ],
-            "ancillaries": [
-                {
-                    "productCode": "SCI_SEAT_B2_F9_PHL_LAS",
-                    "segmentIndex": 1,
-                    "offerId": null,
-                    "buyMethod": "0",
-                    "ancillaryPrice": 63.80,
-                    "currency": "USD",
-                    "vendorPrice": null,
-                    "vendorCurrency": null,
-                    "productType": null,
-                    "auxBaggageElement": null,
-                    "auxSeatElement": null
-                },
-                {
-                    "productCode": "SCI_SEAT_A27_F9_LAS_ORD",
-                    "segmentIndex": 2,
-                    "offerId": null,
-                    "buyMethod": "0",
-                    "ancillaryPrice": 49.24,
-                    "currency": "USD",
-                    "vendorPrice": null,
-                    "vendorCurrency": null,
-                    "productType": null,
-                    "auxBaggageElement": null,
-                    "auxSeatElement": {
-                        "row": "27",
-                        "column": "A"
-                }
-            ]
+          "productCode": "SCI_SEAT_8A_FA_DUR_HLA",
+          "segmentIndex": 1,
+          "offerId": null,
+          "buyMethod": "0",
+          "ancillaryPrice": 2.56,
+          "currency": "EUR",
+          "vendorPrice": null,
+          "vendorCurrency": null,
+          "productType": "6",
+          "displayCurrency": null,
+          "displayPrice": null,
+          "auxBaggageElement": null,
+          "auxSeatElement": {
+            "row": "8",
+            "column": "A"
+          }
         }
+      ]
+    }
+  ],
+  "routing": {
+    "fid": "qMUoH_0WrD8T-59gLuWpYQyRW461p0M0_OBiOR5ubboLmevgV4dL_w..",
+    "routingIdentifier": "RFVSX0pOQl8xXzIwMjUwMzI3X18xXzBfMHxDWkUyNTk0NF9hcGlfMnwxfDIzLjYzXzIzLjYzXzQuNzNfMC41MF81Mi40OV9FVVJ8RFVSX0pOQl8xXzIwMjUwMzI3X18xXzBfMF5EVVItRkE0NzMtLUhMQS0yMDI1MDMyNzA3NTAtMjAyNTAzMjcwOTA1LVRBLTEtXjIzLjYzXzIzLjYzXzQuNzNfMC41MF81Mi40OV5BRkFBUElfQUZBQVBJXl5eWkFSXjQ2MS40NF40NjEuNDReOTIuMjl8MHwyMDI1MDMyNDE0NDAwOHwwfDE3NDI3OTg0MDg2OTdnRzBQdXx8fEdldE9mZmVyfHwwLjUwfDR8MHw=.kgVr8o1Cv+yM1rkf3iof08DAAhSjQdGOKhD1tetzZV0=",
+    "supportCreditTransPayment": "0",
+    "supportPaymentMethods": [
+      1
     ],
-    "routing": {
-        "fid": "UDkKJsajo9XeFOvIRI14RT95DeziNq3cn_J4LnfyL5kdu6x7i9Q_99hdb239v6gV",
-        "routingIdentifier": "kAPir1gptfa5xmCdsTZkH0e0L9cI9MFKGLICoNRk9jLIVGY3uE7U493/BiSYU2lYCYz/vMhBJjNHxx29YKKVnhlP5EWT/YXfkAPir1gptfa5xmCdsTZkH0e0L9cI9MFKUr1HOLYbauVYHwhoJ64w9UbbRSb2DZWlomLeKoQjf3ruSK5qf8AFyAIvhcka7oKSgAEHSN0RzE2FAziTj5sTU3UVadMgeF6WNFV2qOZBL4neI0CpIreuFy0NtPb3+ogO2o5sQPlp/zC+QM0Tm/GivEWod/a+C7OjcFGi7UK0QapcR/CmLEcSQLDq2GUlevjzRSOPPgKYH2Qj8m9aeuwE1ABD6GWL+Qiy",
-        "supportCreditTransPayment": "0",
-        "supportPaymentMethods": [
-            1
-        ],
-        "currency": "USD",
-        "adultPrice": 30.05,
-        "adultTax": 0.43,
-        "childPrice": 30.05,
-        "childTax": 0.43,
-        "infantPrice": 38.12,
-        "infantTax": 0.00,
-        "infantAllowed": true,
-        "transactionFeePerPax": 0.00,
-        "transactionFee": 0.00,
-        "transactionFeeMode": "PER_PAX",
-        "nationalityType": 0,
-        "nationality": "",
-        "suitAge": "",
-        "PaxType": "ADT",
-        "fromSegments": [
-            {
-                "segmentIndex": 1,
-                "carrier": "W4",
-                "flightNumber": "W42849",
-                "depAirport": "VIE",
-                "depTime": "202309230605",
-                "arrAirport": "NCE",
-                "arrTime": "202309230755",
-                "stopCities": "",
-                "duration": 110,
-                "codeShare": false,
-                "cabin": "",
-                "cabinClass": 1,
-                "seatCount": 4,
-                "aircraftCode": "",
-                "depTerminal": "",
-                "arrTerminal": "",
-                "operatingCarrier": "",
-                "operatingFlightnumber": "",
-                "fareFamily": "Basic"
-            }
-        ],
-        "retSegments": [],
-        "combineIndexs": [],
-        "rule": {
-            "hasBaggage": 1,
-            "baggageElements": [
-                {
-                    "segmentNo": 1,
-                    "baggageType": "CabinBaggageUnderSeat",
-                    "passengerType": 0,
-                    "baggagePiece": 1,
-                    "baggageWeight": -1,
-                    "baggageSize": "40*30*20cm"
-                },
-                {
-                    "segmentNo": 1,
-                    "baggageType": "StandardCheckInBaggage",
-                    "passengerType": 0,
-                    "baggagePiece": 0,
-                    "baggageWeight": 0,
-                    "baggageSize": ""
-                }
-            ],
-            "refundRules": [
-                {
-                    "refundType": 0,
-                    "refundStatus": "T",
-                    "refundFee": 0.0,
-                    "currency": "EUR",
-                    "refNoshow": "T",
-                    "refNoShowCondition": 0,
-                    "refNoshowFee": 0.0,
-                    "ruleDetailList": [
-                        {
-                            "ruleId": 3036,
-                            "status": "H",
-                            "startMinute": 525600,
-                            "endMinute": 20160,
-                            "amount": 65.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3038,
-                            "status": "H",
-                            "startMinute": 20160,
-                            "endMinute": 180,
-                            "amount": 85.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3041,
-                            "status": "T",
-                            "startMinute": 180,
-                            "endMinute": 0,
-                            "amount": 0.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3044,
-                            "status": "T",
-                            "startMinute": 0,
-                            "endMinute": -525600,
-                            "amount": 0.0,
-                            "currency": "EUR"
-                        }
-                    ],
-                    "ruleList": null
-                }
-            ],
-            "changesRules": [
-                {
-                    "changesType": 0,
-                    "changesStatus": "T",
-                    "changesFee": 0.0,
-                    "currency": "EUR",
-                    "revNoshow": "T",
-                    "revNoShowCondition": 0,
-                    "revNoshowFee": 0.0,
-                    "ruleList": null,
-                    "ruleDetailList": [
-                        {
-                            "ruleId": 3047,
-                            "status": "H",
-                            "startMinute": 525600,
-                            "endMinute": 43200,
-                            "amount": 35.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3049,
-                            "status": "H",
-                            "startMinute": 43200,
-                            "endMinute": 10080,
-                            "amount": 40.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3051,
-                            "status": "H",
-                            "startMinute": 10080,
-                            "endMinute": 180,
-                            "amount": 45.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3054,
-                            "status": "T",
-                            "startMinute": 180,
-                            "endMinute": 0,
-                            "amount": 0.0,
-                            "currency": "EUR"
-                        },
-                        {
-                            "ruleId": 3057,
-                            "status": "T",
-                            "startMinute": 0,
-                            "endMinute": -525600,
-                            "amount": 0.0,
-                            "currency": "EUR"
-                        }
-                    ]
-                }
-            ]
+    "currency": "EUR",
+    "adultPrice": 14.42,
+    "adultTax": 9.21,
+    "childPrice": 14.42,
+    "childTax": 9.21,
+    "infantPrice": 4.73,
+    "infantTax": 0,
+    "infantAllowed": true,
+    "transactionFeePerPax": 0.5,
+    "transactionFee": 0.5,
+    "transactionFeeMode": "PER_BOOKING",
+    "nationalityType": 0,
+    "nationality": "",
+    "suitAge": "",
+    "PaxType": "ADT",
+    "fromSegments": [
+      {
+        "segmentIndex": 1,
+        "carrier": "FA",
+        "flightNumber": "FA473",
+        "depAirport": "DUR",
+        "depTime": "202503270750",
+        "arrAirport": "HLA",
+        "arrTime": "202503270905",
+        "stopCities": "",
+        "duration": 75,
+        "codeShare": false,
+        "cabin": "",
+        "cabinClass": 1,
+        "seatCount": 9,
+        "aircraftCode": "738",
+        "depTerminal": "",
+        "arrTerminal": "",
+        "operatingCarrier": "",
+        "operatingFlightnumber": "",
+        "fareFamily": "TA"
+      }
+    ],
+    "retSegments": [],
+    "combineIndexs": [],
+    "rule": {
+      "hasBaggage": 1,
+      "baggageElements": [
+        {
+          "segmentNo": 1,
+          "baggageType": "StandardCheckInBaggage",
+          "passengerType": 0,
+          "baggagePiece": 0,
+          "baggageWeight": 0,
+          "baggageSize": ""
         },
-        "ancillaryProductElements": [
+        {
+          "segmentNo": 1,
+          "baggageType": "StandardCheckInBaggage",
+          "passengerType": 1,
+          "baggagePiece": 0,
+          "baggageWeight": 0,
+          "baggageSize": ""
+        },
+        {
+          "segmentNo": 1,
+          "baggageType": "StandardCheckInBaggage",
+          "passengerType": 2,
+          "baggagePiece": 0,
+          "baggageWeight": 0,
+          "baggageSize": ""
+        },
+        {
+          "segmentNo": 1,
+          "baggageType": "CabinBaggageOverheadLocker",
+          "passengerType": 0,
+          "baggagePiece": 1,
+          "baggageWeight": 7,
+          "baggageSize": "56*36*25cm"
+        },
+        {
+          "segmentNo": 1,
+          "baggageType": "CabinBaggageOverheadLocker",
+          "passengerType": 1,
+          "baggagePiece": 1,
+          "baggageWeight": 7,
+          "baggageSize": "56*36*25cm"
+        },
+        {
+          "segmentNo": 1,
+          "baggageType": "CabinBaggageOverheadLocker",
+          "passengerType": 2,
+          "baggagePiece": 0,
+          "baggageWeight": 0,
+          "baggageSize": "56*36*25cm"
+        }
+      ],
+      "refundRules": [
+        {
+          "refundType": 0,
+          "refundStatus": "T",
+          "refundFee": 0,
+          "currency": "ZAR",
+          "refNoshow": "T",
+          "refNoShowCondition": 0,
+          "refNoshowFee": 0,
+          "ruleDetailList": [
             {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_1PC_10KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 40.22,
-                "currency": "USD",
-                "vendorPrice": 36.93,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 1,
-                    "weight": 10,
-                    "isAllWeight": false,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 1,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_1PC_10KG",
-                "auxSeatElement": null
+              "ruleId": 31911,
+              "status": "H",
+              "startMinute": 525600,
+              "endMinute": 64800,
+              "amount": 230.72,
+              "currency": "ZAR"
             },
             {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_1PC_20KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 66.24,
-                "currency": "USD",
-                "vendorPrice": 60.82,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 1,
-                    "weight": 20,
-                    "isAllWeight": false,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 6,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_1PC_20KG",
-                "auxSeatElement": null
+              "ruleId": 31912,
+              "status": "T",
+              "startMinute": 64800,
+              "endMinute": 0,
+              "amount": 0,
+              "currency": "ZAR"
             },
             {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_2PC_40KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 132.47,
-                "currency": "USD",
-                "vendorPrice": 121.64,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 2,
-                    "weight": 40,
-                    "isAllWeight": true,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 1,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_2PC_40KG",
-                "auxSeatElement": null
-            },
-            {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_1PC_26KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 68.42,
-                "currency": "USD",
-                "vendorPrice": 62.83,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 1,
-                    "weight": 26,
-                    "isAllWeight": false,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 6,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_1PC_26KG",
-                "auxSeatElement": null
-            },
-            {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_2PC_52KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 136.84,
-                "currency": "USD",
-                "vendorPrice": 125.66,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 2,
-                    "weight": 52,
-                    "isAllWeight": true,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 1,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_2PC_52KG",
-                "auxSeatElement": null
-            },
-            {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_1PC_32KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 71.61,
-                "currency": "USD",
-                "vendorPrice": 65.76,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 1,
-                    "weight": 32,
-                    "isAllWeight": false,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 6,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_1PC_32KG",
-                "auxSeatElement": null
-            },
-            {
-                "segmentIndex": 1,
-                "endSegmentIndex": null,
-                "productCode": "SCI_2PC_64KG",
-                "productName": "StandardCheckInBaggage",
-                "productType": 1,
-                "canPurchaseWithTicket": 1,
-                "canPurchasePostTicket": 0,
-                "price": 143.22,
-                "currency": "USD",
-                "vendorPrice": 131.52,
-                "vendorCurrency": "EUR",
-                "clientTechnicalServiceFee": 0,
-                "clientTechnicalServiceFeeMode": null,
-                "auxBaggageElement": {
-                    "piece": 2,
-                    "weight": 64,
-                    "isAllWeight": true,
-                    "size": ""
-                },
-                "offerId": null,
-                "maxQty": 1,
-                "minQty": 1,
-                "categoryCode": "StandardCheckInBaggage",
-                "ancillaryCode": "SCI_2PC_64KG",
-                "auxSeatElement": null
+              "ruleId": 31913,
+              "status": "T",
+              "startMinute": 0,
+              "endMinute": -525600,
+              "amount": 0,
+              "currency": "ZAR"
             }
-        ],
-        "vendorFare": null,
-        "bundleOptions": [],
-        "links": [],
-        "separateBookings": false,
-        "refreshTime": null
+          ],
+          "ruleList": [
+            {
+              "rowId": 31911,
+              "gmtCreate": "Jun 24, 2024 11:41:45 AM",
+              "gmtModified": "Jun 24, 2024 11:41:45 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_refund",
+              "ruleName": "self_refund_FA_1_vtgba0",
+              "ruleKey": "self_refund_FA_202406241141441",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": null,
+              "timeRight": -64800,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_refund_FA_202406241141441",
+                "canRefund": "Y",
+                "canChange": null,
+                "canRefundTax": "Y",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": null,
+                "amountCurrency": null,
+                "pricePercent": "0.5",
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            },
+            {
+              "rowId": 31912,
+              "gmtCreate": "Jun 24, 2024 11:41:45 AM",
+              "gmtModified": "Jun 24, 2024 11:41:45 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_refund",
+              "ruleName": "self_refund_FA_2_iQPszP",
+              "ruleKey": "self_refund_FA_202406241141442",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": -64800,
+              "timeRight": 0,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_refund_FA_202406241141442",
+                "canRefund": "N",
+                "canChange": null,
+                "canRefundTax": "N",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": null,
+                "amountCurrency": null,
+                "pricePercent": null,
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            },
+            {
+              "rowId": 31913,
+              "gmtCreate": "Jun 24, 2024 11:41:45 AM",
+              "gmtModified": "Jun 24, 2024 11:41:45 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_refund",
+              "ruleName": "self_refund_FA_3_m03oLw",
+              "ruleKey": "self_refund_FA_202406241141443",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": 0,
+              "timeRight": null,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_refund_FA_202406241141443",
+                "canRefund": "N",
+                "canChange": null,
+                "canRefundTax": "N",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": null,
+                "amountCurrency": null,
+                "pricePercent": null,
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            }
+          ]
+        }
+      ],
+      "changesRules": [
+        {
+          "changesType": 0,
+          "changesStatus": "T",
+          "changesFee": 0,
+          "currency": "ZAR",
+          "revNoshow": "T",
+          "revNoShowCondition": 0,
+          "revNoshowFee": 0,
+          "ruleList": [
+            {
+              "rowId": 31914,
+              "gmtCreate": "Jun 24, 2024 11:41:57 AM",
+              "gmtModified": "Jun 24, 2024 11:41:57 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_change",
+              "ruleName": "self_change_FA_1_XrDAyc",
+              "ruleKey": "self_change_FA_202406241141571",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": null,
+              "timeRight": -240,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_change_FA_202406241141571",
+                "canRefund": "Y",
+                "canChange": null,
+                "canRefundTax": "N",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": 300,
+                "amountCurrency": "ZAR",
+                "pricePercent": null,
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            },
+            {
+              "rowId": 31915,
+              "gmtCreate": "Jun 24, 2024 11:41:57 AM",
+              "gmtModified": "Jun 24, 2024 11:41:57 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_change",
+              "ruleName": "self_change_FA_2_tlSdPH",
+              "ruleKey": "self_change_FA_202406241141572",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": -240,
+              "timeRight": 0,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_change_FA_202406241141572",
+                "canRefund": "N",
+                "canChange": null,
+                "canRefundTax": "N",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": null,
+                "amountCurrency": null,
+                "pricePercent": null,
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            },
+            {
+              "rowId": 31916,
+              "gmtCreate": "Jun 24, 2024 11:41:57 AM",
+              "gmtModified": "Jun 24, 2024 11:41:57 AM",
+              "creator": null,
+              "modifier": null,
+              "isDeleted": "N",
+              "airline": "FA",
+              "ruleType": "self_change",
+              "ruleName": "self_change_FA_3_zvwPU0",
+              "ruleKey": "self_change_FA_202406241141573",
+              "priority": 10,
+              "validBeginTime": "Oct 8, 2019 12:00:00 AM",
+              "validEndTime": "Jun 9, 2333 11:59:59 PM",
+              "depCity": null,
+              "arrCity": null,
+              "depCountry": null,
+              "arrCountry": null,
+              "bookingCode": null,
+              "fareFamily": null,
+              "cabinClass": null,
+              "timingMode": "depTime",
+              "timeLeft": 0,
+              "timeRight": null,
+              "travelBeginDate": null,
+              "travelEndDate": null,
+              "productType": null,
+              "ruleExtend": {
+                "ruleKey": "self_change_FA_202406241141573",
+                "canRefund": "N",
+                "canChange": null,
+                "canRefundTax": "N",
+                "canRefundPkg": null,
+                "canRefundCoupon": null,
+                "canMakeUpDiff": null,
+                "canNoShowRefund": null,
+                "amount": null,
+                "amountCurrency": null,
+                "pricePercent": null,
+                "priceItem": "fare+tax",
+                "taxItem": null,
+                "charge": null,
+                "chargeCurrency": null,
+                "canExemptSameDay": null,
+                "exemptDuration": null,
+                "ticketBeginTime": null,
+                "ticketEndTime": null,
+                "applyBeginTime": null,
+                "applyEndTime": null,
+                "travelBeginTime": null,
+                "travelEndTime": null
+              }
+            }
+          ],
+          "ruleDetailList": [
+            {
+              "ruleId": 31914,
+              "status": "H",
+              "startMinute": 525600,
+              "endMinute": 240,
+              "amount": 300,
+              "currency": "ZAR"
+            },
+            {
+              "ruleId": 31915,
+              "status": "T",
+              "startMinute": 240,
+              "endMinute": 0,
+              "amount": 0,
+              "currency": "ZAR"
+            },
+            {
+              "ruleId": 31916,
+              "status": "T",
+              "startMinute": 0,
+              "endMinute": -525600,
+              "amount": 0,
+              "currency": "ZAR"
+            }
+          ]
+        }
+      ],
+      "serviceElements": [
+        {
+          "hasFreeSeat": 0,
+          "hasFreeMeal": 0
+        }
+      ]
     },
-    "status": 0,
-    "msg": null
+    "ancillaryProductElements": [
+      {
+        "segmentIndex": 1,
+        "endSegmentIndex": null,
+        "productCode": "SCI_BAG_1PC_20KG",
+        "productName": "StandardCheckInBaggage",
+        "productType": 1,
+        "canPurchaseWithTicket": 1,
+        "canPurchasePostTicket": 1,
+        "price": 7.94,
+        "currency": "EUR",
+        "vendorPrice": 155,
+        "vendorCurrency": "ZAR",
+        "clientTechnicalServiceFee": 0,
+        "clientTechnicalServiceFeeMode": null,
+        "auxBaggageElement": {
+          "piece": 1,
+          "weight": 20,
+          "isAllWeight": true,
+          "size": ""
+        },
+        "offerId": null,
+        "maxQty": 1,
+        "minQty": 1,
+        "categoryCode": "StandardCheckInBaggage",
+        "ancillaryCode": "SCI_BAG_1PC_20KG",
+        "auxSeatElement": null,
+        "displayPrice": null,
+        "displayCurrency": null
+      },
+      {
+        "segmentIndex": 1,
+        "endSegmentIndex": null,
+        "productCode": "SCI_BAG_2PC_40KG",
+        "productName": "StandardCheckInBaggage",
+        "productType": 1,
+        "canPurchaseWithTicket": 1,
+        "canPurchasePostTicket": 1,
+        "price": 20.74,
+        "currency": "EUR",
+        "vendorPrice": 405,
+        "vendorCurrency": "ZAR",
+        "clientTechnicalServiceFee": 0,
+        "clientTechnicalServiceFeeMode": null,
+        "auxBaggageElement": {
+          "piece": 2,
+          "weight": 40,
+          "isAllWeight": true,
+          "size": ""
+        },
+        "offerId": null,
+        "maxQty": 1,
+        "minQty": 1,
+        "categoryCode": "StandardCheckInBaggage",
+        "ancillaryCode": "SCI_BAG_2PC_40KG",
+        "auxSeatElement": null,
+        "displayPrice": null,
+        "displayCurrency": null
+      }
+    ],
+    "vendorFare": null,
+    "bundleOptions": [],
+    "links": [
+      {
+        "carrier": null,
+        "kind": "terms",
+        "link": null,
+        "description": "Carrier terms and conditions"
+      }
+    ],
+    "separateBookings": false,
+    "refreshTime": null,
+    "displayFare": null,
+    "ancillarySupported": [
+      "seat",
+      "luggage"
+    ]
+  },
+  "duplicateOrders": null,
+  "paymentOptions": [
+    {
+      "paymentMethod": 1,
+      "serviceFee": {
+        "amount": 0.5,
+        "currency": "EUR",
+        "deductFrom": "DEPOSIT"
+      },
+      "ticketFare": {
+        "amount": 26.19,
+        "currency": "EUR",
+        "deductFrom": "DEPOSIT"
+      },
+      "paymentFee": null
+    }
+  ],
+  "status": 0,
+  "msg": null
 }
 ```
 {% endtab %}
 {% endtabs %}
-
-#### Error codes
-
-| Error code | Description         |
-| ---------- | ------------------- |
-| **`310`**  | Infant not allowed. |
-
