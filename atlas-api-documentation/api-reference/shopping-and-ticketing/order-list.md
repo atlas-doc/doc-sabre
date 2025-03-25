@@ -28,55 +28,120 @@ Points to note:
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **orderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
 
-    Atlas order number. E.g.: TESTA20241122090710695
-*   **airlinePNRs **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The unique identifier for the order.  
+- **Constraints:** Must be a valid order number issued by the system.  
+- **Default:** None  
+- **Example:** "ZNMKU20220119160129691"
 
-    The airline PNR received in the querryOrderDetails.do response. Please note that this is different from the "PNRCode" element. E.g.: ["FT759J", "8HFT67"]
-*   **paxName **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **airlinePNRs**
+- **Type:** Array of Strings  
+- **Required:** No  
+- **Description:** The airline PNR received in the querryOrderDetails.do response. Please note that this is different from the "PNRCode" element. E.g.: ["FT759J", "8HFT67"] 
+- **Constraints:** Must contain valid airline PNRs.  
+- **Default:** None  
+- **Example:** `["FT759J", "8HFT67"]`
 
-    The name of the passenger as entered in the order.do request. E.g.: last name/first name
-*   **contactEmail **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **paxName**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Name of the passenger. Format: last name/first name
+- **Constraints:** Must be a valid passenger name.  
+- **Default:** Empty string  
+- **Example:** "Doe/John"
 
-    The email as entered in the order.do request. E.g.: xxxxxxx@xmail.com
-*   **fromCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **contactEmail**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Contact email of the passenger as entered in the order.do request. 
+- **Constraints:** Must be a valid email address.  
+- **Default:** Empty string  
+- **Example:** "johndoe@example.com"
 
-    Departure city E.g.: SIN
-*   **toCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **fromCity**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Departure city.  
+- **Constraints:** Must be a valid city code or name.  
+- **Default:** Empty string  
+- **Example:** "NYC"
 
-    Arrival city E.g.: JKT
-*   **depDate **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **toCity**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Destination city.  
+- **Constraints:** Must be a valid city code or name.  
+- **Default:** Empty string  
+- **Example:** "LAX"
 
-    Date of departure. Format: YYYYMMDD E.g.: 20241115
-*   **createTimeRangeFrom **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **depDate**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Departure date in `YYYYMMDD` format.  
+- **Constraints:** Must be a valid date.  
+- **Default:** None  
+- **Example:** "20240101"
 
-    The start time of order creation. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
-*   **createTimeRangeTo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **createTimeRangeFrom**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The start time of order creation. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
+- **Constraints:** Must be a valid timestamp.  
+- **Default:** None  
+- **Example:** "2024-10-31T19:57:46Z"
 
-    The end time of order creation. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
-*   **orderStatus **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **createTimeRangeTo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The end time of order creation. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
+- **Constraints:** Must be a valid timestamp.  
+- **Default:** None  
+- **Example:** "2024-11-01T19:57:46Z"
 
-    The status in which the order is.
+### **orderStatus**
+- **Type:** Array of Integers  
+- **Required:** No  
+- **Description:** List of possible order statuses.  
 
-    Options:
+  Valid values:
 
-    0: Unpaid
+  0: Unpaid
 
-    1: Ticketing
+  1: Ticketing
 
-    2: Ticketed
+  2: Ticketed
 
-    3: Cancelled
-*   **airlines **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  3: Cancelled
+- **Constraints:** Must be valid status codes.  
+- **Default:** None  
+- **Example:** `[0, 1, 2, -3]`
 
-    The airline code of one of the airline in the order. E.g.: ["FR"]
-*   **page **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **airlines**
+- **Type:** Array of Strings  
+- **Required:** No  
+- **Description:** List of airline codes.  
+- **Constraints:** Must be valid airline codes.  
+- **Default:** None  
+- **Example:** `["FR"]`
 
-    Start from. Default: 1
-*   **pageSize **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **page**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Page number for paginated results.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** `1`  
+- **Example:** `1`
 
-    Number of records to be displayed on each page. Default: 20 Maximum: 100
+### **pageSize**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of records per page. Default: 20 Maximum: 100
+- **Constraints:** Must be a positive integer.  
+- **Default:** `20`  
+- **Example:** `20`
     
 {% endtab %}
 
@@ -116,58 +181,167 @@ Points to note:
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **orderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the order.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTA20241122090710695"  
 
-    Atlas order number. E.g.: TESTA20241122090710695
-*   **PNRCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **pnrCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** PAtlas internal reference code. E.g.: "Z44IPS" 
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "Z27T5B"  
 
-    Atlas internal reference code. E.g.: "Z44IPS"
-*   **airlinePNRs **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **airlinePNRs**
+- **Type:** Array of Strings  
+- **Required:** Yes  
+- **Description:** The airline PNR received in the querryOrderDetails.do response. Please note that this is different from the "PNRCode" element. E.g.: ["FT759J", "8HFT67"]
+- **Constraints:** Cannot be empty.  
+- **Default:** None  
+- **Example:** ["S86745"]  
 
-    The airline PNR received in the querryOrderDetails.do response. Please note that this is different from the "PNRCode" element. E.g.: ["FT759J", "8HFT67"]
-*   **paxNames **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **orderStatus**
+- **Type:** Array of Integers  
+- **Required:** No  
+- **Description:** List of possible order statuses.  
 
-    The name of the passenger. E.g.: last name/first name
-*   **contactEmail **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  Valid values:
 
-    The email as entered in the order.do request. E.g.: xxxxxxx@xmail.com
-*   **fromCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  0: Unpaid
 
-    Departure city E.g.: SIN
-*   **toCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  1: Ticketing
 
-    Arrival city E.g.: JKT
-*   **depDate **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  2: Ticketed
 
-    Date of departure. Format: YYYYMMDD E.g.: 20241115
-*   **orderCreateTimestamp **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+  3: Cancelled
+- **Constraints:** Must be valid status codes.  
+- **Default:** None  
+- **Example:** `[0, 1, 2, -3]`
 
-    The time of order creation. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
-*   **paymentTimestamp **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **travelStartDate**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Start date of travel if available.  
+- **Constraints:** Must be a valid date format.  
+- **Default:** Null  
+- **Example:** null  
 
-    The time payment was made. This is in UTC. Format: yyyy-MM-dd'T'HH:mm:ss'Z' E.g.: 2024-10-31T19:57:46Z
-*   **orderStatus **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **airlines**
+- **Type:** Array of Strings  
+- **Required:** Yes  
+- **Description:** List of airline codes.  
+- **Constraints:** Cannot be empty.  
+- **Default:** None  
+- **Example:** ["SL"]  
 
-    The status in which the order is.
+### **orderCreateTimestamp**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Timestamp when the order was created.  
+- **Constraints:** Format: yyyy-MM-dd'T'HH:mm:ss'Z'.  
+- **Default:** None  
+- **Example:** "2024-11-22T01:07:10Z"  
 
-    Options:
+### **paymentTimestamp**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Timestamp when payment was completed.  
+- **Constraints:** Format: yyyy-MM-dd'T'HH:mm:ss'Z'.  
+- **Default:** None  
+- **Example:** "2024-11-22T01:07:11Z"  
 
-    0: Unpaid
+### **paxNames**
+- **Type:** Array of Strings  
+- **Required:** Yes  
+- **Description:** List of passenger names in "LASTNAME/FIRSTNAME" format.  
+- **Constraints:** Cannot be empty.  
+- **Default:** None  
+- **Example:** ["YIJING/tFGo"]  
 
-    1: Ticketing
+### **contactEmail**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The email as entered in the order.do request.   
+- **Constraints:** Must be a valid email format.  
+- **Default:** None  
+- **Example:** "test@test.com"  
 
-    2: Ticketed
+### **fromCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure city (IATA code).  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "CNX"  
 
-    -3: Cancelled
-*   **airlines **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **toCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Destination city (IATA code).  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "BKK"  
 
-    The airline code of one of the airline in the order. E.g.: ["FR"]
-*   **errorCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **errorCode**
+- **Type:** String 
+- **Required:** No  
+- **Description:** The error code returned for a cancelled order. This will only be displayed for cancelled orders.
+- **Constraints:** None  
+- **Default:** Null  
+- **Example:** null  
 
-    The error code returned for a cancelled order. This will only be displayed for cancelled orders.
-*   **errorMessage **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **errorMessage**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Error message if applicable.  
+- **Constraints:** None  
+- **Default:** Null  
+- **Example:** null  
 
-    The error description.
+### **page**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Current page number.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** 1  
+- **Example:** 1  
+
+### **pageSize**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of records per page.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** 20  
+- **Example:** 20  
+
+### **totalRecords**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Total number of records available.  
+- **Constraints:** Cannot be negative.  
+- **Default:** None  
+- **Example:** 2  
+
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** API response status (0 indicates success).  
+- **Constraints:** Must be a valid status code. 0: Success, 2: System error
+- **Default:** None  
+- **Example:** 0  
+
+### **msg**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Message related to the response. Should not be used to determine success or failure (use status instead).
+- **Constraints:** None  
+- **Default:** Null  
+- **Example:** null  
     
 {% endtab %}
 
