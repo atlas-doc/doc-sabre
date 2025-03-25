@@ -22,9 +22,15 @@ Order function should be called in prior to this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   #### originalOrderNo                       <mark style="color:blue;">string</mark>                                                                                 <mark style="color:green;">Required</mark>
+### **originalOrderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The unique identifier for the original order.  
+- **Constraints:** Must be a valid order number issued by the system.  
+- **Default:** None  
+- **Example:** "ZNMKU20220119160129691"
 
-    Original order number which you would like to regenerate.&#x20;
+
 {% endtab %}
 
 {% tab title="Samples" %}
