@@ -16,9 +16,14 @@ description: Tentative stopping ticket issuance.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **orderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The unique identifier for the order.  
+- **Constraints:** Must be a valid order number issued by the system.  
+- **Default:** None  
+- **Example:** "ZNMKU20220119160129691"
 
-    Order number. It must be an paid and ticketing order.
 {% endtab %}
 
 {% tab title="Samples" %}
@@ -34,28 +39,37 @@ description: Tentative stopping ticket issuance.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Status code indicating the processing state.  
 
-    0: success
+  Valid values:
 
-    2: System error
+  0: success
 
-    Success does not mean that the ticket issuance has been stopped successfully. It only means that the system will attempt to stop the ticket issuance.
+  2: System error
 
-    The result of stopping ticket issuance needs to be obtained by querying the order status of `Retrieve Booking` after 8 minutes.
+  Success does not mean that the ticket issuance has been stopped successfully. It only means that the system will attempt to stop the ticket issuance.
 
-    orderStatus: -3, means stop issuance successfully.
+  The result of stopping ticket issuance needs to be obtained by querying the order status of `Retrieve Booking` after 8 minutes.
+
+  orderStatus: -3, means stop issuance successfully.
     
-    orderStatus: 2, means stop issuance failed, the order is issued.
+  orderStatus: 2, means stop issuance failed, the order is issued.
 
-    The definition of the queryOrderDetails order status will be different when the request is sent after the "Stop Ticket Issuance" request.
+  The definition of the queryOrderDetails order status will be different when the request is sent after the "Stop Ticket Issuance" request.
+- **Constraints:** Must be a valid status code. Typically, `0` indicates a processing state.  
+- **Default:** None  
+- **Example:** `0`
 
-
-*   **msg **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Error message
-    
-    The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+### **msg**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Message providing additional details about the status. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
+- **Constraints:** Must be a descriptive message related to the status.  
+- **Default:** None  
+- **Example:** "We are trying to intercept the ticket issuance. Please check the order status for result after 8 minutes"
 
 {% endtab %}
 
