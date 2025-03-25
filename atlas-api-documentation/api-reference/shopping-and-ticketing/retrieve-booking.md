@@ -34,54 +34,133 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **orderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-    Order number. It can be an order for ticketing, or an order for add bags. The format of each kind of order is different.
-*   **pnrCode **<mark style="color:blue;">**string**</mark>
-    
-    The pnrCode is the single reference for the booking. This is the Atlas PNR. 
-*   **airlinePNR **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the flight booking order.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "TESTA20240627114717735"  
 
-    The record locator of the airline.
-*   **carrier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **pnrCode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR.
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "XYZ87T"  
 
-    2 character IATA airline code.
-*   **isCompletedOrder **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **airlinePNR**
+- **Type:** String  
+- **Required:** No  
+- **Description:** The record locator of the airline.
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "S75666"  
 
-    If not entered with value, API would take it as “false” by default. 
+### **carrier**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Airline carrier code.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** "G9"  
 
-    **true**: Show the full details of main order and post-booking order
+### **passengers** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of passengers included in the booking.  
+- **Constraints:** Must contain at least one passenger.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    **false**: Only show the details of given order
-*   **passengers Array<**<mark style="color:blue;">**PassengerElement**</mark>**> **<mark style="color:orange;">**Optional**</mark>
+#### **passengers.name**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Full name of the passenger.  
+- **Constraints:** Must be in "LastName/FirstName MiddleName" format.  
+- **Default:** None  
+- **Example:** "Kotwal/Behram"  
 
-    Passengers' information.
+### **routing** (Object)
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Contains segment details of the booked flight.  
+- **Constraints:** Must contain valid segment details.  
+- **Default:** None  
+- **Example:** {...}  
 
-* #### <mark style="color:blue;">**PassengerElement**</mark>
-*   **name **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+#### **routing.fromSegments** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of departure segments.  
+- **Constraints:** Must contain at least one segment.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    Name of the passenger. Format: LastName/FirstName MiddleName
-*   **routing Array<**<mark style="color:blue;">**routing**</mark>**> **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.segmentIndex**
+- **Type:** Integer  
+- **Required:** No  
+- **Description:** Index of the segment in the route.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** 1  
 
-    Routing information.
-*   **segmentIndex **<mark style="color:blue;">**int**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.carrier**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Airline carrier code for the segment.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** "G9"  
 
-    Segment sequence. This will always be 1 as this would be the details of the 1st sector in the booking.
-*   **carrier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.flightNumber**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Flight number of the segment.  
+- **Constraints:** Must be a valid flight number.  
+- **Default:** None  
+- **Example:** "G9147"  
 
-    2-character IATA code of the booked airline.
-*   **flightNumber **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.depAirport**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Departure airport code.  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "SHJ"  
 
-    The flight number of the 1st sector as received in the order.
-*   **depAirport **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.arrAirport**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Arrival airport code.  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "JED"  
 
-    IATA Code of departure city or airport.
-*   **arrAirport **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+##### **fromSegments.fromDate**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Flight departure date in YYYYMMDD format.  
+- **Constraints:** Must be a valid date format.  
+- **Default:** None  
+- **Example:** "20240716"  
 
-    IATA Code of arrival city or airport.
-*   **fromDate **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **isCompletedOrder**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates if the order is completed.  
 
-    Departure date, the format is YYYYMMDD.
+  Valid values:
+
+  true: Show the full details of main order and post-booking order
+
+  false: Only show the details of given order
+- **Constraints:** "true" or "false".  
+- **Default:** "false"  
+- **Example:** "true"  
+
 {% endtab %}
 
 {% tab title="Samples" %}
@@ -118,173 +197,309 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the flight booking order.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "TESTA20240627114717735"  
 
-    0: success
+### **orderList** (Array)
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of all orders associated with the booking.  
+- **Constraints:** Must contain at least one order.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    2: System error
-*   **msg **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **orderList.orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Order number for the booking.  
+- **Default:** None  
+- **Example:** "TESTA20240627114717735"  
 
-    Error message
-    
-    The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to         check the result.
-*   **orderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **orderList.orderStatus**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Status of the order.  
 
-    Order number
-*   **orderStatus **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+Valid values:
 
-    0: Unpaid
+0: Unpaid
 
-    1: Ticketing-in-Process
+1: Ticketing-in-Process
 
-    2: Ticketed
-    
-    \-3: Cancelled(When the booking is failed due to the request information)
-    Order number
-*   **orderList **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+2: Ticketed
 
-    List all the ancillary orders in the given orderNo, including in-booking and post-booking transactions.
+-3: Cancelled(When the booking is failed due to the request information) Order number
+- **Constraints:** "0" for unpaid, "1" for ticketing-in-process, "2" for ticketed and "-3" for cancelled.  
+- **Default:** None  
+- **Example:** "2"  
 
-*   **ticketStatus **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **orderList.ticketStatus**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Status of ticket issuance.
 
-    0: Ticket not issued
+  Valid values:
 
-    1: Ticket issued
-*   **ticketErrorCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+  0: Ticket not issued
 
-    It's only available when orderStatus = -3.&#x20;
+  1: Ticket issued  
+- **Constraints:** "0" for Ticket not issued, "1" for Ticket issued.  
+- **Default:** None  
+- **Example:** "1"  
 
-    Please check the definition of ticketErrorCode [**here**](../overview/errors.md#ticket-error-codes)****
-*   **ticketErrorMessage **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+#### **orderList.totalPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Total fare of this order in the currency Atlas settled with you.  
+- **Constraints:** Must be a positive value.  
+- **Default:** None  
+- **Example:** 86.31  
 
-    It's only available when orderStatus = -3.&#x20;
+#### **orderList.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The currency Atlas settled with you.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** "USD"  
+- **Example:** "USD"  
 
-    Error message
-*   **totalPrice **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **pnrCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR. 
+- **Constraints:** Must be a valid alphanumeric string.
+- **Default:** None  
+- **Example:** "ODNSPH"  
 
-    Total fare of this order in the currency TheAtlas settled with you.
-*   **totalTransactionFee **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **paxTicketInfos** (Array)
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** List of passenger details. This is the same format as the PAXTicketInfo in order response.
+- **Constraints:** Must contain at least one passenger.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    Total technical fees for this order in the currency TheAtlas settled with you.
-*   **currency **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **paxTicketInfos.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Full name of the passenger.  
+- **Constraints:** Must be in "LastName/FirstName MiddleName" format.  
+- **Default:** None  
+- **Example:** "Kotwal/Behram"  
 
-    The currency TheAtlas settled with you.
-*   **vendorTotalPrice **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **paxTicketInfos.passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Passenger type (0 = adult, 1 = child, 2 = infant).  
+- **Constraints:** Can be ADT (Adult), CHD (Child), INF (Infant).
+- **Default:** None  
+- **Example:** 0  
 
-    Total fare of this order in the vendor's currency, reference for you to generate the specific credit card.
-*   **vendorTotalAncillaryPrice **<mark style="color:blue;">**decimal**</mark>** 
+### **routing** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains segment details of the booked flight. The structure is the same format as "Routing" in order response.  
+- **Default:** None  
+- **Example:** {...}  
 
-    Total ancillary fare of this order in the vendor's currency.
-*   **vendorCurrency **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **ancillaryProductElements** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of ancillary products purchased with the booking. The structure is the same format as "Ancillaries" in order response.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    Vendor's currency.
-*   **supportPaymentMethod **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **airlineBookings** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** List of airline-specific booking details.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    1: Prepayment Only
+#### **airlineBookings.airlineCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Two-letter airline code.  
+- **Constraints:** Must be a valid IATA airline code.  
+- **Default:** None  
+- **Example:** "XC"  
 
-    3: Both Credit Card Payment and Prepayment Available
-    
-    This tag shows which payment method is supported for that particular booking.
-*   **supportPaymentMethods **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **airlineBookings.airlineName**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Name of the airline.  
+- **Default:** None  
+- **Example:** "Corendon Airlines"  
 
-    1: Prepayment Only
+#### **airlineBookings.airlinePnr**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Passenger Name Record (PNR) issued by the airline.  
+- **Default:** None  
+- **Example:** "S017554"  
 
-    3: Both Credit Card Payment and Prepayment Available
+#### **airlineBookings.airlineWebSiteAddress**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Website link for airline services.  
+- **Constraints:** Must be a valid URL.  
+- **Default:** None  
+- **Example:** "https://www.corendon-airlines.com"  
 
-    This tag lists down all the various payment methods available for payment for the booking.
-*   **paymentMethod **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **airlineBookings.mmbEmail**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Email address for managing the booking.  
+- **Constraints:** Must be a valid email format.  
+- **Default:** None  
+- **Example:** "SARABAGCI@WEB.DE"  
 
-    1: Prepayment Only
+#### **airlineBookings.tailDigitsOfPaymentCard**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Last few digits of the payment card used for booking.  
+- **Default:** Null  
+- **Example:** Null  
 
-    3: Both Credit Card Payment and Prepayment Available
+#### **airlineBookings.extras** (Array)
+- **Type:** Array  
+- **Required:** No  
+- **Description:** Additional airline booking details.  
+- **Default:** None  
+- **Example:** [{...}]  
 
-    This is the mode of payment used to pay for the booking.
-*   **tktLimitTime **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+##### **extras.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Name of the extra field.  
+- **Default:** None  
+- **Example:** "email"  
 
-    Payment deadline for this order. This time will be displayed in SGT (GMT +8)
-*   **paxTicketInfos Array<**[**PAXTicketInfo**](order.md#paxticketinfo-schema/)**> **<mark style="color:green;">**Required**</mark>
+##### **extras.remark**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Additional remarks about the extra field.  
+- **Default:** None  
+- **Example:** "email"  
 
-    Ticket information for passengers, the same format as the PAXTicketInfo in order response.
-*   **routing Object<**[**RouteElement**](search.md#route-element-schema/)**> **<mark style="color:green;">**Required**</mark>
+##### **extras.value**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Value assigned to the extra field.  
+- **Default:** Null  
+- **Example:** Null  
 
-    Route and fare details. The structure is the same format as "Routing Element" in search response.
-*   **airlineBookings Array<**[**ManageBookingElement**]**> **<mark style="color:green;">**Required**</mark>
+### **itineraryDownload**
+- **Type:** String  
+- **Required:** No  
+- **Description:** URL to download the itinerary document.  
+- **Constraints:** Must be a valid URL.  
+- **Default:** None  
+- **Example:** "https://api-sg.atriptech.com/itineraryDownload.do?orderNo=8b83jgNhkaYaktdGP0fboCRs8w5cQTow"  
 
-*   **ancillaries Array<**<mark style="color:blue;">**AncillaryElement**</mark>**>**
+### **contact** (Object)
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contact details for the booking.  
+- **Constraints:** Must contain valid contact information.  
+- **Default:** None  
+- **Example:** {...}  
 
-    Ancillaries selection for the specific passenger
+#### **contact.name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Name of the contact person.  
+- **Default:** None  
+- **Example:** "KURT/ESRA"  
 
-  * [**AncillaryElement**](order.md)
-    
-    *   **productCode **<mark style="color:blue;">**string**</mark>
+#### **contact.address**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Address of the contact person.  
+- **Default:** Null  
+- **Example:** None  
 
-        Ancillary product code;
+#### **contact.postcode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Postal code of the contact person's address.  
+- **Default:** Null  
+- **Example:** None  
 
-        Got from routing element in the search/revalidation response.
-     *   **segmentIndex **<mark style="color:blue;">**int**</mark>
+#### **contact.email**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Email address of the contact person.  
+- **Constraints:** Must be a valid email format.  
+- **Default:** None  
+- **Example:** "SAARABAGCI@WEB.DE"  
 
-         Segment sequence
-     *   **offerId **<mark style="color:blue;">**string**</mark>
+#### **contact.mobile**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Mobile phone number of the contact person. XXXX(digital country code)-XXXXXXXX(phone number). Examples: 0001-87291810, 0086-13928109091, 0971-19201998
+- **Constraints:** Must be a valid phone number format.  
+- **Default:** None  
+- **Example:** "0046-771407000"  
 
-         unique identifier for this ancillary's offer.
-     *   **productType **<mark style="color:orange;">**integer**</mark>
+### **ancillaryBuyMethod**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Indicates the method used for purchasing ancillary services.  
+- **Constraints:** "0" for pre-purchase, "1" for post-purchase.  
+- **Default:** "0"  
+- **Example:** "0"  
 
-         Ancillary product type.
-     
-         1: Standard Check-in baggage
-     
-         2: Cabin Baggage Overhead Locker
-     
-         6: Seat
-     *   **auxSeatElement **<mark style="color:blue;">**Array**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **errorCode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Error code indicating issues during booking or fare retrieval.  
+- **Constraints:** Must be a valid numeric error code.  
+- **Default:** None  
+- **Example:** "601"  
 
-         Configuration of ordering when the seat is occupied
+### **errorMessage**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Description of the error encountered during the booking process.  
+- **Constraints:** Must be a valid string.  
+- **Default:** None  
+- **Example:** "Fare changed"  
 
-         SIMILAR_SEAT: Default, select a similar seat automatically
+### **airlineMessage**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Airline-specific error message or code.  
+- **Constraints:** Must be a valid airline error code.  
+- **Default:** None  
+- **Example:** "301"  
 
-         STOP_SEAT: Stop seat and continue ticketing
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code. 
 
-         STOP_TICKET: Stop ticketing and cancel the order
-     *   **row **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Optional**</mark>
-         Seat row
+  Valid values:
 
-         **Example**: 27
-            
-     *   **column **<mark style="color:blue;">**String**</mark>**  **<mark style="color:green;">**Optional**</mark>
-         Seat column
+  0: success
 
-         **Example**: A
+  2: System error 
+- **Constraints:** 0 indicates success.  
+- **Default:** 0  
+- **Example:** 0  
 
-         Booking information of the airline.
-
-*   **airlineCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    2 character IATA airline code.
-
-*   **airlineName **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Name of the airline.
-
-*   **airlinePnr **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    The record locator of the airline.
-
-*   **airlineWebSiteAddress **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    The URL of the public airline website.
-
-*   **mmbEmail **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    The email id to be used in the airline's MMB (Manage my Booking) section.
-
-*   **tailDigitsOfPaymentCard **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    The last 4 digits of the VCC used for payment.
-
-*   **itineraryDownload **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    The link to download the itinerary of the trip.
-
+### **msg**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Response message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+- **Default:** "success"  
+- **Example:** "success"  
        
 {% endtab %}
 
@@ -890,9 +1105,9 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
     "mobile": "0086-13928109091"
   },
   "ancillaryBuyMethod": null,
-  "errorCode": null,
-  "errorMessage": null,
-  "airlineMessage": null,
+  "errorCode": "601",
+  "errorMessage": "Fare changed",
+  "airlineMessage": "301",
   "locale": "",
   "status": 0,
   "msg": "success"
