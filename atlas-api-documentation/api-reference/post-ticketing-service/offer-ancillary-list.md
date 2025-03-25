@@ -43,21 +43,45 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **ticketOrderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **ticketOrderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the ticket order.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTA20240618162411631"  
 
-    Order number. It is the original order number.
-*   **airlinePNR **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **airlinePNR**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** PNR code assigned by the airline.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "S74883"  
 
-    The record locator of the airline.
-*   **carrier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **carrier**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline carrier code.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** "MM"  
 
-    2 character IATA airline code.
-*   **ancillaryCategory **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **ancillaryCategory**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of ancillary service requested. Different categories of ancillaries need to be separately requested. Currently we only support "BAGGAGE".
+- **Constraints:** Must be a valid ancillary category (e.g., "BAGGAGE").  
+- **Default:** None  
+- **Example:** "BAGGAGE"  
 
-    Ancillary Category. Different categories of ancillaries need to be separately requested. Currently we only support "BAGGAGE".
-*   **displayCurrency ** <mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. 
+### **displayCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered.
+- **Constraints:** Must be a valid three-letter currency code (ISO 4217).  
+- **Default:** None  
+- **Example:** "CNY"
     
 {% endtab %}
 
@@ -79,168 +103,459 @@ The alternative currency in which the fare and taxes amount needs to be displaye
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **msg **<mark style="color:blue;">**string**</mark>
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Status code of the response (0 indicates success).  
+- **Constraints:** Must be a valid status code.  
+- **Default:** None  
+- **Example:** "0"  
 
-    The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
-*   **status **<mark style="color:blue;">**int**</mark>
+### **msg**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Message indicating success or failure of the request. The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** "success"  
 
-    0: success
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "90223f62-fd87-45b4-9a32-68f03f9f85c8"  
 
-    2: System error
+### **ticketOrderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique ticket order number.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTA20240618162411631"  
 
-*   **sessionId **<mark style="color:blue;">**int**</mark>
+### **supportCreditTransPayment**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates if credit transaction payment is supported (0 for no, 1 for yes).  
 
-    The unique identifier for this search.
+  Valid values:
 
-    It is required when you call order function to make a reservation to identify which ancillary the client is choosing.
+  0: The credit card details will not be passed through and only pre-payment is allowed.
 
-*   **ticketOrderNo **<mark style="color:blue;">**string**</mark>
+  1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment.
+- **Constraints:** Must be 0 or 1.  
+- **Default:** "0"  
+- **Example:** "0"  
 
-    Order number. It is the original order number.
-    
-*   **supportCreditTransPayment **<mark style="color:blue;">**int**</mark>
+### **currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency code for the transaction.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-    This tag is used to identify if the fare needs to be paid using the client's credit card.
+## Flight Segment Fields
 
-    0: The credit card details will not be passed through and only pre-payment is allowed.
+### **segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Index of the flight segment.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "1"  
 
-    1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment.
-    
-*   **currency **<mark style="color:blue;">**string**</mark>
+### **carrier**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline carrier code.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** "5F"  
 
-    The currency in which Atlas settles transactions with you.
+### **flightNumber**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Flight number assigned by the carrier.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "5F617"  
 
-*   **fromSegment Array **<mark style="color:blue;">**AncillaryElement**</mark>
+### **depAirport**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure airport IATA code.  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "RMO"  
 
-    For outbound segments. Same elements as search response.
+### **depTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure time of the flight.  
+- **Constraints:** Format: YYYYMMDDHHMM.  
+- **Default:** None  
+- **Example:** "202408200810"  
 
-*   **retSegment Array **<mark style="color:blue;">**AncillaryElement**</mark>
+### **arrAirport**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Arrival airport IATA code.  
+- **Constraints:** Must be a valid IATA airport code.  
+- **Default:** None  
+- **Example:** "LTN"  
 
-    For inbound segments. Same elements as search response.
+### **arrTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Arrival time of the flight.  
+- **Constraints:** Format: YYYYMMDDHHMM.  
+- **Default:** None  
+- **Example:** "202408200940"  
 
-*   **ancillaries Array **<mark style="color:blue;">**AncillaryElement**</mark>
+### **stopCities**
+- **Type:** String  
+- **Required:** No  
+- **Description:** List of stopover cities if applicable.  
+- **Constraints:** Can be empty if no stopovers.  
+- **Default:** ""  
+- **Example:** ""  
 
-    Ancillary list provided for this order
+### **duration**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Flight duration in minutes.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "210"  
 
-    * **AncillaryProductElements**
-      *   **segmentIndex **<mark style="color:blue;">**int**</mark>
+### **codeShare**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates if the flight is operated under a codeshare agreement.  
+- **Constraints:** Must be true or false.  
+- **Default:** false  
+- **Example:** false  
 
-          Segment sequence. It starts from 1. If it is round trip, the outbound and inbound sequence would be together.
+### **cabin**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Cabin class of the flight segment.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** ""  
+- **Example:** ""  
 
-      *   **endSegmentIndex **<mark style="color:blue;">**int**</mark>
+### **cabinClass**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Numeric representation of cabin class (e.g., 1 for economy, 2 for business).  
 
-          The last segment for which this information is applicable.
+  Valid values:
 
-      *   **productCode **<mark style="color:blue;">**string**</mark>
+  1 : Economy
 
-          Unique identifier for the ancillary product.
-      *   **productName **<mark style="color:blue;">**string**</mark>
+  2 : Business
 
-          Ancillary product name.
+  3 : First Class
 
-          Options:
-          
-          StandardCheckInBaggage
+  4: Premium Economy
+- **Constraints:** Must be a valid class indicator.  
+- **Default:** None  
+- **Example:** "1"  
 
-          CabinBaggageOverheadLocker
-      *   **productType **<mark style="color:blue;">**string**</mark>
+### **seatCount**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of available seats on the flight segment.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "4"  
 
-          Ancillary product type.
+### **aircraftCode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Aircraft model code if available.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** ""  
+- **Example:** ""  
 
-          1: Standard Check-in baggage
-          
-          3: Cabin Baggage Overhead Locker
-          
-          6: Seat
+### **depTerminal**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Departure terminal of the airport.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** ""  
+- **Example:** ""  
 
-          Currently only "Standard Check-in Baggage" and "Cabin Baggage Overhead Locker" are available.
+### **arrTerminal**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Arrival terminal of the airport.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** ""  
+- **Example:** ""  
 
-      *   **canPurchaseWithTicket **<mark style="color:blue;">**int**</mark>
+### **operatingCarrier**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Carrier actually operating the flight if different from the marketing carrier.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** None  
+- **Example:** "5F"  
 
-          This ancillary product can be purchased during the booking flow.
+### **operatingFlightnumber**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Flight number assigned by the operating carrier.  
+- **Constraints:** Can be empty if not specified.  
+- **Default:** ""  
+- **Example:** ""  
 
-          1=Yes
+### **fareFamily**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Fare family category of the ticket.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "LOYAL"  
 
-          0=No
+## Ancillary Product Fields
 
-      *   **canPurchasePostTicket **<mark style="color:blue;">**int**</mark>
+### **segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Index of the flight segment to which this product applies.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "1"  
 
-          This ancillary product can be purchased in the post-ticketing flow.
+### **endSegmentIndex**
+- **Type:** Integer | Null  
+- **Required:** No  
+- **Description:** Index of the last segment if applicable.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-          1=Yes
+### **productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code identifying the ancillary product.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "SCI_BAG_1PC_10KG"  
 
-          0=No
-          
-      *   **price **<mark style="color:blue;">**string**</mark>
+### **productName**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Name of the ancillary product.  
 
-          Price for this ancillary.
-      *   **currency **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-          Currency for this ancillary price.
+  StandardCheckInBaggage
 
-      *   **vendorPrice **<mark style="color:blue;">**string**</mark>
+  CabinBaggageOverheadLocker
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "Standard Check-in Baggage"  
 
-          The price charged by the vendor for the ancillary.  Only when supportCreditTransPayment=1, there is a value.
+### **productType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Type of ancillary product.  
 
-      *   **vendorCurrency **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-          The currency in which the vendor charges for the ancillary.
+  1: Standard Check-in baggage
 
-      *   **offerId **<mark style="color:blue;">**string**</mark>
+  3: Cabin Baggage Overhead Locker
 
-          Reserved field, temporarily null
-          
-      *   **maxQty **<mark style="color:blue;">**int**</mark>
+  6: Seat
 
-          Maximum purchase quantity per product
-  
-      *   **minQty **<mark style="color:blue;">**int**</mark>
+  Currently only "Standard Check-in Baggage" and "Cabin Baggage Overhead Locker" are available.
+- **Constraints:** Must be a valid product type identifier.  
+- **Default:** None  
+- **Example:** "1"  
 
-          Minimum purchase quantity per product
-          
-      *   **categoryCode **<mark style="color:blue;">**string**</mark>
+### **canPurchaseWithTicket**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Indicates if the product can be purchased with the ticket (0 for no, 1 for yes).  
+- **Constraints:** Must be 0 or 1.  
+- **Default:** "0"  
+- **Example:** "0"  
 
-          Ancillary category code.
-          
-      *   **categoryCode **<mark style="color:blue;">**string**</mark>
+### **canPurchasePostTicket**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Indicates if the product can be purchased after ticket issuance (0 for no, 1 for yes).  
+- **Constraints:** Must be 0 or 1.  
+- **Default:** "1"  
+- **Example:** "1"  
 
-          Ancillary code.
+### **price**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the product in the base currency.  
+- **Constraints:** Must be a positive number.  
+- **Default:** None  
+- **Example:** "22.88"  
 
-     * **`auxBaggageElement` Object<**[**AuxBaggageElement**](search.md#10.-auxbaggage-element-schema)**>**
-       
-     * **`auxBaggageElement` includes the following parameters**
-       
-    *   **`piece`  **<mark style="color:blue;">**int**</mark>
+### **currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency of the product price.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-        0：No Limitation about piece;
+### **vendorPrice**
+- **Type:** Float | Null  
+- **Required:** No  
+- **Description:** Vendor-specific price if available.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-        \>0：Maximum pieces
-        
-    *   **`weight`  **<mark style="color:blue;">**int**</mark>
+### **vendorCurrency**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Vendor-specific currency if available.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-        Value mentions maximum weight for ancillary baggage; this should be greater than 0.
-        
-    *   **`isAllWeight`  **<mark style="color:blue;">**boolean**</mark>
+### **clientTechnicalServiceFee**
+- **Type:** Float  
+- **Required:** No  
+- **Description:** Additional service fee charged to the client.  
+- **Constraints:** Must be a non-negative number.  
+- **Default:** "0.00"  
+- **Example:** "0.00"  
 
-        True：The weight is for all the pieces
+### **clientTechnicalServiceFeeMode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Mode of applying service fee (e.g., PER_PAX).  
 
-        False：The weight is for each piece
-        
-    *   **`size`  **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-        Maximum size for ancillary baggage
+  PER_SEGMENT: Each segment of an itinerary (per passenger)
 
-    *   **`maxQty`  **<mark style="color:blue;">**string**</mark>
+  PER_TICKET: No. of tickets in a booking
 
-        Maximum purchase quantity per product
+  PER_PAX: Per passenger
 
-    *   **`minQty`  **<mark style="color:blue;">**string**</mark>
+  PER_BOOKING: Per atlas booking (order #)
+- **Constraints:** Can be empty if not applicable.  
+- **Default:** "PER_PAX"  
+- **Example:** "PER_PAX"  
 
-        Starting purchase quantity per product
+### **auxBaggageElement** (Nested Object)
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Additional details if the product is baggage-related.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** None  
+- **Example:** See below.  
 
-    *   **`ancillaryCode`  **<mark style="color:blue;">**string**</mark>
+#### **Baggage Element Fields**
+- **piece**  
+  - **Type:** Integer  
+  - **Required:** Yes  
+  - **Description:** Number of baggage pieces.  
 
-    The code for this ancillary option. This will be identical to the `productCode`.  
+  Valid values:
+
+  0：No Limitation about piece;
+
+  greater than 0：Maximum pieces
+  - **Constraints:** Must be a positive integer.  
+  - **Default:** None  
+  - **Example:** "1"  
+
+- **weight**  
+  - **Type:** Integer  
+  - **Required:** Yes  
+  - **Description:** Weight of baggage in kilograms.  
+  - **Constraints:** Must be a positive number.  
+  - **Default:** None  
+  - **Example:** "10"  
+
+- **isAllWeight**  
+  - **Type:** Boolean  
+  - **Required:** Yes  
+  - **Description:** Indicates if the weight is cumulative.  
+
+  Valid values:
+
+  True: The weight is for all the pieces
+
+  False: The weight is for each piece
+  - **Constraints:** Must be true or false.  
+  - **Default:** true  
+  - **Example:** true  
+
+- **size**  
+  - **Type:** String  
+  - **Required:** No  
+  - **Description:** Dimensions of baggage if applicable.  
+  - **Constraints:** Can be empty if not specified.  
+  - **Default:** ""  
+  - **Example:** ""  
+
+### **offerId**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Unique identifier for the offer. This will be "null" in the booking flow but will have an id in the post-ticketing flow.
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
+
+### **categoryCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Category of the ancillary product.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "StandardCheckInBaggage"  
+
+### **ancillaryCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code representing the ancillary product. This will be identical to the "product code". 
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "SCI_BAG_1PC_10KG"  
+
+### **auxSeatElement**
+- **Type:** Object | Null  
+- **Required:** No  
+- **Description:** Additional details if the product is related to seat selection.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
+
+### **displayPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the product in the display currency.  
+- **Constraints:** Must be a positive number.  
+- **Default:** None  
+- **Example:** "165.89"  
+
+### **displayCurrency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Display currency of the price.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "CNY"  
+
+
+
 
 {% endtab %}
 
