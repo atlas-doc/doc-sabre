@@ -18,47 +18,104 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **ticketOrderNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-    Order number. It is the original order number.
+### **ticketOrderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the ticket order. It is the original order number.
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTA20240618162411631"  
 
-*   **airlinePNR **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **airlinePNR**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline PNR associated with the booking.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "S37310"  
 
-    The record locator of the airline.
-    
-*   **carrier **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **carrier**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline carrier code.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** "5F"  
 
-    2 character IATA airline code.
+### **ancillaryCategory**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Category of ancillary service requested. Different categories of ancillaries need to be separately requested. Currently we only support "BAGGAGE".
+- **Constraints:** Must be a valid ancillary category (e.g., "BAGGAGE").  
+- **Default:** None  
+- **Example:** "BAGGAGE"  
 
-*   **ancillaryCategory **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier for the request.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "fb4861a9-d410-41ed-a483-c372f0713e9c"  
 
-    Ancillary Category. Different categories of ancillaries need to be separately requested. Currently we only support "BAGGAGE".
+### **passengers** (Array of Objects)
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** List of passengers for whom ancillaries are being booked.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** See below.  
 
-*   **sessionId **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### **Passenger Object Fields**
 
-    Identifier of the searched ancillary, received from the ancillary search response.
-    
-*   **passengers Array<**<mark style="color:blue;">**PassengerElement**</mark>**> **<mark style="color:green;">**Required**</mark>
-     
-    * <mark style="color:blue;">**PassengerElement**</mark>
-      *   **name **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+##### **name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's name in "LASTNAME/FIRSTNAME MIDDLE NAME" format.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "DOER/DEF"  
 
-          LastName/FirstName MiddleName.
-      *   **passengerType **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+##### **passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Type of passenger (e.g., 0 for adult).  
 
-          0 ADT
+  Valid values:
 
-          1 CHD
-*   **ancillaries Array<**[**AncillaryElement**](add-ancillaries.md#undefined)**> **<mark style="color:green;">**Required**</mark>
+  0 ADT
 
-    Ancillaries selection for the specific passenger
-      * <mark style="color:blue;">**AncillaryElement**</mark>
-        *   **segmentIndex **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
+  1 CHD
+- **Constraints:** Must be a valid passenger type.  
+- **Default:** None  
+- **Example:** "0"  
 
-            Segment sequence. It starts from 1. If it is round trip, the outbound and inbound sequence would be together.
-        *   **productCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+##### **ancillaries** (Array of Objects)
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** List of ancillaries booked for the passenger.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** See below.  
 
-            Unique identifier for the ancillary product. Used for the order ancillary function.
+#### **Ancillary Object Fields**
+
+###### **productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code identifying the ancillary product.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "SCI_BAG_1PC_10KG"  
+
+###### **segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Segment index to which this ancillary applies.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "1"  
             
 {% endtab %}
 
@@ -94,150 +151,357 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>
 
-    0: success
 
-    2: System error
+### **sessionId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique session identifier.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "cde38a72-d7fa-4e5b-9ba5-08b6929143c8"  
 
-    6: Price change
-    
-*   **msg **<mark style="color:blue;">**string**</mark>
+### **orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique order number for the ticket purchase.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTB20240520180835748"  
 
-    Error message
-    
-    The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
-    
-*   **sessionId **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **originalOrderNo**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Original order number if applicable.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-    Identifier of the revalidation, received from search ancillary response.
-*   **orderNo **<mark style="color:blue;">**string**</mark>
+### **ticketOrderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique ticket order number.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TESTM20240520171341468"  
 
-    Order number of the added ancillary.
-    
-*   **ticketOrderNo **<mark style="color:blue;">**string**</mark>
+### **totalPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Total price of the ticket order.  
+- **Constraints:** Must be a positive number.  
+- **Default:** None  
+- **Example:** "85.51"  
 
-    Order number of the original ticket.
+### **totalTransactionFee**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Total transaction fee for the order.  
+- **Constraints:** Must be a non-negative number.  
+- **Default:** "0"  
+- **Example:** "0"  
 
-*   **totalPrice **<mark style="color:blue;">**decimal**</mark>
+### **currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency of the transaction.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-    Total fare of this order in the currency Atlas settled with the customer.
+### **vendorTotalPrice**
+- **Type:** Float | Null  
+- **Required:** No  
+- **Description:** Total price from the vendor.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-*   **totalTransactionFee **<mark style="color:blue;">**decimal**</mark>
+### **vendorCurrency**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Currency of the vendor price.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-    Total technical fees for this order in the currency Atlas settled with the customer.
-*   **currency **<mark style="color:blue;">**string**</mark>
+### **tktLimitTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Ticketing limit time.  
+- **Constraints:** Format: YYYY-MM-DD HH:MM:SS.  
+- **Default:** None  
+- **Example:** "2024-05-20 18:24:35"  
 
-    The currency Atlas settled with the customer.
-*   **vendorTotalPrice **<mark style="color:blue;">**decimal**</mark>
+### **pnrCode**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR.
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-    Total fare of this order in the vendor's currency. This is the reference for the customer to generate the specific credit card.
-*   **vendorCurrency **<mark style="color:blue;">**string**</mark>
+### **includeExtraBaggage**
+- **Type:** Boolean | Null  
+- **Required:** No  
+- **Description:** Indicates if extra baggage is included.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-    Vendor's currency.
-*   **tktLimitTime **<mark style="color:blue;">**string**</mark>
+#### **Passenger Object Fields**
 
-    Payment deadline for this order. This time will be displayed in SGT (GMT +8)
-*   **paxTicketInfos Array<**<mark style="color:blue;">**PAXTicketInfo**</mark>**>**
+##### **name**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's full name in "LASTNAME/FIRSTNAME MIDDLENAME" format.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "TEST/ONE"  
 
-    Ticket information for passengers
+##### **passengerType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Passenger type (e.g., 0 for adult).  
 
-    * <mark style="color:blue;">**PAXTicketInfo**</mark>
-      *   **name **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-          LastName/FirstName MiddleName.
-      *   **passengerType **<mark style="color:blue;">**int**</mark>
+  0 ADT
 
-          0 ADT
+  1 CHD
 
-          1 CHD
-      *   **birthday **<mark style="color:blue;">**string**</mark>
+  2 INF
+- **Constraints:** Must be a valid passenger type.  
+- **Default:** None  
+- **Example:** "0"  
 
-          Birthday, Format: YYYYMMDD
-      *   **gender **<mark style="color:blue;">**string**</mark>
+##### **birthday**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's date of birth.  
+- **Constraints:** Format: YYYYMMDD.  
+- **Default:** None  
+- **Example:** "19900101"  
 
-          M : Male
+##### **gender**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger's gender (e.g., M for male, F for female).  
+- **Constraints:** Must be "M" or "F".  
+- **Default:** None  
+- **Example:** "M"  
 
-          F : Female
-      *   **cardNum **<mark style="color:blue;">**string**</mark>
+##### **cardNum**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Identification document number.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "00000000"  
 
-          Passenger id card number
-      *   **cardType **<mark style="color:blue;">**string**</mark>
+##### **cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of identification document (e.g., PP for passport).  
 
-          Passenger id card type：
+  Valid values:
 
-          PP - Passport
+  PP - Passport
 
-          GA - Hong Kong Macau Pass for China mainland citizens
+  GA - Hong Kong Macau Pass for China mainland citizens
 
-          TW - Taiwan Pass for China mainland citizens
+  TW - Taiwan Pass for China mainland citizens
 
-          TB - China mainland pass for Taiwanese
+  TB - China mainland pass for Taiwanese
 
-          HY - International Seaman's Certificate
-      *   **cardIssuePlace **<mark style="color:blue;">**string**</mark>
+  HY - International Seaman's Certificate
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "PP"  
 
-          Card issue country，IATA code of country
-      *   **cardExpired **<mark style="color:blue;">**string**</mark>
+##### **cardIssuePlace**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Country where the identification document was issued.  
+- **Constraints:** Must be a valid country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-          Card expire date，Format：YYYYMMDD
-      *   **nationality **<mark style="color:blue;">**string**</mark>
+##### **cardExpired**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Expiry date of the identification document.  
+- **Constraints:** Format: YYYYMMDD.  
+- **Default:** None  
+- **Example:** "20301231"  
 
-          Nationality，IATA code of country
-      *   **ticketNos Array<**<mark style="color:blue;">**string**</mark>**>**
+##### **nationality**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Nationality of the passenger.  
+- **Constraints:** Must be a valid country code.  
+- **Default:** None  
+- **Example:** "SG"  
 
-          Ticket numbers
-      *   **airlinePNRs Array<**<mark style="color:blue;">**string**</mark>**>**
+##### **contactEmails**
+- **Type:** Array of Strings  
+- **Required:** No  
+- **Description:** Passenger contact email address.  
+- **Constraints:** Must contain valid email address.  
+- **Default:** None  
+- **Example:** ["test@test.com"]  
 
-          AirlinePNRs, the array count would be the same as ticket nos count
-      *   **ancillaries Array<**<mark style="color:blue;">**AncillaryElement**</mark>**>**
+##### **contactPhones**
+- **Type:** Array of Strings  
+- **Required:** No  
+- **Description:** Passenger contact phone number.  
+- **Constraints:** Must be a valid phone number.  
+- **Default:** None  
+- **Example:** ["0001-87291810"]  
 
-          Ancillaries selection for the specific passenger
+#### **Ancillary Object Fields**
 
-          * [**AncillaryElement**](add-ancillaries.md#undefined)
-            *   **productCode **<mark style="color:blue;">**string**</mark>
+###### **productCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code identifying the ancillary product.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "SCI_1PC_19KG"  
 
-                Ancillary product code received from ancillary search response.
-                
-            *   **segmentIndex **<mark style="color:blue;">**int**</mark>
+###### **segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Segment index to which this ancillary applies.  
+- **Constraints:** Must be a positive integer.  
+- **Default:** None  
+- **Example:** "1"  
 
-                Segment sequence
+###### **buyMethod**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Purchase method for the ancillary product.  
+- **Constraints:** Cannot be null or empty.  
+- **Default:** None  
+- **Example:** "0"  
 
-            *   **ancillaryPrice **<mark style="color:blue;">**int**</mark>
+###### **offerId**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Unique identifier for the offer.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
-                Price for this ancillary.
+###### **ancillaryPrice**
+- **Type:** Float  
+- **Required:** Yes  
+- **Description:** Price of the ancillary service.  
+- **Constraints:** Must be a positive number.  
+- **Default:** None  
+- **Example:** "85.51"  
 
-            *   **offerId **<mark style="color:blue;">**int**</mark>
+### **currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency of the transaction.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** "USD"  
 
-                unique identifier for this ancillary's offer.
+###### **auxSeatElement**
+- **Type:** Object | Null  
+- **Required:** No  
+- **Description:** Additional details if the product is related to seat selection.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null
 
-            *   **currency **<mark style="color:blue;">**int**</mark>
+###### **auxBaggageElement** (Nested Object)
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Additional details if the product is baggage-related.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** None  
+- **Example:** See below.  
 
-                Currency for this ancillary price.
+#### **Baggage Element Fields**
 
-         * **`auxBaggageElement` Object<**[**AuxBaggageElement**](search.md#10.-auxbaggage-element-schema)**>**
-       
-         * **`auxBaggageElement` includes the following parameters**
-       
-        *   **`piece`  **<mark style="color:blue;">**int**</mark>
+- **piece**  
+  - **Type:** Integer  
+  - **Required:** Yes  
+  - **Description:** Number of baggage pieces.  
 
-        0：No Limitation about piece;
+  Valid values:
 
-        \>0：Maximum pieces
-        
-       *   **`weight`  **<mark style="color:blue;">**int**</mark>
+  0：No Limitation about piece;
 
-           Value mentions maximum weight for ancillary baggage; this should be greater than 0.
-        
-       *   **`isAllWeight`  **<mark style="color:blue;">**boolean**</mark>
+  greater than 0：Maximum pieces
+  - **Constraints:** Must be a positive integer.  
+  - **Default:** None  
+  - **Example:** "0"  
 
-           True：The weight is for all the pieces
+- **weight**  
+  - **Type:** Integer  
+  - **Required:** Yes  
+  - **Description:** Weight of baggage in kilograms.  
+  - **Constraints:** Must be a positive number.  
+  - **Default:** None  
+  - **Example:** "0"  
 
-           False：The weight is for each piece
-        
-       *   **`size`  **<mark style="color:blue;">**string**</mark>
+- **isAllWeight**  
+  - **Type:** Boolean  
+  - **Required:** Yes  
+  - **Description:** Indicates if the weight is cumulative.  
 
-           Maximum size for ancillary baggage
+  Valid values:
+
+  True: The weight is for all the pieces
+
+  False: The weight is for each piece
+  - **Constraints:** Must be true or false.  
+  - **Default:** true  
+  - **Example:** true  
+
+- **size**  
+  - **Type:** String | Null  
+  - **Required:** No  
+  - **Description:** Dimensions of baggage if applicable.  
+  - **Constraints:** Can be null if not specified.  
+  - **Default:** Null  
+  - **Example:** null  
+
+### **routing**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Routing details if applicable.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
+
+### **duplicateOrders**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Indicates duplicate orders if any.  
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
+
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code.  
+- **Constraints:** Must be a valid status code.  
+- **Default:** None  
+- **Example:** "0"  
+
+### **msg**
+- **Type:** String | Null  
+- **Required:** No  
+- **Description:** Message related to the response. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
+- **Constraints:** Can be null if not applicable.  
+- **Default:** Null  
+- **Example:** null  
 
 {% endtab %}
 
