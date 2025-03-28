@@ -241,52 +241,109 @@ No preceding function needs to be called before `Search`.
 - **Example:** "USD"  
 
 #### **routings.adultPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Price for an adult passenger.  
+- **Description:** The base fare price for an adult passenger.  
 - **Constraints:** Must be a positive number.  
 - **Default:** None  
-- **Example:** 2.68  
+- **Example:** 96.03  
 
 #### **routings.adultTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Tax applicable for an adult passenger.  
-- **Constraints:** Must be a positive number.  
+- **Description:** The tax amount applicable to an adult ticket.  
+- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
-- **Example:** 38.3  
+- **Example:** 0.18  
+
+#### **routings.adultDetails**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** Breakdown of adult fare and tax details.  
+- **Constraints:** Must contain objects with valid pricing details.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  [
+    {"code": "farePrice", "type": "base", "amount": 96.03, "description": ""},
+    {"code": "tax", "type": "tax", "amount": 0.18, "description": ""}
+  ]
+  ```
 
 #### **routings.childPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Price for a child passenger.  
+- **Description:** The base fare price for a child passenger.  
 - **Constraints:** Must be a positive number.  
 - **Default:** None  
-- **Example:** 2.68  
+- **Example:** 96.03  
 
 #### **routings.childTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Tax applicable for a child passenger.  
-- **Constraints:** Must be a positive number.  
+- **Description:** The tax amount applicable to a child ticket.  
+- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
-- **Example:** 38.3  
+- **Example:** 0.18  
+
+#### **routings.childDetails**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** Breakdown of child fare and tax details.  
+- **Constraints:** Must contain objects with valid pricing details.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  [
+    {"code": "farePrice", "type": "base", "amount": 96.03, "description": ""},
+    {"code": "tax", "type": "tax", "amount": 0.18, "description": ""}
+  ]
+  ```
 
 #### **routings.infantPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Price for an infant passenger.  
+- **Description:** The base fare price for an infant passenger.  
 - **Constraints:** Must be a positive number.  
 - **Default:** None  
-- **Example:** 10.0  
+- **Example:** 51.04  
 
 #### **routings.infantTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
-- **Description:** Tax applicable for an infant passenger.  
-- **Constraints:** Must be a positive number.  
+- **Description:** The tax amount applicable to an infant ticket.  
+- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
-- **Example:** 0.0  
+- **Example:** 0  
+
+#### **routings.infantDetails**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** Breakdown of infant fare and tax details.  
+- **Constraints:** Must contain objects with valid pricing details.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  [
+    {"code": "farePrice", "type": "base", "amount": 51.04, "description": ""},
+    {"code": "tax", "type": "tax", "amount": 0, "description": ""}
+  ]
+  ```
+
+#### **routings.adultDetails**
+- **Type:** Array  
+- **Required:** Yes  
+- **Description:** A summary of all fare breakdowns, including adults, children, and infants.  
+- **Constraints:** Must contain at least one valid pricing object.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  [
+    {"category": "Adult", "price": 96.03, "tax": 0.18},
+    {"category": "Child", "price": 96.03, "tax": 0.18},
+    {"category": "Infant", "price": 51.04, "tax": 0}
+  ]
+  ```
 
 #### **routings.infantAllowed**
 - **Type:** Boolean  
