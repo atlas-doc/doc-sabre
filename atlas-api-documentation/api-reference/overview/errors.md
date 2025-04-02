@@ -170,9 +170,12 @@ Atlas uses the following **Enum** to store the **error codes** and corresponding
 | <mark style="color:blue;">626</mark> | There are unpaid services in the current order. | The airline identied that there were unpaid transactions under this PNR, leading to subsequent business operations failure..  | Make payment for any unpaid orders |
 | <mark style="color:blue;">627</mark> | The current order does not support post-ticketing ancillary purchase. | Post-ticketing ancillaries are not allowed for this order.  | Remove the ancillaries and create a new order. |
 | <mark style="color:blue;">628</mark> | The flight information of the post-ticketing ancillary purchase order does not match the original flight. | The flight details are incorrect.  | Check the flight details and create a new order. |
+| <mark style="color:blue;">629</mark> | The order is non-refundable. |  |  |
+| <mark style="color:blue;">630</mark> | The refund amount from the airline is less than the expected amount for the order. |  |  |
 | <mark style="color:blue;">631</mark> | Baggage fare changed. | The baggage price has changed at the time of fulfillment.  | Start the process from verify. |
 | <mark style="color:blue;">632</mark> | Baggage fare changed. | Ticketing failed due to airline risk control.  | Start the process from verify. If the problem still exists please contact our operations team. |
 | <mark style="color:blue;">633</mark> | Payment declined by airline. | Payment declined due to airline risk control.  | Use "deposit" as the payment mode and retry. |
+| <mark style="color:blue;">699</mark> | System issues. |   | Retry after some time. If the issue persists, please contact support. |
 
 
 #### Query Order Error Codes
