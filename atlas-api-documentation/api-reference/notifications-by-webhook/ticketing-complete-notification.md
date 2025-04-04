@@ -12,22 +12,75 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **cid **<mark style="color:blue;">**string**</mark>
+##### **cid**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** "XXXXXXX"  
 
-    Identifier of client and user.
-*   **type **<mark style="color:blue;">**string**</mark>
+##### **data**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains order details.  
+- **Constraints:** Must be a valid JSON object.  
+- **Default:** None  
 
-    Notification type.
-* **data**
-  *   **orderNo **<mark style="color:blue;">**string**</mark>
+  ##### **orderNo**
+  - **Type:** String  
+  - **Required:** Yes  
+  - **Description:** Unique order number.  
+  - **Constraints:** Must be a valid alphanumeric string.  
+  - **Default:** None  
+  - **Example:** "TESTL20230922153224323"  
+  
+  ##### **orderStatus**
+  - **Type:** Integer  
+  - **Required:** Yes  
+  - **Description:** Status of the order.  
+  - **Constraints:** Must be a valid integer.  
+  - **Default:** None  
+  - **Example:** `2`  
 
-      Order number.
-  *   **orderStatus **<mark style="color:blue;">**int**</mark>
+  ##### **paxTicketInfos**
+  - **Type:** Array  
+  - **Required:** Yes  
+  - **Description:** List of passenger ticket details.  
+  - **Constraints:** Must contain valid passenger objects.  
+  - **Default:** None  
+  
+    Each object contains:
+    
+    - **airlinePNRs** (Array, Required): List of airline PNRs. Example: `["S30814"]`
+    - **ancillaries** (Array, Required): List of ancillary services. Example: `[]`
+    - **birthday** (String, Required): Passenger birth date in YYYYMMDD format. Example: "20160202"
+    - **cardExpired** (String, Required): Expiry date of identification. Example: "20400101"
+    - **cardIssuePlace** (String, Required): Country of issue for identification. Example: "CN"
+    - **cardNum** (String, Required): Identification number. Example: "123458"
+    - **cardType** (String, Required): Type of identification document. Example: "PP"
+    - **gender** (String, Required): Passenger gender. Example: "F"
+    - **name** (String, Required): Passenger name. Example: "zhang/lisi"
+    - **nationality** (String, Required): Passenger nationality. Example: "CN"
+    - **passengerType** (Integer, Required): Type of passenger (0 = Adult, 1 = Child, etc.). Example: `1`
+    - **ticketNos** (Array, Required): List of ticket numbers. Example: `["S30814"]`
+  
+##### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Indicates the status of the request. A value of `-1` indicates an issue.  
+- **Constraints:** Must be `-1` for error.  
+- **Default:** None  
+- **Example:** `-1`  
 
-      orderStatus=2 means ticketed
-  *   **paxTicketInfos Array<[**PAXTicketInfo**](broken-reference/)>**
+##### **type**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates the type of the response.  
+- **Constraints:** Must be a valid string.  
+- **Default:** None  
+- **Example:** "order.ticketed"
 
-      Passengers' ticket information, the same format as the PAXTicketInfo in order response or retrive booking response, click [here](../shopping-and-ticketing/order.md) to check the schema
 {% endtab %}
 
 {% tab title="Samples" %}
