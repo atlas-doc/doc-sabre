@@ -10,98 +10,74 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **`cid` **<mark style="color:blue;">**string**</mark>
+### **cid**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier for tracking the request.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Example:** `"xxxxxxxxxx"`
 
-    Identifier of client and user.
-*   **`type` **<mark style="color:blue;">**string**</mark>
+### **type**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Incident type.  
 
-    Incident type
-    
-    email.schedulechange: Schedule Change-Email Notification
-    
-    abnormal.cancelled: Unacounted Cancellation
-    
-    order.schedulechange: Schedule Change-API Notification. The Notification is [<mark style="color:blue;">**Schedule Change Notification**</mark>]
-      
-*   **`notificationId` **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-      Incident ID
-      
-*   **`status` **<mark style="color:blue;">**string**</mark>
+  email.schedulechange: Schedule Change-Email Notification
 
-      Incident staus
-      
-      0: Unconfirmed
-      1: Confirmed
-    
-* **data**
-  *   **`orderNo` **<mark style="color:blue;">**string**</mark>
+  abnormal.cancelled: Unaccounted Cancellation
 
-      Order number
-      
-  *   **`scheduleChangeType` **<mark style="color:blue;">**int**</mark>
-      Schedule change type. This is only for Schedule Change-API Notification.
+  order.schedulechange: Schedule Change-API Notification
+- **Constraints:** Must be `"email.schedulechange"`.  
+- **Example:** `"email.schedulechange"`
 
-      1: Schedule change
+### **notificationId**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the notification event.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Example:** `"20230323113246035DNIDD"`
 
-      2: Flight cancel
-      
-  *   **`previousSegs` Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+### **status**  
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Incident status.
 
-      The original segments. This is only for Schedule Change - API Notification. 
-  *   **scSegment **<mark style="color:blue;">**\*\*\*\***</mark>** Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+  Valid values:
 
-          segment information for schedule change notification
+  0: Unconfirmed 
 
-         *   **carrier **<mark style="color:blue;">**string**</mark>
+  1: Confirmed  
+- **Constraints:** None   
+- **Example:** `0`
 
-              carrier
-         *   **flightNumber **<mark style="color:blue;">**string**</mark>
+### **data**  
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains details of the email notification related to the schedule change.  
 
-              flight number
-         *   **depAirport **<mark style="color:blue;">**string**</mark>
+#### **data.orderNo**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique order number associated with the flight booking.  
+- **Constraints:** Must be a valid order identifier.  
+- **Example:** `"TESTS20230323103458265"`
 
-              departure airport
-         *   **arrAirport **<mark style="color:blue;">**string**</mark>
+#### **data.emailSubject**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Subject line of the email notification sent to the customer.  
+- **Constraints:** Must be a valid text string.  
+- **Example:** `"IMPORTANT: Flight delay notice. Confirmation Code KDK7QG"`
 
-              arrival ariport
-         *   **depTime **<mark style="color:blue;">**string**</mark>
+#### **data.emailLink**  
+- **Type:** String (URL)  
+- **Required:** Yes  
+- **Description:** Direct link to the email details page for further information.  
+- **Constraints:** Must be a valid URL.  
+- **Example:** `"https://theatlas/#/email-detail/4378270"`
 
-              departure time
-         *   **arrTime **<mark style="color:blue;">**string**</mark>
-
-              arrival time
-         *   **depTerminal **<mark style="color:blue;">**string**</mark>
-
-              departure time
-         *   **arrTerminal **<mark style="color:blue;">**string**</mark>\
-              arrival time
-          
-  *   **`revisedSegs` Array<**<mark style="color:blue;">**scSegment**</mark>**>**
-
-      The revised segments. This is only for Schedule Change-API Notification.
-      
-  *   **`vendorRefundInformation` **<mark style="color:blue;">**string**</mark>
-
-      Reference information for determining Unacounted Cancellation. This is only for Unacounted Cancellation.
-      
-      Fully: Atlas received a full refund from the airline without any schedule change or refund application.
-      
-      Cancelled: Atlas found some abnormal cancellation from airline.
-      
-  *   **`emailReceivingDate` **<mark style="color:blue;">**string**</mark>
-
-      Email receiving Date
-      
-      Format: (UTC+08:00) yyyymmdd hh:mm:ss. This is only for Schedule Change-Email Notification.
-      
-  *   **`emailSubject` **<mark style="color:blue;">**string**</mark>
-  
-      Email Subject. Only for Schedule Change-Email Notification.
-      
-  *   **`emailLink` **<mark style="color:blue;">**string**</mark>
-
-      Email Link is only valid for 10 mins. This is only for Schedule Change-Email Notification.
 {% endtab %}
       
 {% tab title="Samples" %}
