@@ -354,18 +354,18 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** null  
 
 ### **totalPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total price of the booking.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 110.8  
 
 ### **totalTransactionFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total transaction fee applied to the booking.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -378,10 +378,10 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** "USD"  
 
 ### **vendorTotalPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** The total price charged by the vendor.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 102  
 
@@ -566,10 +566,10 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** "0"  
 
 ### **ancillaries.ancillaryPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the ancillary product.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 38.02  
 
@@ -582,7 +582,7 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** "USD"  
 
 ### **ancillaries.vendorPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Vendor's price for the ancillary product.  
 - **Constraints:** Can be null.  
@@ -622,7 +622,7 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** null  
 
 ### **ancillaries.displayPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Price for the ancillary in display currency .  
 - **Constraints:** Can be null.  
@@ -648,10 +648,10 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** 1  
 
 #### **auxBaggageElement.weight**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Weight allowance per baggage piece in kg.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 20  
 
@@ -705,50 +705,50 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** {...}  
 
 #### **vendorFare.vendorAdultPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for an adult passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 44.88  
 
 #### **vendorFare.vendorAdultTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for an adult passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0.12  
 
 #### **vendorFare.vendorChildPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for a child passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 44.88  
 
 #### **vendorFare.vendorChildTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for a child passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0.12  
 
 #### **vendorFare.vendorInfantPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for an infant passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 30  
 
 #### **vendorFare.vendorInfantTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for an infant passenger.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0  
 
@@ -833,58 +833,58 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Example:** "EUR"  
 
 #### **displayFare.exchangeRate**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** The exchange rate applied to convert the fare to the display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** 1  
 - **Example:** 1  
 
 #### **displayFare.adultPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for an adult passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 44.88  
 
 #### **displayFare.adultTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for an adult passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0.12  
 
 #### **displayFare.childPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for a child passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 44.88  
 
 #### **displayFare.childTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for a child passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0.12  
 
 #### **displayFare.infantPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price for an infant passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 30  
 
 #### **displayFare.infantTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Tax applied for an infant passenger in display currency.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 0  
 
