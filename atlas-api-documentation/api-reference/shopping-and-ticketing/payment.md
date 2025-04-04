@@ -190,7 +190,7 @@
 - **Example:** test@ai.com  
 
 #### **creditCard.maxAcceptedAmount**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Maximum accepted transaction amount. Certain airlines may experience fare change after payment submission due to their inability to hold seat reservations. You can use this parameter to set a maximum acceptable payment amount threshold. This is the maximum amount which can be used to create the booking using a VCC.
 
