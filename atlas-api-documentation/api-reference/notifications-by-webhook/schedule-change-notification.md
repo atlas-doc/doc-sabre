@@ -10,99 +10,206 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-#### **cid**
-- **Type:** String
-- **Required:** Yes
-- **Description:** Client identifier associated with the order.
-- **Constraints:** Must be a valid alphanumeric string.
-- **Default:** None
-- **Example:** "XXXXXXX"
+#### **cid**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier for tracking requests.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** `"XXXXXXX"`
 
-#### **data**
-- **Type:** Object
-- **Required:** Yes
-- **Description:** Contains detailed information about the order and schedule changes.
-- **Constraints:** Must be a valid JSON object.
-- **Default:** None
+#### **data**  
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains order-related details, including previous and revised flight segments.  
+- **Constraints:** Must be a valid JSON object.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  {
+    "orderNo": "ATXFQ20230720193244809",
+    "previousSegs": [ ... ],
+    "revisedSegs": [ ... ],
+    "scheduleChangeType": 1
+  }
+  ```
 
-##### **orderNo**
-- **Type:** String
-- **Required:** Yes
-- **Description:** Unique identifier for the order.
-- **Constraints:** Must be a valid order number.
-- **Default:** None
-- **Example:** "ATXFQ20230720193244809"
+#### **data.orderNo**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique order number associated with the flight booking.  
+- **Constraints:** Must be a valid order identifier.  
+- **Default:** None  
+- **Example:** `"ATXFQ20230720193244809"`
 
-##### **previousSegs**
-- **Type:** Array of Objects
-- **Required:** Yes
-- **Description:** List of previous flight segments before the schedule change.
-- **Constraints:** Must contain at least one flight segment.
-- **Default:** None
+#### **data.previousSegs**  
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Contains details of the original flight segments before any schedule change.  
+- **Constraints:** Must contain at least one flight segment.  
+- **Default:** None  
 
-###### **Flight Segment Fields**
+##### **data.previousSegs[]**  
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Individual flight segment details before the schedule change.  
+- **Constraints:** Each entry must be a valid flight segment.  
+- **Example:**  
+  ```json
+  {
+    "depAirport": "HKG",
+    "arrAirport": "SGN",
+    "depTime": "2023-07-24 19:50:00",
+    "arrTime": "2023-07-24 21:30:00",
+    "carrier": "VJ",
+    "flightNumber": "VJ877",
+    "codeShare": false,
+    "depTerminal": "",
+    "arrTerminal": ""
+  }
+  ```
 
-- **arrAirport** (String): Arrival airport code. Example: "SGN"
-- **arrTerminal** (String): Arrival terminal information. Example: ""
-- **arrTime** (String): Arrival time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 21:30:00"
-- **carrier** (String): Airline carrier code. Example: "VJ"
-- **codeShare** (Boolean): Indicates if the flight is a codeshare flight. Example: `false`
-- **depAirport** (String): Departure airport code. Example: "HKG"
-- **depTerminal** (String): Departure terminal information. Example: ""
-- **depTime** (String): Departure time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 19:50:00"
-- **flightNumber** (String): Flight number. Example: "VJ877"
+##### **data.previousSegs[].depAirport**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure airport code (IATA).  
+- **Constraints:** Must be a valid three-letter airport code.  
+- **Default:** None  
+- **Example:** `"HKG"`
 
-##### **revisedSegs**
-- **Type:** Array of Objects
-- **Required:** Yes
-- **Description:** List of updated flight segments after the schedule change.
-- **Constraints:** Must contain at least one revised flight segment.
-- **Default:** None
+##### **data.previousSegs[].arrAirport**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Arrival airport code (IATA).  
+- **Constraints:** Must be a valid three-letter airport code.  
+- **Default:** None  
+- **Example:** `"SGN"`
 
-- ###### **Flight Segment Fields**
+##### **data.previousSegs[].depTime**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure time in `YYYY-MM-DD HH:MM:SS` format.  
+- **Constraints:** Must be a valid timestamp.  
+- **Default:** None  
+- **Example:** `"2023-07-24 19:50:00"`
 
-- **arrAirport** (String): Arrival airport code. Example: "SGN"
-- **arrTerminal** (String): Arrival terminal information. Example: ""
-- **arrTime** (String): Arrival time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 21:30:00"
-- **carrier** (String): Airline carrier code. Example: "VJ"
-- **codeShare** (Boolean): Indicates if the flight is a codeshare flight. Example: `false`
-- **depAirport** (String): Departure airport code. Example: "HKG"
-- **depTerminal** (String): Departure terminal information. Example: ""
-- **depTime** (String): Departure time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 19:50:00"
-- **flightNumber** (String): Flight number. Example: "VJ877"
+##### **data.previousSegs[].arrTime**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Arrival time in `YYYY-MM-DD HH:MM:SS` format.  
+- **Constraints:** Must be a valid timestamp.  
+- **Default:** None  
+- **Example:** `"2023-07-24 21:30:00"`
 
-##### **scheduleChangeType**
-- **Type:** Integer
-- **Required:** Yes
-- **Description:** Type of schedule change.
-- **Constraints:** Must be an integer representing a valid schedule change type.
-- **Default:** None
+##### **data.previousSegs[].carrier**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline carrier code.  
+- **Constraints:** Must be a valid airline code.  
+- **Default:** None  
+- **Example:** `"VJ"`
+
+##### **data.previousSegs[].flightNumber**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Flight number assigned by the airline.  
+- **Constraints:** Must be a valid alphanumeric flight number.  
+- **Default:** None  
+- **Example:** `"VJ877"`
+
+##### **data.previousSegs[].codeShare**  
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates if the flight is a codeshare.  
+- **Constraints:** `true` = Codeshare flight, `false` = Not a codeshare flight.  
+- **Default:** `false`  
+- **Example:** `false`
+
+##### **data.previousSegs[].depTerminal**  
+- **Type:** String  
+- **Required:** No  
+- **Description:** Departure terminal information.  
+- **Constraints:** Can be an empty string if no terminal information is available.  
+- **Default:** `""`  
+- **Example:** `""`
+
+##### **data.previousSegs[].arrTerminal**  
+- **Type:** String  
+- **Required:** No  
+- **Description:** Arrival terminal information.  
+- **Constraints:** Can be an empty string if no terminal information is available.  
+- **Default:** `""`  
+- **Example:** `""`
+
+#### **data.revisedSegs**  
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Contains details of the flight segments after the schedule change.  
+- **Constraints:** Must contain at least one flight segment.  
+- **Default:** None  
+
+##### **data.revisedSegs[]**  
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Individual flight segment details after the schedule change.  
+- **Constraints:** Each entry must be a valid flight segment.  
+- **Example:**  
+  ```json
+  {
+    "depAirport": "SGN",
+    "arrAirport": "HKG",
+    "depTime": "2023-10-19 15:10:00",
+    "arrTime": "2023-10-19 18:50:00",
+    "carrier": "VJ",
+    "flightNumber": "VJ876",
+    "codeShare": false,
+    "depTerminal": "",
+    "arrTerminal": ""
+  }
+  ```
+
+#### **data.scheduleChangeType**  
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Type of schedule change.  
+- **Constraints:**  
+  
+  Valid values:
+
+  1: Schedule change
+
+  2: Flight cancel
+- **Default:** None  
 - **Example:** `1`
 
-#### **notificationId**
-- **Type:** String
-- **Required:** Yes
-- **Description:** Unique identifier for the notification event.
-- **Constraints:** Must be a valid alphanumeric string.
-- **Default:** None
-- **Example:** "20230917143240511TATVO"
+#### **notificationId**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the notification event.  
+- **Constraints:** Must be a valid alphanumeric string.  
+- **Default:** None  
+- **Example:** `"20230917143240511TATVO"`
 
-#### **status**
-- **Type:** Integer
-- **Required:** Yes
-- **Description:** Status of the notification.
-- **Constraints:** `0` indicates success, other values indicate errors.
-- **Default:** `0`
+#### **status**  
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Incident staus.  
+- **Constraints:**  
+  Valid values:
+
+  0: Unconfirmed 
+
+  1: Confirmed  
+- **Default:** None  
 - **Example:** `0`
 
-#### **type**
-- **Type:** String
-- **Required:** Yes
-- **Description:** Type of notification event.
-- **Constraints:** Must be a valid event type string.
-- **Default:** None
-- **Example:** "order.schedulechange"
-
+#### **type**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Notification type.  
+- **Constraints:** Must be a valid response type string.  
+- **Default:** None  
+- **Example:** `"order.schedulechange"`
 {% endtab %}
 
 {% tab title="Samples" %}
