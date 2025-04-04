@@ -186,7 +186,7 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 - **Example:** "TESTM20240520171341468"  
 
 ### **totalPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total price of the ticket order.  
 - **Constraints:** Must be a positive number.  
@@ -194,7 +194,7 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 - **Example:** "85.51"  
 
 ### **totalTransactionFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total transaction fee for the order.  
 - **Constraints:** Must be a non-negative number.  
@@ -210,7 +210,7 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 - **Example:** "USD"  
 
 ### **vendorTotalPrice**
-- **Type:** Float | Null  
+- **Type:** Number | Null  
 - **Required:** No  
 - **Description:** Total price from the vendor.  
 - **Constraints:** Can be null if not applicable.  
@@ -394,7 +394,7 @@ The "postBookingAncillarySearch.do" function should be called prior to this one.
 - **Example:** null  
 
 ###### **ancillaryPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the ancillary service.  
 - **Constraints:** Must be a positive number.  
