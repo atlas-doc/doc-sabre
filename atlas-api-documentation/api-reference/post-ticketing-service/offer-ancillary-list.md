@@ -396,7 +396,7 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Example:** "1"  
 
 ### **price**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the product in the base currency.  
 - **Constraints:** Must be a positive number.  
@@ -412,7 +412,7 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Example:** "USD"  
 
 ### **vendorPrice**
-- **Type:** Float | Null  
+- **Type:** Number | Null  
 - **Required:** No  
 - **Description:** Vendor-specific price if available.  
 - **Constraints:** Can be null if not applicable.  
@@ -428,7 +428,7 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Example:** null  
 
 ### **clientTechnicalServiceFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Additional service fee charged to the client.  
 - **Constraints:** Must be a non-negative number.  
@@ -539,7 +539,7 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Example:** null  
 
 ### **displayPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the product in the display currency.  
 - **Constraints:** Must be a positive number.  
