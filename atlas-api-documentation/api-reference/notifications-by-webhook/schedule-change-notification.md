@@ -10,69 +10,99 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **cid **<mark style="color:blue;">**string**</mark>
+#### **cid**
+- **Type:** String
+- **Required:** Yes
+- **Description:** Client identifier associated with the order.
+- **Constraints:** Must be a valid alphanumeric string.
+- **Default:** None
+- **Example:** "XXXXXXX"
 
-    Identifier of client and user.
-*   **type **<mark style="color:blue;">**string**</mark>
+#### **data**
+- **Type:** Object
+- **Required:** Yes
+- **Description:** Contains detailed information about the order and schedule changes.
+- **Constraints:** Must be a valid JSON object.
+- **Default:** None
 
-    Notification type.
-    
-*   **`notificationId` **<mark style="color:blue;">**string**</mark>
+##### **orderNo**
+- **Type:** String
+- **Required:** Yes
+- **Description:** Unique identifier for the order.
+- **Constraints:** Must be a valid order number.
+- **Default:** None
+- **Example:** "ATXFQ20230720193244809"
 
-      Incident ID
-      
-*   **`status` **<mark style="color:blue;">**string**</mark>
+##### **previousSegs**
+- **Type:** Array of Objects
+- **Required:** Yes
+- **Description:** List of previous flight segments before the schedule change.
+- **Constraints:** Must contain at least one flight segment.
+- **Default:** None
 
-      Incident staus
-      
-      0: Unconfirmed
-      1: Confirmed
-* **data**
-  *   **orderNo **<mark style="color:blue;">**string**</mark>
+###### **Flight Segment Fields**
 
-      Order number.
-      
-  *   **scheduleChangeType **<mark style="color:blue;">**int**</mark>
+- **arrAirport** (String): Arrival airport code. Example: "SGN"
+- **arrTerminal** (String): Arrival terminal information. Example: ""
+- **arrTime** (String): Arrival time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 21:30:00"
+- **carrier** (String): Airline carrier code. Example: "VJ"
+- **codeShare** (Boolean): Indicates if the flight is a codeshare flight. Example: `false`
+- **depAirport** (String): Departure airport code. Example: "HKG"
+- **depTerminal** (String): Departure terminal information. Example: ""
+- **depTime** (String): Departure time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 19:50:00"
+- **flightNumber** (String): Flight number. Example: "VJ877"
 
-      Schedule change type.
+##### **revisedSegs**
+- **Type:** Array of Objects
+- **Required:** Yes
+- **Description:** List of updated flight segments after the schedule change.
+- **Constraints:** Must contain at least one revised flight segment.
+- **Default:** None
 
-      1: Schedule change
+- ###### **Flight Segment Fields**
 
-      2: Flight cancel
-  *   **previousSegs Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+- **arrAirport** (String): Arrival airport code. Example: "SGN"
+- **arrTerminal** (String): Arrival terminal information. Example: ""
+- **arrTime** (String): Arrival time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 21:30:00"
+- **carrier** (String): Airline carrier code. Example: "VJ"
+- **codeShare** (Boolean): Indicates if the flight is a codeshare flight. Example: `false`
+- **depAirport** (String): Departure airport code. Example: "HKG"
+- **depTerminal** (String): Departure terminal information. Example: ""
+- **depTime** (String): Departure time in format "YYYY-MM-DD HH:mm:ss". Example: "2023-07-24 19:50:00"
+- **flightNumber** (String): Flight number. Example: "VJ877"
 
-      The original segments
-  *   **revisedSegs Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+##### **scheduleChangeType**
+- **Type:** Integer
+- **Required:** Yes
+- **Description:** Type of schedule change.
+- **Constraints:** Must be an integer representing a valid schedule change type.
+- **Default:** None
+- **Example:** `1`
 
-      The revised segments
+#### **notificationId**
+- **Type:** String
+- **Required:** Yes
+- **Description:** Unique identifier for the notification event.
+- **Constraints:** Must be a valid alphanumeric string.
+- **Default:** None
+- **Example:** "20230917143240511TATVO"
 
-      *   **scSegment **<mark style="color:blue;">**\*\*\*\***</mark>** Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+#### **status**
+- **Type:** Integer
+- **Required:** Yes
+- **Description:** Status of the notification.
+- **Constraints:** `0` indicates success, other values indicate errors.
+- **Default:** `0`
+- **Example:** `0`
 
-          segment information for schedule change notification
+#### **type**
+- **Type:** String
+- **Required:** Yes
+- **Description:** Type of notification event.
+- **Constraints:** Must be a valid event type string.
+- **Default:** None
+- **Example:** "order.schedulechange"
 
-          *   **carrier **<mark style="color:blue;">**string**</mark>
-
-              carrier
-          *   **flightNumber **<mark style="color:blue;">**string**</mark>
-
-              flight number
-          *   **depAirport **<mark style="color:blue;">**string**</mark>
-
-              departure airport
-          *   \*\*arrAirport \*\*<mark style="color:blue;">**string**</mark>
-
-              arrival ariport
-          *   \*\*depTime \*\*<mark style="color:blue;">**string**</mark>
-
-              departure time
-          *   \*\*arrTime \*\*<mark style="color:blue;">**string**</mark>
-
-              arrival time
-          *   \*\*depTerminal \*\*<mark style="color:blue;">**string**</mark>
-
-              departure time
-          * \*\*arrTerminal \*\*<mark style="color:blue;">**string**</mark>\
-            arrival time
 {% endtab %}
 
 {% tab title="Samples" %}
