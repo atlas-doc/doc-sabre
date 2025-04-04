@@ -354,7 +354,7 @@ No preceding function needs to be called before `Search`.
 - **Example:** true  
 
 #### **routings.transactionFeePerPax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Technical service fee per passenger as per the signed contract.  
 - **Constraints:** Must be a positive number.  
@@ -362,7 +362,7 @@ No preceding function needs to be called before `Search`.
 - **Example:** 0.65  
 
 #### **routings.transactionFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Technical service fee as per "transactionFeeMode". 
 - **Constraints:** Must be a positive number.  
@@ -732,7 +732,7 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Example:** "T"  
 
 ### **refundRules.refundFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Fee applied for processing the refund (for the most restrictive condition).
 
@@ -774,7 +774,7 @@ F: Free for refund
 - **Example:** 0  
 
 ### **refundRules.refNoshowFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total refund fee (for the most restrictive condition):
 
@@ -832,7 +832,7 @@ F: Free for refund
 - **Example:** -525600  
 
 #### **refundRules.ruleDetailList.amount**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Refund amount associated with the rule.  
 - **Constraints:** Must be a non-negative value.  
@@ -882,7 +882,7 @@ F: Free for refund
 - **Example:** "T"  
 
 ### **changesRules.changesFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Fee applied for making changes to the ticket (for the most restrictive condition).  If changesStatus = H, it should not be "null" and if changesStatus = T/F, it can be "null"
 - **Constraints:** Must be a non-negative value.  
@@ -920,7 +920,7 @@ F: Free for refund
 - **Example:** 0  
 
 ### **changesRules.revNoshowFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** The total fee charged to change flight in case of no show. If revNoshow = H, it should not be "null." This value includes the change flight fee and no-show penalty.
 - **Constraints:** Must be a non-negative value.  
@@ -1043,7 +1043,7 @@ F: Free for refund
 - **Example:** 0  
 
 ### **ancillaryProductElements.price**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the ancillary product.  
 - **Constraints:** Must be a non-negative value.  
@@ -1059,7 +1059,7 @@ F: Free for refund
 - **Example:** "USD"  
 
 ### **ancillaryProductElements.vendorPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Vendor price of the ancillary product.  
 - **Constraints:** Must be a non-negative value.  
@@ -1075,7 +1075,7 @@ F: Free for refund
 - **Example:** "USD"  
 
 ### **ancillaryProductElements.clientTechnicalServiceFee**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** The service fee charged by Atlas for the purchase of the ancillary.
 - **Constraints:** Must be a non-negative value.  
@@ -1193,7 +1193,7 @@ F: Free for refund
 - **Example:** null  
 
 ### **ancillaryProductElements.displayPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price displayed to the user for the ancillary product in display currency.  
 - **Constraints:** Must be a non-negative value.  
