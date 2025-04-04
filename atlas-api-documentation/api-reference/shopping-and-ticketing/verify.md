@@ -299,7 +299,7 @@ The `search` function should be called prior to this call.
 - **Example:** false  
 
 ### **priceChange.originalAdultPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for an adult ticket.  
 - **Constraints:** Must be a non-negative value.  
@@ -307,7 +307,7 @@ The `search` function should be called prior to this call.
 - **Example:** 40.85  
 
 ### **priceChange.originalAdultTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for an adult ticket.  
 - **Constraints:** Must be a non-negative value.  
@@ -315,7 +315,7 @@ The `search` function should be called prior to this call.
 - **Example:** 0.13  
 
 ### **priceChange.originalChildPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for a child ticket.  
 - **Constraints:** Must be a non-negative value.  
@@ -323,7 +323,7 @@ The `search` function should be called prior to this call.
 - **Example:** 40.85  
 
 ### **priceChange.originalChildTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for a child ticket.  
 - **Constraints:** Must be a non-negative value.  
@@ -331,7 +331,7 @@ The `search` function should be called prior to this call.
 - **Example:** 0.13  
 
 ### **priceChange.originalInfantPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for an infant ticket.  
 - **Constraints:** Must be a non-negative value.  
@@ -339,7 +339,7 @@ The `search` function should be called prior to this call.
 - **Example:** 10.00  
 
 ### **priceChange.originalInfantTax**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for an infant ticket.  
 - **Constraints:** Must be a non-negative value.  
