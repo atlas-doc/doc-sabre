@@ -223,10 +223,10 @@ Verify function should be called in prior to this call.
 **Document link**: https://pnr.lt/Failai/Code set Directory v13 2.pdf
 
 ### **seats.price**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the seat.
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 23.52  
 
@@ -239,10 +239,10 @@ Verify function should be called in prior to this call.
 - **Example:** "USD"  
 
 ### **seats.vendorPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the seat from the vendor.  
-- **Constraints:** Must be a positive float value.  
+- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 593907.25  
 
@@ -271,7 +271,7 @@ Verify function should be called in prior to this call.
 - **Example:** "USD"  
 
 ### **seats.displayPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Seat price displayed in the display currency.  
 - **Constraints:** Can be null if not applicable.  
