@@ -253,7 +253,7 @@ Valid values:
 - **Example:** "1"  
 
 #### **orderList.totalPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total fare of this order in the currency Atlas settled with you.  
 - **Constraints:** Must be a positive value.  
