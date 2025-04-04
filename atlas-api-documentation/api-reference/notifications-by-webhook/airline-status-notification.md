@@ -13,31 +13,63 @@ Method : Post
 {% tabs %}
 {% tab title="Schema" %}
 
-*   **type **<mark style="color:blue;">**string**</mark>
+#### **data**  
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains airline information including the airline codes and their status.  
+- **Constraints:** Must be a valid JSON object.  
+- **Default:** None  
+- **Example:**  
+  ```json
+  {
+    "airline": ["TO", "HV"],
+    "airlineStatus": "Active"
+  }
+  ```
 
-    Notification type.
-    Notification type = airline.status
+#### **data.airline**  
+- **Type:** Array of Strings  
+- **Required:** Yes  
+- **Description:** List of airline codes associated with the response.  
+- **Constraints:** Each item must be a valid airline code (IATA or ICAO).  
+- **Default:** None  
+- **Example:** `["TO", "HV"]`  
 
-* **data**
-  *   **airline Array**<mark style="color:blue;">**string**</mark>
+#### **data.airlineStatus**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates the operational status of the airline(s).  
 
-  Airline Code
-
-  *   **airlineStatus **<mark style="color:blue;">**int**</mark>
-
-  Airline Status. It is the same as the information in "Online Status" of Airline List on Atrip.
+  Valid values:
 
   Active = Online
 
   Maintenance = Airline is under maintenance
 
   Inactive = Offline
+- **Constraints:** Can be "Active" or "Inactive".  
+- **Default:** None  
+- **Example:** `"Active"`
 
+#### **status**  
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Indicates the response status.  
+- **Constraints:** -1 indicates an error or inactive status.  
+- **Default:** None  
+- **Example:** `-1`  
 
-**`status` **<mark style="color:blue;">**string**</mark>
+#### **type**  
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Specifies the type of response message. 
 
-  Only for internal use by Atlas.
+  Valid value:
 
+  airline.status 
+- **Constraints:** Must be a valid response type string.  
+- **Default:** None  
+- **Example:** `"airline.status"`  
 
 {% endtab %}
 {% tab title="Samples" %}
