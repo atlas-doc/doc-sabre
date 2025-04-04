@@ -276,7 +276,7 @@ Steps:
 - **Example:** false  
 
 ### **price**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the ancillary service.  
 - **Constraints:** Must be a positive number.  
@@ -284,7 +284,7 @@ Steps:
 - **Example:** 50.00  
 
 ### **vendorPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Price charged by the vendor.  
 - **Constraints:** Must be a positive number.  
@@ -354,7 +354,7 @@ Steps:
 - **Example:** "EUR"  
 
 ### **displayPrice**
-- **Type:** Float  
+- **Type:** Number  
 - **Required:** No  
 - **Description:** Price in the display currency.  
 - **Constraints:** Must be a positive number.  
