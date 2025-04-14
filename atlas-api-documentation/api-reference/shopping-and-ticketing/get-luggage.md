@@ -27,9 +27,7 @@ Steps:
 {% tabs %}
 {% tab title="Schema" %}
 
-## **Offer API Documentation**
-
-### **1. offerId**  
+### **offerId**  
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the offer. offerId returned by getOffer. sessionId returned by verify can also be used.
@@ -37,7 +35,7 @@ Steps:
 - **Default:** None  
 - **Example:** `"1499249e-4149-483b-824c-a4ff8e150a40"`
 
-### **2. maxResponseTime**  
+### **maxResponseTime**  
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Maximum response time for the request in milliseconds. The API will return an accurate quotation within this time. If this time is exceeded, the system will directly return a rule - based quotation. 
