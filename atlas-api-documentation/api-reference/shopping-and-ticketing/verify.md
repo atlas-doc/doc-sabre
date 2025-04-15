@@ -12,6 +12,8 @@ The `search` function should be called prior to this call.
 
 * When there is no price change, the "original" and the "new" price and tax will always be the same.
 * When there is price change, there will be some difference between the "original" and the "new" price and tax.
+* If paymentMethod in the request is 5（MoR）the MoR currency will be returned and amount in “VendorFare” and it’s paymentFee in cardChargeList. The paymentFee amount will not be added to the “VendorFare”.
+* If paymentMethod in the request is 3（VCC Passthrough）the VCC Passthrough currency will be returned and amount in “VendorFare” and it’s paymentFee in cardChargeList (if any). The paymentFee amount will be added to the “VendorFare”.
 
 {% endhint %}
 
@@ -36,14 +38,6 @@ The `search` function should be called prior to this call.
 - **Default:** None  
 - **Example:** "EXsU8XSpfLYTSaQTVCjrJMJvG/...TthTQ=="  
 
-## **displayCurrency**
-- **Type:** String  
-- **Required:** Yes  
-- **Description:** The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. Please refer to the "Highlights" section in fare search menu for further information.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
-- **Default:** "PHP"  
-- **Example:** "PHP"  
-
 ## **realtimeLuggage**
 - **Type:** Integer  
 - **Required:** Yes  
@@ -59,6 +53,21 @@ The `search` function should be called prior to this call.
 - **Constraints:** 1 for true, 0 for false.  
 - **Default:** 1  
 - **Example:** 1  
+
+## **paymentMethod**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Method of payment selected by the user.  
+  Valid values:
+
+  1 = Deposit
+
+  3 = VCC Passthrough
+
+  5 = MoR
+- **Constraints:** None  
+- **Default:** Deposit  
+- **Example:** `3`  
 
 ## **maxResponseTime**
 - **Type:** Integer  
@@ -83,7 +92,7 @@ The `search` function should be called prior to this call.
 {% endtab %}
 {% endtabs %}
 
-## Response
+### Response
 
 {% tabs %}
 {% tab title="Schema" %}
@@ -200,7 +209,7 @@ The `search` function should be called prior to this call.
 - **Description:** Passenger-specific details required for booking.  
 - **Constraints:** Must contain necessary fields for passenger identification.  
 - **Default:** None  
-- **Example:** {...}  
+- **Example:** {...}
 
 #### **bookingRequirement.passenger.birthday**
 - **Type:** String  
@@ -273,6 +282,56 @@ The `search` function should be called prior to this call.
 - **Constraints:** None  
 - **Default:** None  
 - **Example:** "Passport"  
+
+### **cardChargeList**
+- **Type:** Array of Objects  
+- **Required:** No  
+- **Description:** List of credit/debit card surcharge configurations. Each object specifies the card type and either a percentage-based or fixed charge to be applied during payment.  
+- **Constraints:** Can be empty or omitted if no charges apply.  
+- **Default:** `[]`  
+- **Example:**
+  ```json
+  [
+    {
+      "cardType": "Amex",
+      "percentage": 0.05,
+      "charge": null,
+      "currency": null
+    }
+  ]
+  ```
+
+#### **cardChargeList[].cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The card brand/type to which the charge rule applies.  
+- **Constraints:** Must be a supported card type (e.g., `"Visa"`, `"Mastercard"`, `"Amex"`).  
+- **Default:** None  
+- **Example:** `"Amex"`
+
+#### **cardChargeList[].percentage**
+- **Type:** Number
+- **Required:** No  
+- **Description:** Percentage of the total transaction to be added as a surcharge.  
+- **Constraints:** None  
+- **Default:** `0.0`  
+- **Example:** `0.05` (i.e., 5%)
+
+#### **cardChargeList[].charge**
+- **Type:** Number or Null  
+- **Required:** No  
+- **Description:** Fixed surcharge amount applied for this card type.  
+- **Constraints:** Can be `null` if a percentage is provided instead.  
+- **Default:** `null`  
+- **Example:** `null`  
+
+#### **cardChargeList[].currency**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Currency in which the fixed charge is denominated.  
+- **Constraints:** Must be a valid ISO 4217 3-letter currency code, or `null` if `charge` is not used.  
+- **Default:** `null`  
+- **Example:** `null`
 
 ## **priceChange**
 - **Type:** Object  
