@@ -21,24 +21,49 @@ The "request" has to be only the header information consisting of 'x-atlas-clien
 {% tabs %}
 {% tab title="Schema" %}
 
-**`accountBalance`  **<mark style="color:blue;">**string**</mark>
+### **accountBalance**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Object containing the current account balance and its associated currency.  
+- **Constraints:** Must include both `amount` and `currency`.  
+- **Default:** None  
+- **Example:**
+  ```json
+  {
+    "amount": 12308007.89,
+    "currency": "USD"
+  }
+  ```
 
-This element contavins the information regarding the amount and the currency of transaction of the customer.
+### **accountBalance.amount**
+- **Type:** Number (Float)  
+- **Required:** Yes  
+- **Description:** Current available balance in the account.  
+- **Constraints:** Must be ≥ 0  
+- **Default:** `0.00`  
+- **Example:** `12308007.89`
 
-**`amount`  **<mark style="color:blue;">**string**</mark>
+### **accountBalance.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The currency in which Atlas settles transactions with you.  
+- **Constraints:** Must be a valid 3-letter ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** `"USD"`
 
-The amount of balance in your deposit account.
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Status of the request indicating success or failure.  
 
-**`currency`  **<mark style="color:blue;">**string**</mark>
+  Valid values:
 
-The currency in which Atlas settles transactions with you.
+  0: success
 
-**'status' **<mark style="color:blue;">**string**</mark>
-
-0: success
-
-9999: error (an error message will be displayed with the issue)
-
+  9999: error (an error message will be displayed with the issue)
+- **Constraints:**  
+- **Default:** None  
+- **Example:** `0`
 {% endtab %}
 
 {% tab title="Samples" %}
