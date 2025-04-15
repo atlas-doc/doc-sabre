@@ -10,103 +10,91 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **`cid` **<mark style="color:blue;">**string**</mark>
 
-    Identifier of client and user.
-*   **`type` **<mark style="color:blue;">**string**</mark>
+### **cid**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier submitting the email notification event.  
+- **Constraints:** Alphanumeric string.  
+- **Default:** None  
+- **Example:** `"rggat40831"`
 
-    Incident type
-    
-    email.schedulechange: Schedule Change-Email Notification
-    
-    abnormal.cancelled: Unacounted Cancellation
-    
-    order.schedulechange: Schedule Change-API Notification. The Notification is [<mark style="color:blue;">**Schedule Change Notification**</mark>]
-      
-*   **`notificationId` **<mark style="color:blue;">**string**</mark>
+### **type**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Type of notification event. 
+  Valid values:
+  - email.schedulechange: Schedule Change-Email Notification
+  - abnormal.cancelled: Unacounted Cancellation
+  - order.schedulechange: Schedule Change-API Notification. 
+- **Constraints:** Must match one of the predefined event types. 
+- **Default:** None  
+- **Example:** `"email.schedulechange"`
 
-      Incident ID
-      
-*   **`status` **<mark style="color:blue;">**string**</mark>
+### **notificationId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier for the email notification event.  
+- **Constraints:** Must be unique across all events.  
+- **Default:** None  
+- **Example:** `"20230323113246035DNIDD"`
 
-      Incident staus
-      
-      0: Unconfirmed
-      1: Confirmed
-    
-* **data**
-  *   **`orderNo` **<mark style="color:blue;">**string**</mark>
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Status of the notification event.  
+- **Constraints:**  
+  - `0` = Success  
+  - Non-zero values can indicate error 
+- **Default:** `0`  
+- **Example:** `0`
 
-      Order number
-      
-  *   **`scheduleChangeType` **<mark style="color:blue;">**int**</mark>
-      Schedule change type. This is only for Schedule Change-API Notification.
+### **data**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Contains details of the email content and metadata.  
+- **Constraints:** Must include all subfields.  
+- **Default:** None  
+- **Example:**
+  ```json
+  {
+    "orderNo": "TESTS20230323103458265",
+    "emailSubject": "IMPORTANT: Flight delay notice. Confirmation Code KDK7QG",
+    "emailLink": "https://theatlas/#/email-detail/4378270"
+  }
+  ```
 
-      1: Schedule change
+#### **data.orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The order number to which the email notification relates.  
+- **Constraints:** Alphanumeric, system-generated.  
+- **Default:** None  
+- **Example:** `"TESTS20230323103458265"`
 
-      2: Flight cancel
-      
-  *   **`previousSegs` Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+#### **data.emailReceivingDate**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Date and time when the email was received by Atlas.  
+- **Constraints:** Format: `YYYY-MM-DD HH:mm:ss`  
+- **Default:** None  
+- **Example:** `"2022-12-11 18:33:33"`
 
-      The original segments. This is only for Schedule Change - API Notification. 
-  *   **scSegment **<mark style="color:blue;">**\*\*\*\***</mark>** Array<**<mark style="color:blue;">**scSegment**</mark>**>**
+#### **data.emailSubject**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The subject line of the email that was received.  
+- **Constraints:** Free text.  
+- **Default:** `""`  
+- **Example:** `"IMPORTANT: Flight delay notice. Confirmation Code KDK7QG"`
 
-          segment information for schedule change notification
-
-         *   **carrier **<mark style="color:blue;">**string**</mark>
-
-              carrier
-         *   **flightNumber **<mark style="color:blue;">**string**</mark>
-
-              flight number
-         *   **depAirport **<mark style="color:blue;">**string**</mark>
-
-              departure airport
-         *   **arrAirport **<mark style="color:blue;">**string**</mark>
-
-              arrival ariport
-         *   **depTime **<mark style="color:blue;">**string**</mark>
-
-              departure time
-         *   **arrTime **<mark style="color:blue;">**string**</mark>
-
-              arrival time
-         *   **depTerminal **<mark style="color:blue;">**string**</mark>
-
-              departure time
-         *   **arrTerminal **<mark style="color:blue;">**string**</mark>\
-              arrival time
-          
-  *   **`revisedSegs` Array<**<mark style="color:blue;">**scSegment**</mark>**>**
-
-      The revised segments. This is only for Schedule Change-API Notification.
-      
-*   **`vendorRefundInformation` **<mark style="color:blue;">**string**</mark>
-
-      Reference information for determining Unacounted Cancellation. This is only for Unacounted Cancellation.
-      FULLY: means Atlas received a full refund from the airline without any schedule change or refund apply.
-      Cancelled: means Atlas found some abnormal cancellation from airline.
-      
-  *   **`emailReceivingDate` **<mark style="color:blue;">**string**</mark>
-
-      Email receiving Date
-      
-      Format: (UTC+08:00) yyyymmdd hh:mm:ss. This is only for Schedule Change-Email Notification.
-      
-  *   **`emailSubject` **<mark style="color:blue;">**string**</mark>
-  
-      Email Subject. Only for Schedule Change-Email Notification.
-      
-  *   **`emailLink` **<mark style="color:blue;">**string**</mark>
-
-      Email Link is only valid for 10 mins. This is only for Schedule Change-Email Notification.
-
-
-      
-{% endtab %}
-      
-{% tab title="Samples" %}
-**Schedule Change-Email Notification**
+#### **data.emailLink**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** URL link to view the full email content in the system.  
+- **Constraints:** Must be a valid URL.  
+- **Default:** None  
+- **Example:** `"https://theatlas/#/email-detail/4378270"`
 
 ```
 {
