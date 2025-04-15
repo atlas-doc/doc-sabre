@@ -14,68 +14,100 @@ No preceding function needs to be carried out.
 {% tabs %}
 {% tab title="Schema" %}
 
+### **eventId**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Unique identifier for the event (Incident ID).  
+- **Constraints:** Alphanumeric string, can be empty to fetch all.  
+- **Default:** `""`  
+- **Example:** `""`
 
+### **orderNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Order number associated with the event.  
+- **Constraints:** Alphanumeric format.  
+- **Default:** `""`  
+- **Example:** `"ORD20230811113115020"`
 
-**`eventId`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **eventType**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Type of the event (e.g., `scheduleChange`, `ticketed`, `cancelled`).  
+  Valid values:
+  - email.schedulechange: Schedule Change-Email Notification
+  - abnormal.cancelled: Unacounted Cancellation
+  - order.schedulechange: Schedule Change-API Notification.
+- **Constraints:** Must match supported event type codes.  
+- **Default:** `""`  
+- **Example:** `"scheduleChange"`
 
-Incident ID
+### **eventStatus**
+- **Type:** Array of Integers  
+- **Required:** No  
+- **Description:** List of status codes to filter events.  
+  Valid values:
+  - 0: Unconfirmed 
+  - 1: Confirmed
+- **Constraints:**  None
+- **Default:** `[]`  
+- **Example:** `[0, 1]`
 
-**`orderNo`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **airline**
+- **Type:** String  
+- **Required:** No  
+- **Description:** IATA code of the airline related to the event.  
+- **Constraints:** Must be a valid 2-letter IATA airline code.  
+- **Default:** `""`  
+- **Example:** `"W4"`
 
-Order number
+### **eventTimeStart**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Start time of the event search window.  
+- **Constraints:** Must be in format `YYYY-MM-DD HH:mm:ss`  
+- **Default:** `null`  
+- **Example:** `"2023-04-01 00:00:00"`
 
-**`eventType`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **eventTimeEnd**
+- **Type:** String  
+- **Required:** No  
+- **Description:** End time of the event search window.  
+- **Constraints:** Must be in format `YYYY-MM-DD HH:mm:ss`  
+- **Default:** `null`  
+- **Example:** `"2023-05-01 00:00:00"`
 
-Incident type
+### **depTimeStart**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Optional filter for departure time start.  
+- **Constraints:** Must be `null` or a valid timestamp in `YYYY-MM-DD HH:mm:ss` format.  
+- **Default:** `null`  
+- **Example:** `null`
 
-email.schedulechange: Schedule Change-Email Notification
+### **depTimeEnd**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Optional filter for departure time end.  
+- **Constraints:** Must be `null` or a valid timestamp in `YYYY-MM-DD HH:mm:ss` format.  
+- **Default:** `null`  
+- **Example:** `null`
 
-abnormal.cancelled: Unacounted Cancellation
+### **pageIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Page number for pagination.  
+- **Constraints:** Must be ≥ 1  
+- **Default:** `1`  
+- **Example:** `1`
 
-order.schedulechange: Schedule Change-API Notification.
-
-**`eventStatus`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-Incident status
-
-0: Unconfirmed 
-1: Confirmed
-
-**`airlines`  **<mark style="color:blue;">**array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-An array of IATA Codes of airlines
-
-**`eventTimeStart`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-Incident Receiving Time Start 
-
-Format: yyyy-MM-dd HH:mm:ss UTC+08:00
-
-**`eventTimeEnd`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-Incident Receiving Time End 
-
-Format: yyyy-MM-dd HH:mm:ss UTC+08:00
-
-**`depTimeStart`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-Departure Time Start(Departure local time) 
-
-Format: yyyy-MM-dd HH:mm:ss
-
-**`depTimeEnd`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-Departure Time End(Departure local time) 
-
-Format: yyyy-MM-dd HH:mm:ss
-
-**`pageIndex`  **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-Pagination
-
-**`pageSize`  **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-Number of records per page
+### **pageSize**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of results to return per page.  
+- **Constraints:** Must be ≥ 1 and ≤ 1000  
+- **Default:** `100`  
+- **Example:** `100`
 
 {% endtab %}
 
@@ -106,83 +138,184 @@ Number of records per page
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **eventId **<mark style="color:blue;">**string**</mark>**
 
-    Incident Id.
-*   **orderNo **<mark style="color:blue;">**string**</mark>**
+### **records**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** List of event records matching the query criteria.  
+- **Constraints:** Can be empty if no records found.  
+- **Default:** `[]`  
+- **Example:** `[ { ... } ]`
 
-    Order Number.
+### **records[].eventId**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique identifier of the event (Incident Id).  
+- **Constraints:** Alphanumeric string.  
+- **Default:** None  
+- **Example:** `"20230401003644225YJQGR"`
 
-*   **eventType **<mark style="color:blue;">**string**</mark>**
+### **records[].orderNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Primary order number associated with the event.  
+- **Constraints:** Alphanumeric string.  
+- **Default:** None  
+- **Example:** `"HCNMN20230227142411968"`
 
-    Incident type
+### **records[].subOrderNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Sub-order number associated with a specific itinerary or passenger.  
+- **Constraints:** Alphanumeric string, may include underscore (`_`).  
+- **Default:** None  
+- **Example:** `"HCNMN20230227142411968_1"`
 
-    email.schedulechange: Schedule Change-Email Notification
+### **records[].eventType**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Type of the event (e.g., `scheduleChange`, `ticketed`, `cancelled`).  
+  Valid values:
+  - email.schedulechange: Schedule Change-Email Notification
+  - abnormal.cancelled: Unacounted Cancellation
+  - order.schedulechange: Schedule Change-API Notification.
+- **Constraints:** Must match supported event type codes.  
+- **Default:** `""`  
+- **Example:** `"scheduleChange"`
 
-    abnormal.cancelled: Unacounted Cancellation
+### **records[].eventStatus**
+- **Type:** Array of Integers  
+- **Required:** No  
+- **Description:** List of status codes to filter events.  
+  Valid values:
+  - 0: Unconfirmed 
+  - 1: Confirmed
+- **Constraints:**  None
+- **Default:** `[]`  
+- **Example:** `[0, 1]`
 
-    order.schedulechange: Schedule Change-API Notification
+### **records[].eventTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Incident receiving time. UTC+08:00
+- **Constraints:** Format: `MMM d, yyyy hh:mm:ss A`  
+- **Default:** None  
+- **Example:** `"Apr 1, 2023 12:36:44 AM"`
 
-*   **eventStatus**<mark style="color:blue;">**int**</mark>**
+### **records[].extraInfo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Additional metadata or reference ID related to the event.  
+- **Constraints:** Optional string.  
+- **Default:** `null`  
+- **Example:** `"4775822"`
 
-    Incident staus
+### **records[].confirmedResult**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Incident Reason. Schedule Change Type & Cancelled Type.
+- **Constraints:** Can be `null` or free-text string.  
+- **Default:** `null`  
+- **Example:** `null`
 
-    0: Unconfirmed 
-    1: Confirmed
-    
-*   **eventTime**<mark style="color:blue;">**string**</mark>**
+### **records[].confirmedRemark**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Remarks provided during confirmation.  
+- **Constraints:** Can be `null` or any free-text comment.  
+- **Default:** `null`  
+- **Example:** `null`
 
-    Incident recieving time.UTC+08:00
-    
-*   **confirmedResult**<mark style="color:blue;">**string**</mark>**
+### **records[].clientCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Identifier for the client.
+- **Constraints:** Alphanumeric string.  
+- **Default:** None  
+- **Example:** `"TAC00001"`
 
-    Incident Reason. Schedule Change Type & Cancelled Type.
+### **records[].createTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Incident create time. UTC+08:00 
+- **Constraints:** Format: `MMM d, yyyy hh:mm:ss A`  
+- **Default:** None  
+- **Example:** `"Apr 1, 2023 12:36:44 AM"`
 
-*   **confirmedRemark**<mark style="color:blue;">**string**</mark>**
+### **records[].updateIme** (Note: Likely a typo; should be `updateTime`)
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Timestamp of the last update to the event record. UTC+08:00  
+- **Constraints:** Format: `MMM d, yyyy hh:mm:ss A`  
+- **Default:** None  
+- **Example:** `"Apr 1, 2023 12:36:44 AM"`
 
-    Remark.
+### **records[].airline**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** IATA airline code associated with the event.  
+- **Constraints:** 2-letter IATA code.  
+- **Default:** None  
+- **Example:** `"F9"`
 
-*   **clientCode**<mark style="color:blue;">**string**</mark>**
+### **records[].depTime**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Scheduled departure time for the affected flight.  
+- **Constraints:** Format: `MMM d, yyyy hh:mm:ss A`  
+- **Default:** None  
+- **Example:** `"Mar 31, 2023 11:12:00 AM"`
 
-    Client code.
+### **records[].confirmTime**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Timestamp when the event was confirmed.  
+- **Constraints:** Same as above format or `null`.  
+- **Default:** `null`  
+- **Example:** `null`
 
-*   **createTime**<mark style="color:blue;">**Date**</mark>**
+### **records[].confirmUsr**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Username or system that confirmed the event.  
+- **Constraints:** Alphanumeric string or `null`.  
+- **Default:** `null`  
+- **Example:** `null`
 
-    Incident create time.UTC+08:00
+### **records[].notified**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Sent the notification or not.  
+  Valid values:
+  - 1: YES. 
+  - 0: No
+- **Constraints:** None
+- **Default:** `0`  
+- **Example:** `1`
 
-*   **updateIme**<mark style="color:blue;">**Date**</mark>**
-    
-    Update Time.UTC+08:00
+### **records[].pnr**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger Name Record (PNR) associated with the booking.  
+- **Constraints:** None  
+- **Default:** None  
+- **Example:** `"G7ZNW5"`
 
-*   **airline**<mark style="color:blue;">**string**</mark>**
-    
-    Airline IATA code.
+### **records[].paxName**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Comma-separated list of passenger names.  
+- **Constraints:** Free-text.  
+- **Default:** None  
+- **Example:** `"SOWERS/REBECCA MUSETTA,STEPHENS/DAVID JEROME"`
 
-*   **depTime**<mark style="color:blue;">**Date**</mark>**
-
-    Flight depature time. Depature local time.
-
-*   **confirmTime**<mark style="color:blue;">**Date**</mark>**
-
-    Confirmed Time. UTC+08:00
-
-*   **notified**<mark style="color:blue;">**int**</mark>**
-
-    Send the notification or not. 1: YES. 0: No
-
-*   **pnr**<mark style="color:blue;">**string**</mark>**
-
-    Order's pnr.
-
-*   **paxName**<mark style="color:blue;">**string**</mark>**
-
-    Order's passenger names.
-
-*   **paxEmail**<mark style="color:blue;">**string**</mark>**
-
-    Order's passenger Email. Email address passed to the Airline.
-
-
+### **records[].paxEmail**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Email address used to notify passengers.  
+- **Constraints:** Valid email format.  
+- **Default:** None  
+- **Example:** `"GeraldineDushkin2005@ttjipiao.top"`
     
 {% endtab %}
 
