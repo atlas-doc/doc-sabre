@@ -16,57 +16,72 @@ There is no dependency for this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **routeType **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
+### **routeType**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Type of route being queried.  
 
-    Type code: 
+  Valid values:
 
-    1 = Airline routes
+  1 = Airline routes
 
-    2 = Atlas routes 
+  2 = Atlas routes
+- **Constraints:**  
+- **Default:** None  
+- **Example:** `1`
 
-*   **airlines **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **airlines**
+- **Type:** Array of Strings  
+- **Required:** No  
+- **Description:** List of preferred airline codes to filter routes.  
+- **Constraints:** Must be valid 2-letter IATA airline codes.  
+- **Default:** `[]`  
+- **Example:** `["EI"]`
 
-    An array of IATA Codes of airlines. 
+### **fromCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** IATA airport or city code representing the departure location.  
+- **Constraints:** Must be a valid 3-letter IATA code.  
+- **Default:** None  
+- **Example:** `"DUB"`
 
-*   **fromCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **fromCountry**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** ISO 3166-1 alpha-2 country code of the departure location.  
+- **Constraints:** Must be a valid 2-letter country code.  
+- **Default:** None  
+- **Example:** `"IE"`
 
-    IATA Code of departure city or airport
+### **toCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** IATA airport or city code representing the destination location.  
+- **Constraints:** Must be a valid 3-letter IATA code.  
+- **Default:** None  
+- **Example:** `"SAN"`
 
-*   **toCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    IATA Code of arrival city or airport
-
-*   **fromCountry **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    IATA Code of departure country.
-
-*   **toCountry **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    IATA Code of arrival country.
+### **toCountry**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** ISO 3166-1 alpha-2 country code of the destination location.  
+- **Constraints:** Must be a valid 2-letter country code.  
+- **Default:** None  
+- **Example:** `"IE"`
 
 {% endtab %}
 
 {% tab title="Samples" %}
 ```
-{ 
-
-    "routeType": 1, 
-
-    "airlines": [ 
-
-        "EI" 
-
-    ], 
-
-    "fromCity": "DUB", 
-
-    "fromCountry": "IE", 
-
-    "toCity": "SAN", 
-
-    "toCountry": "IE" 
-
-} 
+{
+    "routeType": 1,
+  
+    "fromCity": "LON",
+    "fromCountry": "GB",
+    "toCity": "AMS",
+    "toCountry": "NL"
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -75,87 +90,253 @@ There is no dependency for this call.
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **airlines **<mark style="color:blue;">**array**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
 
-    An array of IATA Codes of airlines. 
+### **data**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** List of available route schedules matching the search criteria.  
+- **Constraints:** Can be empty if no routes are available.  
+- **Default:** `[]`  
+- **Example:**
+  ```json
+  [
+    {
+      "airlines": ["EI"],
+      "fromCity": "DUB",
+      "fromCountry": "IE",
+      "toCity": "SAN",
+      "toCountry": "IE",
+      "isDirect": false,
+      "scheduleStart": "20241024",
+      "scheduleEnd": "20250428",
+      "updateDate": "20241031"
+    }
+  ]
+  ```
 
-*   **fromCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
+### **data[].airlines**
+- **Type:** Array of Strings  
+- **Required:** Yes  
+- **Description:** List of airline codes operating the route.  
+- **Constraints:** Must be valid 2-letter IATA airline codes.  
+- **Default:** `[]`  
+- **Example:** `["EI"]`
 
-    IATA Code of departure city or airport
+### **data[].fromCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** IATA code for the departure city/airport.  
+- **Constraints:** Must be a valid 3-letter code.  
+- **Default:** None  
+- **Example:** `"DUB"`
 
-*   **toCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
+### **data[].fromCountry**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** ISO 3166-1 alpha-2 code of the departure country.  
+- **Constraints:** Must be a valid 2-letter country code.  
+- **Default:** None  
+- **Example:** `"IE"`
 
-    IATA Code of arrival city or airport
+### **data[].toCity**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** IATA code for the destination city/airport.  
+- **Constraints:** Must be a valid 3-letter code.  
+- **Default:** None  
+- **Example:** `"SAN"`
 
-*   **fromCountry **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
+### **data[].toCountry**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** ISO 3166-1 alpha-2 code of the destination country.  
+- **Constraints:** Must be a valid 2-letter country code.  
+- **Default:** None  
+- **Example:** `"IE"`
 
-    IATA Code of departure country.
+### **data[].isDirect**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates whether the route is a direct flight.  
 
-*   **toCountry **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Mandatory**</mark>
+  Valid values:
 
-    IATA Code of arrival country.
+  True: Direct Flight 
 
-*   **isDirect **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
+  False: Transfer Flight 
 
-    True: Direct Flight 
+  This data will only be available when the "routeType" = 2 (Atlas Routes)
+- **Constraints:** `true` = direct flight, `false` = includes stops or connections.  
+- **Default:** `false`  
+- **Example:** `false`
 
-    False: Transfer Flight 
+### **data[].scheduleStart**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The start date of the booking window. The format is YYYYMMDD.  
+- **Constraints:** Must be a valid date string.  
+- **Default:** None  
+- **Example:** `"20241024"`
 
-    This data will only be available when the "routeType" = 2 (Atlas Routes)
+### **data[].scheduleEnd**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:**  The end date of the booking window. The format is YYYYMMDD.
+- **Constraints:** Must be a valid date string.  
+- **Default:** None  
+- **Example:** `"20250428"`
 
-*   **scheduleStart **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
+### **data[].updateDate**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The date when the routing data was updated. The format is YYYYMMDD.
+- **Constraints:** Must be a valid date string.  
+- **Default:** None  
+- **Example:** `"20241031"`
 
-    The start date of the booking window. The format is YYYYMMDD.
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code.  
+- **Constraints:** 0 indicates success.  
+- **Default:** 0  
+- **Example:** 0  
 
-*   **scheduleEnd **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    The end date of the booking window. The format is YYYYMMDD.
-
-*   **updateDate **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    The date when the routing data was updated. The format is YYYYMMDD.
+### **msg**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Response message.  
+- **Constraints:** Can be null.  
+- **Default:** null  
+- **Example:** null  
     
 {% endtab %}
 
 {% tab title="Samples" %}
 ```
-{ 
-
-    "data": [ 
-
-        { 
-
-            "airlines": [ 
-
-                "EI" 
-
-            ], 
-
-            "fromCity": "DUB", 
-
-            "fromCountry": "IE", 
-
-            "toCity": "SAN", 
-
-            "toCountry": "IE", 
-
-            "isDirect": false, 
-
-            "scheduleStart": "20241024", 
-
-            "scheduleEnd": "20250428", 
-
-            "updateDate": "20241031" 
-
-        }, 
-
-], 
-
-    "status": 0, 
-
-    "msg": null 
-
-} 
+{
+  "data": [
+    {
+      "airlines": [
+        "U2"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250408"
+    },
+    {
+      "airlines": [
+        "DS"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250408"
+    },
+    {
+      "airlines": [
+        "EC"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250408"
+    },
+    {
+      "airlines": [
+        "DH"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250402"
+    },
+    {
+      "airlines": [
+        "D8"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250402"
+    },
+    {
+      "airlines": [
+        "LE"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250402"
+    },
+    {
+      "airlines": [
+        "DY"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250402"
+    },
+    {
+      "airlines": [
+        "6E"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20241210"
+    },
+    {
+      "airlines": [
+        "GQ"
+      ],
+      "fromCity": "LON",
+      "fromCountry": "GB",
+      "toCity": "AMS",
+      "toCountry": "NL",
+      "isDirect": null,
+      "scheduleStart": null,
+      "scheduleEnd": null,
+      "updateDate": "20250217"
+    }
+  ],
+  "status": 0,
+  "msg": null
+}
 ```
 {% endtab %}
 {% endtabs %}
