@@ -246,6 +246,20 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Default:** null  
 - **Example:** null  
 
+#### **paymentMethod**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Method of payment selected by the user. For MoR, the card type must be same as that in order.do RQ.
+  Valid values:
+
+  1 = Deposit
+
+  3 = VCC Passthrough
+
+  5 = MoR
+- **Constraints:** None  
+- **Default:** Deposit  
+- **Example:** `3`  
 {% endtab %}
 
 {% tab title="Samples" %}
@@ -280,9 +294,9 @@ Cardholder country, province, city, postcode and address are required only for a
     "maxAcceptedAmount": null,
     "threeDS": null
   },
-  "paymentMethod": null,
+  "paymentMethod": 5,    
   "clientOrderNo": null,
-  "cid": "ttxzp62405",
+  "cid": "xxxxxxxxxx",
   "requestSource": null,
   "channel": null,
   "mainChannel": null,
