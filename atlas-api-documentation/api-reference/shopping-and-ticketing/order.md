@@ -42,6 +42,27 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Default:** None  
 - **Example:** "43c3c07e-2b05-4fc9-8832-29a71075a097"  
 
+### **payment[].cardType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The card brand/type to which the charge rule applies.  
+  Valid values:
+
+  Amex
+
+  Visa
+
+  Mastercard
+
+  JCB
+
+  Discover
+
+  DinersClub
+- **Constraints:** Must be a supported card type (e.g., `"Visa"`, `"Mastercard"`, `"Amex"`).  
+- **Default:** None  
+- **Example:** `"Amex"`
+
 ## **passengers** (Array)
 - **Type:** Array  
 - **Required:** Yes  
@@ -235,6 +256,9 @@ The booking requirements need to be read from the "bookingRequirement" array in 
   "sessionId": "2ef08340-d311-41e0-9078-b7589dafbd59",
   "offerId": null,
   "orderNo": null,
+  "payment": {
+        "cardType": "Visa"
+    },
   "passengers": [
     {
       "name": "LATIFI/KARIM",
@@ -888,53 +912,190 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Default:** None  
 - **Example:** 0  
 
-### **paymentOptions** (Array)
-- **Type:** Array  
-- **Required:** Yes  
-- **Description:** List of available payment methods and associated fees.  
-- **Constraints:** Must contain at least one valid payment option.  
-- **Default:** None  
-- **Example:** [{...}]  
 
-#### **paymentOptions.paymentMethod**
+### **paymentOptions**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** A list of payment method options, including details of service fees and ticket fares per method.  
+- **Constraints:** Must contain at least one payment option supported for the transaction.  
+- **Default:** None  
+- **Example:**
+  ```json
+  [
+    {
+      "paymentMethod": 3,
+      "serviceFee": {
+        "amount": 10.00,
+        "currency": "USD",
+        "deductFrom": "DEPOSIT"
+      },
+      "ticketFare": {
+        "amount": 123744.40,
+        "currency": "KRW",
+        "deductFrom": "CARD"
+      },
+      "paymentFee": null
+    }
+  ]
+  ```
+
+### **paymentOptions[].paymentMethod**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Payment method identifier. 
+- **Description:** Method of payment selected by the user.  
+  Valid values:
+
+  1 = Deposit
+
+  3 = VCC Passthrough
+
+  5 = MoR
+- **Constraints:** None  
+- **Default:** Deposit  
+- **Example:** `3`  
+
+### **paymentOptions[].serviceFee**
+- **Type:** Object  
+- **Required:** No  
+- **Description:** Service fee details for this payment method.  
+- **Constraints:** Must be provided if any service fee applies.  
+- **Default:** `null`  
+- **Example:**
+  ```json
+  {
+    "amount": 10.00,
+    "currency": "USD",
+    "deductFrom": "DEPOSIT"
+  }
+  ```
+#### **paymentOptions[].serviceFee.amount**
+- **Type:** Number (Float)  
+- **Required:** Yes  
+- **Description:** Amount of the service fee.  
+- **Constraints:** Must be ≥ 0  
+- **Default:** `0.00`  
+- **Example:** `10.00`
+
+#### **paymentOptions[].serviceFee.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency in which the service fee is charged.  
+- **Constraints:** Must be a valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** `"USD"`
+
+#### **paymentOptions[].serviceFee.deductFrom**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates the account source for fee deduction.  
+
+Valid values:
+
+DEPOSIT = Deduct from pre-funded deposit  
+
+CARD = Deduct from credit/debit card  
+- **Constraints:**  None
+- **Default:** `"CARD"`  
+- **Example:** `"DEPOSIT"`
+
+### **paymentOptions[].ticketFare**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Fare details for the ticket paid under the selected method.  
+- **Constraints:** Must be a valid currency object.  
+- **Default:** None  
+- **Example:**
+  ```json
+  {
+    "amount": 123744.40,
+    "currency": "KRW",
+    "deductFrom": "CARD"
+  }
+  ```
+
+#### **paymentOptions[].ticketFare.amount**
+- **Type:** Number (Float)  
+- **Required:** Yes  
+- **Description:** The fare amount for the ticket.  
+- **Constraints:** Must be ≥ 0  
+- **Default:** None  
+- **Example:** `123744.40`
+
+#### **paymentOptions[].ticketFare.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency of the ticket fare.  
+- **Constraints:** Valid ISO 4217 currency code.  
+- **Default:** None  
+- **Example:** `"KRW"`
+
+#### **paymentOptions[].ticketFare.deductFrom**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates where the fare amount is deducted from.  
 
   Valid values:
 
-  1: Pre-payment
+  DEPOSIT = Deduct from pre-funded deposit  
 
-  3: VCC
+  CARD = Deduct from credit/debit card  
+- **Constraints:** None  
+- **Default:** `"CARD"`  
+- **Example:** `"CARD"`
 
-  5: MOR
-- **Constraints:** Must be a valid payment method.  
-- **Default:** None  
-- **Example:** 1  
-
-#### **paymentOptions.serviceFee** (Object)
+### **paymentFee**
 - **Type:** Object  
+- **Required:** No  
+- **Description:** Additional fee charged for using a specific payment method. Typically includes service/processing charges applied at checkout.  
+- **Constraints:** Can be `null` if no additional fee is charged.  
+- **Default:** `null`  
+- **Example:**
+  ```json
+  {
+    "amount": 4.03,
+    "currency": "USD",
+    "deductFrom": "CARD",
+    "displayAmount": 3.73
+  }
+  ```
+
+### **paymentFee.amount**
+- **Type:** Number (Float)  
 - **Required:** Yes  
-- **Description:** Atlas transaction fee associated with the payment method.  
-- **Constraints:** Must contain valid fee details.  
-- **Default:** None  
-- **Example:** {...}  
+- **Description:** Actual fee amount charged for the selected payment method.  
+- **Constraints:** Must be ≥ 0  
+- **Default:** `0.00`  
+- **Example:** `4.03`
 
-#### **paymentOptions.ticketFare** (Object)
-- **Type:** Object  
-- **Required:** No  
-- **Description:** Fare amount deducted from a specific payment source.  
-- **Constraints:** Can be null.  
-- **Default:** null  
-- **Example:** {...}  
+### **paymentFee.currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency in which the fee is charged.  
+- **Constraints:** Must be a valid 3-letter ISO 4217 currency code.  
+- **Default:** Follows system or booking currency.  
+- **Example:** `"USD"`
 
-#### **paymentOptions.paymentFee** (Object)
-- **Type:** Object  
-- **Required:** No  
-- **Description:** Additional payment fee charged for that payment option. Example: VCC surcharge.
-- **Constraints:** Can be null.  
-- **Default:** null  
-- **Example:** {...}  
+### **paymentFee.deductFrom**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Indicates the source from which the fee will be deducted.  
+
+Valid values:
+
+DEPOSIT = Deduct from pre-funded deposit  
+
+CARD = Deduct from credit/debit card  
+- **Constraints:**  None
+- **Default:** `"CARD"`  
+- **Example:** `"CARD"`
+
+### **paymentFee.displayAmount**
+- **Type:** Number 
+- **Required:** Yes  
+- **Description:** Display amount in the user-selected display currency (e.g., converted from system currency).  
+- **Constraints:** Must be ≥ 0  
+- **Default:** Matches `amount` if no conversion applied  
+- **Example:** `3.73`
 
 ### **status**
 - **Type:** Integer  
@@ -1597,18 +1758,23 @@ The booking requirements need to be read from the "bookingRequirement" array in 
   "duplicateOrders": null,
   "paymentOptions": [
     {
-      "paymentMethod": 1,
+      "paymentMethod": 5,
       "serviceFee": {
-        "amount": 0.5,
-        "currency": "EUR",
+        "amount": 10.00,
+        "currency": "USD",
         "deductFrom": "DEPOSIT"
       },
       "ticketFare": {
-        "amount": 26.19,
-        "currency": "EUR",
-        "deductFrom": "DEPOSIT"
+        "amount": 84.46,
+        "currency": "USD",
+        "deductFrom": "CARD"
       },
-      "paymentFee": null
+      "paymentFee": {
+        "amount": 4.03,
+        "currency": "USD",
+        "deductFrom": "CARD",
+        "displayAmount": 3.73
+      }
     }
   ],
   "status": 0,
