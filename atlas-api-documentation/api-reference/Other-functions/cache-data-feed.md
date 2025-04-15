@@ -115,15 +115,29 @@ VJ1900, USD 145, USD 156, USD 167
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **cid **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+### **cid**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Unique client identifier used for authentication or tracking the request. This is the Access key (AK) of the customer.
+- **Constraints:** Alphanumeric string, typically provided by the platform.  
+- **Default:** None  
+- **Example:** `"xxxxxxxxxxx"`
 
-    The Access key (AK) of the customer.
-*   **startTimestamp **<mark style="color:blue;">**string (13 numerals)**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+### **startTimestamp**
+- **Type:** Integer (Unix Timestamp in milliseconds)  
+- **Required:** Yes  
+- **Description:** Start time for filtering orders. Represents the beginning of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago.  
+- **Constraints:** Must be a valid Unix timestamp in milliseconds (13 digits).  
+- **Default:** None  
+- **Example:** `1696631580000`
 
-    Unix Timestamp. When not filled in, defaults to one hour ago.
-*   **endTimestamp **<mark style="color:blue;">**string (13 numerals)**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Unix Timestamp. When not filled in, defaults to one hour ago. The time range cannot exceed one hour. 
+### **endTimestamp**
+- **Type:** Integer (Unix Timestamp in milliseconds)  
+- **Required:** Yes  
+- **Description:** End time for filtering orders. Represents the end of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago. The time range cannot exceed one hour.  
+- **Constraints:** Must be a valid Unix timestamp in milliseconds (13 digits). Must be equal to or greater than `startTimestamp`.  
+- **Default:** None  
+- **Example:** `1696631580000`
     
 {% endtab %}
 
@@ -167,203 +181,295 @@ VJ1900, USD 145, USD 156, USD 167
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **airline **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
 
-    The airline code
-
-*   **createTime **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    The time when the cache was refreshed.
-
-    Format: yyyy-MM-dd HH:mm
-
-*   **itineraries **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    List of itinerary details.
-
-### "Itineraries" Array
-
-*   **ancillaryList **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    List of ancillary services associated with the itinerary.
-
-*   **prices **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Price details for the itinerary.
-
-*   **segments **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Flight segments in the itinerary.
-
-### "ancillaryList" Array
-
-*   **outputAncillary **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    List of ancillary service options offered for each segment.
-
-*   **segmentIndex **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Index of the flight segment in the itinerary.
-
-### "outputAncillary" Array
-
-*   **categoryEntity **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Array defining types of ancillary services, like baggage.
-
-*   **currency **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Currency for ancillary pricing (ISO 4217).
-
-*   **fareFamily **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Class or fare category for ancillary services.
-
-### "categoryEntity" Array
-
-*   **categoryCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Code for ancillary category, e.g., baggage type.
-
-*   **categoryDetail **<mark style="color:blue;">**array**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Details of each category, such as piece count and weight.
-
-### "categoryDetail" Array
-
-*   **auxBaggageElement **<mark style="color:blue;">**object**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Object with specific baggage information.
-
-*   **maxQty **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Maximum quantity allowed for this ancillary.
-
-*   **minQty **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Minimum quantity required for this ancillary.
-
-*   **price **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Price of this ancillary service.
-
-### "auxBaggageElement" Object
-
-*   **isAllWeight **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Indicates if the weight applies universally.
-
-*   **piece **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Number of baggage pieces allowed.
-
-*   **size **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Size of baggage if applicable (empty if not).
-
-*   **weight **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Weight limit in kilograms.
-
-### "prices" Array
-
-*   **bookingCode **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Reservation or fare class code.
-
-*   **currency **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Currency of the price (ISO 4217).
-
-*   **fareFamily **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Fare category for the passenger (e.g., STANDARD).
-
-*   **paxType **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Passenger type (e.g., ADT for adult).
-
-*   **price **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Base price for the itinerary in the specified currency.
-
-*   **seatCount **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Number of seats available at this fare.
-
-*   **tax **<mark style="color:blue;">**decimal**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Total tax applied to the base price.
-
-### "segments" Array
-
-*   **airline **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Airline code for the segment.
-
-*   **arrAirport **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Arrival airport IATA code.
-
-*   **arrCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Arrival city name (if available).
-
-*   **arrTerminal **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Arrival terminal (if available).
-
-*   **arrTime **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Scheduled arrival time. Format: yyyyMMddHHmm
-
-*   **codeShare **<mark style="color:blue;">**boolean**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Indicates if the flight is a codeshare flight.
-
-*   **direction **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Flight direction (1 for outbound, 2 for return).
-
-*   **dptAirport **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Departure airport IATA code.
-
-*   **dptCity **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Departure city name (if available).
-
-*   **dptTerminal **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Departure terminal (if available).
-
-*   **dptTime **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Scheduled departure time. Format: yyyyMMddHHmm
-
-*   **duration **<mark style="color:blue;">**integer**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Duration of the segment in minutes.
-
-*   **equipment **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-    Equipment or aircraft type (if available).
-
-*   **flightNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Mandatory**</mark>
-
-    Flight number for the segment.
-
-*   **operatingAirline **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    Operating airline code if different from primary airline.
-
-*   **operatingFlightNo **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    Operating flight number if different from main flight number.
-
-*   **stopCities **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Optional**</mark>
-
-    List of stopover cities, if any.
+### **airline**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** 2-letter IATA code of the airline operating the flight.  
+- **Constraints:** Must be a valid IATA airline code.  
+- **Default:** None  
+- **Example:** `"W4"`
+
+### **createTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** The time when the cache was refreshed. Format: yyyy-MM-dd HH:mm 
+- **Constraints:** Format `YYYY-MM-DD HH:mm:ss`.  
+- **Default:** None  
+- **Example:** `"2024-10-29 12:54:00"`
+
+### **itineraries**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** List of available flight itineraries, each containing segment, price, and ancillary data.  
+- **Constraints:** Must contain at least one itinerary object.  
+- **Default:** `[]`  
+- **Example:** `[ { ... } ]`
+
+### **itineraries[].ancillaryList**
+- **Type:** Array of Objects  
+- **Required:** No  
+- **Description:** Ancillary product information available for a specific segment.  
+- **Constraints:** Optional if no ancillaries are present.  
+- **Default:** `[]`  
+
+### **ancillaryList[].segmentIndex**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Index of the segment the ancillary applies to.  
+- **Constraints:** Must be ≥ 1.  
+- **Default:** None  
+- **Example:** `1`
+
+### **ancillaryList[].outputAncillary**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Ancillary definitions grouped by fare family and currency.  
+- **Constraints:** At least one per segment if available.  
+- **Default:** `[]`
+
+### **outputAncillary[].currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency code used for the ancillary pricing.  
+- **Constraints:** Must be a valid ISO 4217 code.  
+- **Default:** None  
+- **Example:** `"EUR"`
+
+### **outputAncillary[].fareFamily**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Fare family to which the ancillaries apply.  
+- **Constraints:** Free-text, airline-defined.  
+- **Default:** None  
+- **Example:** `"Basic"`
+
+### **outputAncillary[].categoryEntity**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Array defining types of ancillary services. (e.g., baggage, seat).  
+- **Constraints:** At least one category with details.  
+- **Default:** `[]`
+
+### **categoryEntity[].categoryCode**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Code defining the ancillary category.  
+- **Constraints:** Examples: `"StandardCheckInBaggage"`, `"CabinBaggageOverheadLocker"`  
+- **Default:** None  
+- **Example:** `"StandardCheckInBaggage"`
+
+### **categoryEntity[].categoryDetail**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Details of each category, such as piece count and weight.
+- **Constraints:** At least one option must exist.  
+- **Default:** `[]`
+
+### **categoryDetail[].auxBaggageElement**
+- **Type:** Object  
+- **Required:** Yes  
+- **Description:** Structure containing baggage specifications.  
+- **Constraints:** Must include piece and weight.  
+- **Default:** None
+
+### **auxBaggageElement.isAllWeight**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates if weight is total for all pieces or per piece.  
+- **Constraints:** true = all pieces, false = per piece  
+- **Default:** true  
+- **Example:** `true`
+
+### **auxBaggageElement.piece**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of baggage pieces allowed.  
+- **Constraints:** ≥ 0  
+- **Default:** 0  
+- **Example:** `3`
+
+### **auxBaggageElement.weight**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Total or per-piece weight allowed in kilograms.  
+- **Constraints:** ≥ 0  
+- **Default:** 0  
+- **Example:** `96`
+
+### **auxBaggageElement.size**
+- **Type:** String or Null  
+- **Required:** No  
+- **Description:** Size of baggage if applicable (empty if not). 
+- **Constraints:** Text format, can be empty.  
+- **Default:** `""`  
+- **Example:** `""`
+
+### **categoryDetail[].maxQty / minQty**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Max/min quantity allowed for purchase.  
+- **Constraints:** ≥ 1  
+- **Default:** `1`  
+- **Example:** `1`
+
+### **categoryDetail[].price**
+- **Type:** Number  
+- **Required:** Yes  
+- **Description:** Ancillary item price.  
+- **Constraints:** ≥ 0  
+- **Default:** 0.0  
+- **Example:** `199.44`
+
+### **itineraries[].prices**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Fare prices by passenger type and fare family.  
+- **Constraints:** Must contain at least one entry.  
+- **Default:** `[]`
+
+### **prices[].bookingCode**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Booking class code used by the airline (optional).  
+- **Constraints:** Free-text, can be empty.  
+- **Default:** `""`  
+- **Example:** `""`
+
+### **prices[].currency**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Currency for price and tax fields.  
+- **Constraints:** ISO 4217 format.  
+- **Default:** None  
+- **Example:** `"EUR"`
+
+### **prices[].fareFamily**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Fare category for the passenger (e.g., STANDARD).
+- **Constraints:** Free-text, airline-defined.  
+- **Default:** None  
+- **Example:** `"Basic"`
+
+### **prices[].paxType**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Passenger type.  
+- **Constraints:** Must be one of: `"ADT"` (Adult), `"CHD"` (Child), `"INF"` (Infant)  
+- **Default:** `"ADT"`  
+- **Example:** `"ADT"`
+
+### **prices[].price**
+- **Type:** Number 
+- **Required:** Yes  
+- **Description:** Base fare price.  
+- **Constraints:** ≥ 0  
+- **Default:** 0.0  
+- **Example:** `49.9`
+
+### **prices[].seatCount**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of seats available at this fare.  
+- **Constraints:** ≥ 0  
+- **Default:** 0  
+- **Example:** `2`
+
+### **prices[].tax**
+- **Type:** Number 
+- **Required:** Yes  
+- **Description:** Tax associated with the fare.  
+- **Constraints:** ≥ 0  
+- **Default:** 0.0  
+- **Example:** `9.46`
+
+### **itineraries[].segments**
+- **Type:** Array of Objects  
+- **Required:** Yes  
+- **Description:** Flight segment details.  
+- **Constraints:** At least one segment must be present.  
+- **Default:** `[]`
+
+### **segments[].airline**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Airline code for the segment.  
+- **Constraints:** Valid 2-letter IATA code.  
+- **Default:** None  
+- **Example:** `"W4"`
+
+### **segments[].flightNo**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Flight number.  
+- **Constraints:** Alphanumeric, includes airline prefix.  
+- **Default:** None  
+- **Example:** `"W46070"`
+
+### **segments[].dptAirport / arrAirport**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure / arrival airport IATA code.  
+- **Constraints:** 3-letter IATA code.  
+- **Default:** None  
+- **Example:** `"SPX"` / `"FCO"`
+
+### **segments[].dptTime / arrTime**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Departure / arrival time in `YYYYMMDDHHmm` format.  
+- **Constraints:** Valid timestamp.  
+- **Default:** None  
+- **Example:** `"202411261100"` / `"202411261345"`
+
+### **segments[].duration**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Flight duration in minutes.  
+- **Constraints:** ≥ 0  
+- **Default:** 0  
+- **Example:** `225`
+
+### **segments[].direction**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Direction of travel (1 = outbound, 2 = return).  
+- **Constraints:** Must be either 1 or 2  
+- **Default:** `1`  
+- **Example:** `1`
+
+### **segments[].codeShare**
+- **Type:** Boolean  
+- **Required:** Yes  
+- **Description:** Indicates if the flight is operated under a codeshare agreement.  
+- **Constraints:** true or false  
+- **Default:** false  
+- **Example:** `false`
+
+### **segments[].operatingAirline**
+- **Type:** String  
+- **Required:** Yes  
+- **Description:** Actual airline operating the flight.  
+- **Constraints:** Valid IATA code.  
+- **Default:** None  
+- **Example:** `"W4"`
+
+### **segments[].operatingFlightNo**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Operating carrier's flight number if different from marketing carrier.  
+- **Constraints:** Can be empty.  
+- **Default:** `""`  
+- **Example:** `""`
+
+### **segments[].stopCities**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Comma-separated IATA codes of stopover cities.  
+- **Constraints:** Empty if no stops.  
+- **Default:** `""`  
+- **Example:** `""`
 
 {% endtab %}
 
