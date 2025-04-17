@@ -39,7 +39,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight booking order.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "TESTA20240627114717735"  
 
@@ -47,7 +46,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR.
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "XYZ87T"  
 
@@ -55,7 +53,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** The record locator of the airline.
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "S75666"  
 
@@ -63,7 +60,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be a valid airline code.  
 - **Default:** None  
 - **Example:** "G9"  
 
@@ -71,15 +67,13 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Array  
 - **Required:** No  
 - **Description:** List of passengers included in the booking.  
-- **Constraints:** Must contain at least one passenger.  
 - **Default:** None  
 - **Example:** [{...}]  
 
 #### **passengers.name**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Full name of the passenger.  
-- **Constraints:** Must be in "LastName/FirstName MiddleName" format.  
+- **Description:** Full name of the passenger. Must be in "LastName/FirstName MiddleName" format.  
 - **Default:** None  
 - **Example:** "Kotwal/Behram"  
 
@@ -87,7 +81,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Contains segment details of the booked flight.  
-- **Constraints:** Must contain valid segment details.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -95,7 +88,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Array  
 - **Required:** No  
 - **Description:** List of departure segments.  
-- **Constraints:** Must contain at least one segment.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -103,7 +95,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Index of the segment in the route.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -111,7 +102,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Airline carrier code for the segment.  
-- **Constraints:** Must be a valid airline code.  
 - **Default:** None  
 - **Example:** "G9"  
 
@@ -119,7 +109,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Flight number of the segment.  
-- **Constraints:** Must be a valid flight number.  
 - **Default:** None  
 - **Example:** "G9147"  
 
@@ -127,7 +116,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Departure airport code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "SHJ"  
 
@@ -135,7 +123,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Arrival airport code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "JED"  
 
@@ -143,7 +130,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Flight departure date in YYYYMMDD format.  
-- **Constraints:** Must be a valid date format.  
 - **Default:** None  
 - **Example:** "20240716"  
 
@@ -151,13 +137,9 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Indicates if the order is completed.  
-
   Valid values:
-
   true: Show the full details of main order and post-booking order
-
   false: Only show the details of given order
-- **Constraints:** "true" or "false".  
 - **Default:** "false"  
 - **Example:** "true"  
 
@@ -201,7 +183,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight booking order.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "TESTA20240627114717735"  
 
@@ -209,7 +190,6 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of all orders associated with the booking.  
-- **Constraints:** Must contain at least one order.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -224,17 +204,11 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Status of the order.  
-
-Valid values:
-
-0: Unpaid
-
-1: Ticketing-in-Process
-
-2: Ticketed
-
--3: Cancelled(When the booking is failed due to the request information) Order number
-- **Constraints:** "0" for unpaid, "1" for ticketing-in-process, "2" for ticketed and "-3" for cancelled.  
+  Valid values:
+  0: Unpaid
+  1: Ticketing-in-Process
+  2: Ticketed
+  -3: Cancelled(When the booking is failed due to the request information) Order number
 - **Default:** None  
 - **Example:** "2"  
 
@@ -242,13 +216,9 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Status of ticket issuance.
-
   Valid values:
-
   0: Ticket not issued
-
   1: Ticket issued  
-- **Constraints:** "0" for Ticket not issued, "1" for Ticket issued.  
 - **Default:** None  
 - **Example:** "1"  
 
@@ -256,7 +226,6 @@ Valid values:
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Total fare of this order in the currency Atlas settled with you.  
-- **Constraints:** Must be a positive value.  
 - **Default:** None  
 - **Example:** 86.31  
 
@@ -264,15 +233,101 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The currency Atlas settled with you.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
+
+#### **orderList.tktLimitTime**
+- **Type:** **string**  
+- **Required:** Yes  
+- **Description:** Ticketing deadline timestamp. Format: **yyyy-MM-dd HH:mm:ss**   
+- **Default:** None  
+- **Example:** **"2024-06-27 13:07:21"**
+
+#### **orderList.vendorTotalPrice**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Total cost from the vendor including fare and tax.  
+- **Default:** **0.0**  
+- **Example:** **316.96**
+
+#### **orderList.vendorCost**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Actual fare of this order in the vendor's currency. If the order does not support VCC passthrough or BYOA, this fare will not be displayed.  
+- **Default:** **0.0**  
+- **Example:** **312.69**
+
+#### **orderList.vendorTotalAncillaryPrice**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Total ancillary fare of this order in the vendor's currency. 
+- **Default:** **0.0**  
+- **Example:** **0**
+
+#### **orderList.vendorCurrency**
+- **Type:** **string**  
+- **Required:** Yes  
+- **Description:** Vendor's transaction currency.  
+- **Default:** **"USD"**  
+- **Example:** **"AED"**
+
+#### **orderList.adultTotalFare**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Total fare for adult passengers.  
+- **Default:** **0.0**  
+- **Example:** **86.31**
+
+#### **orderList.childTotalFare**
+- **Type:** **number**  
+- **Required:** No  
+- **Description:** Total fare for child passengers.  
+- **Default:** **0.0**  
+- **Example:** **86.31**
+
+#### **orderList.infantTotalFare**
+- **Type:** **number**  
+- **Required:** No  
+- **Description:** Total fare for infant passengers.  
+- **Default:** **0.0**  
+- **Example:** **153.79**
+
+#### **orderList.totalAncillaryPrice**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Total paid by user for ancillaries.  
+- **Default:** **0.0**  
+- **Example:** **0**
+
+#### **orderList.totalTransactionFee**
+- **Type:** **number**  
+- **Required:** Yes  
+- **Description:** Platform fee added to booking.  
+- **Default:** **0.0**  
+- **Example:** **1**
+
+#### **orderList.paymentFee**
+- **Type:** **number | null**  
+- **Required:** No  
+- **Description:** Fee for selected payment method.  
+- **Default:** **null**  
+- **Example:** **null**
+
+#### **orderList.supportPaymentMethod**
+- **Type:** **integer**  
+- **Required:** Yes  
+- **Description:** Code for allowed payment method.  
+  Valid values:
+  1: Pre-payment
+  3: VCC
+  5: MOR
+- **Default:** **1**  
+- **Example:** **3**
 
 ### **pnrCode**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR. 
-- **Constraints:** Must be a valid alphanumeric string.
 - **Default:** None  
 - **Example:** "ODNSPH"  
 
@@ -280,15 +335,13 @@ Valid values:
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of passenger details. This is the same format as the PAXTicketInfo in order response.
-- **Constraints:** Must contain at least one passenger.  
 - **Default:** None  
 - **Example:** [{...}]  
 
 #### **paxTicketInfos.name**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Full name of the passenger.  
-- **Constraints:** Must be in "LastName/FirstName MiddleName" format.  
+- **Description:** Full name of the passenger. Must be in "LastName/FirstName MiddleName" format.    
 - **Default:** None  
 - **Example:** "Kotwal/Behram"  
 
@@ -296,7 +349,6 @@ Valid values:
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Passenger type (0 = adult, 1 = child, 2 = infant).  
-- **Constraints:** Can be ADT (Adult), CHD (Child), INF (Infant).
 - **Default:** None  
 - **Example:** 0  
 
@@ -318,7 +370,6 @@ Valid values:
 - **Type:** Array  
 - **Required:** No  
 - **Description:** List of airline-specific booking details.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -326,7 +377,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Two-letter airline code.  
-- **Constraints:** Must be a valid IATA airline code.  
 - **Default:** None  
 - **Example:** "XC"  
 
@@ -348,7 +398,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Website link for airline services.  
-- **Constraints:** Must be a valid URL.  
 - **Default:** None  
 - **Example:** "https://www.corendon-airlines.com"  
 
@@ -356,7 +405,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Email address for managing the booking.  
-- **Constraints:** Must be a valid email format.  
 - **Default:** None  
 - **Example:** "SARABAGCI@WEB.DE"  
 
@@ -399,7 +447,6 @@ Valid values:
 - **Type:** String  
 - **Required:** No  
 - **Description:** URL to download the itinerary document.  
-- **Constraints:** Must be a valid URL.  
 - **Default:** None  
 - **Example:** "https://api-sg.atriptech.com/itineraryDownload.do?orderNo=8b83jgNhkaYaktdGP0fboCRs8w5cQTow"  
 
@@ -407,7 +454,6 @@ Valid values:
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contact details for the booking.  
-- **Constraints:** Must contain valid contact information.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -436,7 +482,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Email address of the contact person.  
-- **Constraints:** Must be a valid email format.  
 - **Default:** None  
 - **Example:** "SAARABAGCI@WEB.DE"  
 
@@ -444,15 +489,16 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Mobile phone number of the contact person. XXXX(digital country code)-XXXXXXXX(phone number). Examples: 0001-87291810, 0086-13928109091, 0971-19201998
-- **Constraints:** Must be a valid phone number format.  
 - **Default:** None  
 - **Example:** "0046-771407000"  
 
 ### **ancillaryBuyMethod**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Indicates the method used for purchasing ancillary services.  
-- **Constraints:** "0" for pre-purchase, "1" for post-purchase.  
+- **Description:** Indicates the method used for purchasing ancillary services.
+  Valid values:
+  0 = pre-purchase
+  1 = post-purchase.  
 - **Default:** "0"  
 - **Example:** "0"  
 
@@ -460,7 +506,6 @@ Valid values:
 - **Type:** String  
 - **Required:** No  
 - **Description:** Error code indicating issues during booking or fare retrieval.  
-- **Constraints:** Must be a valid numeric error code.  
 - **Default:** None  
 - **Example:** "601"  
 
@@ -468,7 +513,6 @@ Valid values:
 - **Type:** String  
 - **Required:** No  
 - **Description:** Description of the error encountered during the booking process.  
-- **Constraints:** Must be a valid string.  
 - **Default:** None  
 - **Example:** "Fare changed"  
 
@@ -476,7 +520,6 @@ Valid values:
 - **Type:** String  
 - **Required:** No  
 - **Description:** Airline-specific error message or code.  
-- **Constraints:** Must be a valid airline error code.  
 - **Default:** None  
 - **Example:** "301"  
 
@@ -484,7 +527,6 @@ Valid values:
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** A list of payment method options, including details of service fees and ticket fares per method.  
-- **Constraints:** Must contain at least one payment option supported for the transaction.  
 - **Default:** None  
 - **Example:**
   ```json
@@ -511,13 +553,9 @@ Valid values:
 - **Required:** Yes  
 - **Description:** Method of payment selected by the user.  
   Valid values:
-
   1 = Deposit
-
   3 = VCC Passthrough
-
   5 = MoR
-- **Constraints:** None  
 - **Default:** Deposit  
 - **Example:** `3`  
 
@@ -525,7 +563,6 @@ Valid values:
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Service fee details for this payment method.  
-- **Constraints:** Must be provided if any service fee applies.  
 - **Default:** `null`  
 - **Example:**
   ```json
@@ -539,7 +576,6 @@ Valid values:
 - **Type:** Number (Float)  
 - **Required:** Yes  
 - **Description:** Amount of the service fee.  
-- **Constraints:** Must be ≥ 0  
 - **Default:** `0.00`  
 - **Example:** `10.00`
 
@@ -547,7 +583,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which the service fee is charged.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"USD"`
 
@@ -555,13 +590,9 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the account source for fee deduction.  
-
   Valid values:
-
   DEPOSIT = Deduct from pre-funded deposit  
-
   CARD = Deduct from credit/debit card  
-- **Constraints:**  None
 - **Default:** `"CARD"`  
 - **Example:** `"DEPOSIT"`
 
@@ -569,7 +600,6 @@ Valid values:
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Fare details for the ticket paid under the selected method.  
-- **Constraints:** Must be a valid currency object.  
 - **Default:** None  
 - **Example:**
   ```json
@@ -584,7 +614,6 @@ Valid values:
 - **Type:** Number (Float)  
 - **Required:** Yes  
 - **Description:** The fare amount for the ticket.  
-- **Constraints:** Must be ≥ 0  
 - **Default:** None  
 - **Example:** `123744.40`
 
@@ -592,7 +621,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the ticket fare.  
-- **Constraints:** Valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"KRW"`
 
@@ -600,13 +628,9 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates where the fare amount is deducted from.  
-
   Valid values:
-
   DEPOSIT = Deduct from pre-funded deposit  
-
   CARD = Deduct from credit/debit card  
-- **Constraints:** None  
 - **Default:** `"CARD"`  
 - **Example:** `"CARD"`
 
@@ -614,7 +638,6 @@ Valid values:
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Additional fee charged for using a specific payment method. Typically includes service/processing charges applied at checkout.  
-- **Constraints:** Can be `null` if no additional fee is charged.  
 - **Default:** `null`  
 - **Example:**
   ```json
@@ -630,7 +653,6 @@ Valid values:
 - **Type:** Number (Float)  
 - **Required:** Yes  
 - **Description:** Actual fee amount charged for the selected payment method.  
-- **Constraints:** Must be ≥ 0  
 - **Default:** `0.00`  
 - **Example:** `4.03`
 
@@ -638,7 +660,6 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which the fee is charged.  
-- **Constraints:** Must be a valid 3-letter ISO 4217 currency code.  
 - **Default:** Follows system or booking currency.  
 - **Example:** `"USD"`
 
@@ -646,13 +667,9 @@ Valid values:
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the source from which the fee will be deducted.  
-
   Valid values:
-
   DEPOSIT = Deduct from pre-funded deposit  
-
   CARD = Deduct from credit/debit card  
-- **Constraints:**  None
 - **Default:** `"CARD"`  
 - **Example:** `"CARD"`
 
@@ -660,7 +677,6 @@ Valid values:
 - **Type:** Number 
 - **Required:** Yes  
 - **Description:** Display amount in the user-selected display currency (e.g., converted from system currency).  
-- **Constraints:** Must be ≥ 0  
 - **Default:** Matches `amount` if no conversion applied  
 - **Example:** `3.73`
 
@@ -668,13 +684,9 @@ Valid values:
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code. 
-
   Valid values:
-
   0: success
-
   2: System error 
-- **Constraints:** 0 indicates success.  
 - **Default:** 0  
 - **Example:** 0  
 
