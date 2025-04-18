@@ -63,9 +63,6 @@ Accept-Encoding: gzip
 {% tab title="Schema" %}
 ### Request
 
-{% tabs %}
-{% tab title="Schema" %}
-
 ### **tripType**
 - **Type:** String  
 - **Required:** Yes  
