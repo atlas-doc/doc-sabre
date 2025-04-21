@@ -13,25 +13,33 @@ No preceding function needs to be carried out.
 {% tabs %}
 {% tab title="Schema" %}
 
-**`eventId`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-Incident ID
+#### `eventId`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Unique identifier of the event being confirmed.  
+- **Default:** `null`  
+- **Example:** `"20230323113246035DNIDD"`
 
-**`result`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### `result`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** The result of handling the event.  
+  Valid values:
+  - FLIGHT_CANCELED: Flight Cancelled
+  - ABNORMAL_CANCELLATION: Unaccounted Cancellation
+  - PASSENGER_CANCELLATION: Cancelled by Passenger
+  - NO_CANCELLATION: No Cancellation  
+- **Default:** `null`  
+- **Example:** `"ABNORMAL_CANCELLATION"`
 
-Cancelled Type
+#### `remark`
+- **Type:** `string`  
+- **Required:** No  
+- **Description:** Optional notes or remarks regarding the abnormal cancellation.  
+- **Default:** `""`  
+- **Example:** `"Flight cancelled due to weather. No alternative offered."`
 
-FLIGHT_CANCELED: Flight Cancelled
-
-ABNORMAL_CANCELLATION: Unaccounted Cancellation
-
-PASSENGER_CANCELLATION: Cancelled by Passenger
-
-NO_CANCELLATION: No Cancellation
-
-**`remark`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-Remark
 {% endtab %}
 
 {% tab title="Samples" %}
@@ -52,16 +60,23 @@ Remark
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-    0: success
+#### `status`
+- **Type:** `integer`  
+- **Required:** Yes  
+- **Description:** Status code representing the outcome of the API request.  
+  Valid values: 
+  - `0` = Success  
+  - Any non-zero value indicates an error or failure.  
+- **Default:** `0`  
+- **Example:** `0`
 
-    2: System error
-*   **msg **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
-
-    Error message
-    
-    The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+#### `msg`
+- **Type:** `string`  
+- **Required:** No  
+- **Description:** Message describing the result of the API call. The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** `"success"`  
+- **Example:** `"success"`
 {% endtab %}
 
 {% tab title="Samples" %}
