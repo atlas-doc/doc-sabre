@@ -13,65 +13,69 @@ No preceding function needs to be carried out.
 {% tabs %}
 {% tab title="Schema" %}
 
-**`eventId`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-Incident ID
+#### `eventId`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Unique identifier of the schedule change event.  
+- **Default:** `null`  
+- **Example:** `"20230323113246035DNIDD"`
 
-**`result`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### `result`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Action taken in response to the schedule change.  
+  Valid values:
+  - FLIGHT_CHANGE: Flight Change  
+  - FLIGHT_CANCELED: Flight Cancelled
+  - NO_SCHEDULE_CHANGE: No Schedule Change 
+- **Default:** `null`  
+- **Example:** `"FLIGHT_CHANGE"`
 
-Schedule Change Type
+#### `remark`
+- **Type:** `string`  
+- **Required:** No  
+- **Description:** Optional remark or comment associated with the result.  
+- **Default:** `""`  
+- **Example:** `"Confirmed by customer via call"`
 
-FLIGHT_CHANGE: Flight Change
+#### `changedFlights`
+- **Type:** `array`  
+- **Required:** Required if `result = "FLIGHT_CHANGE"`  
+- **Description:** List of changed flight details.  
+- **Default:** `[]`  
+- **Example:**
+```json
+[
+  {
+    "originalFlightNo": "FZ2323",
+    "newDepartureTime": "2023-04-23 13:30",
+    "newArrivalTime": "2023-04-23 15:30"
+  }
+]
+```
 
-FLIGHT_CANCELED: Flight Cancelled
+#### `changedFlights[].originalFlightNo`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Flight number before the change. Must include airline code prefix (e.g., "FZ2323").  
+- **Default:** `null`  
+- **Example:** `"FZ2323"`
 
-NO_SCHEDULE_CHANGE: No Schedule Change
+#### `changedFlights[].newDepartureTime`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Updated departure time. Format `yyyy-MM-dd HH:mm`  
+- **Default:** `null`  
+- **Example:** `"2023-04-23 13:30"`
 
-**`remark`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
+#### `changedFlights[].newArrivalTime`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Updated arrival time. Format `yyyy-MM-dd HH:mm`  
+- **Default:** `null`  
+- **Example:** `"2023-04-23 15:30"`
 
-Remark.
-
-**changedFlights Array<**<mark style="color:blue;">**changedFlightsElement**</mark>**> **<mark style="color:orange;">**Optional**</mark>
-
-**`originalFlightNo`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Required**</mark>
-
-Original Flight No
-
-**`newFlightNo`  **<mark style="color:blue;">**string**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-New Flight No
-
-**`newDepartureTime`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-New Departure Time
-
-Format: yyyy-MM-dd HH:mm:ss
-
-**`newArrivalTime`  **<mark style="color:blue;">**Date**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-New Arrival Time
-
-Format: yyyy-MM-dd HH:mm:ss
-
-**`newDepartureAirport`  **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-IATA code
-
-**`newDepartureTerminal`  **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-New Departure Terminal
-
-**`newArrivalAirport`  **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-IATA code
-
-**`newArrivalAirport`  **<mark style="color:blue;">**String**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-New Arrival Terminal
-
-**canceledFlights  **<mark style="color:blue;">**array**</mark>**  **<mark style="color:orange;">**Optional**</mark>
-
-Canceled Flights No
 {% endtab %}
 
 {% tab title="Samples" %}
@@ -106,16 +110,24 @@ Canceled Flights No
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **status **<mark style="color:blue;">**int**</mark>**  **<mark style="color:green;">**Required**</mark>
 
-    0: success
 
-    2: System error
-*   **msg **<mark style="color:blue;">**string**</mark>**  **<mark style="color:green;">**Required**</mark>
+#### `status`
+- **Type:** `integer`  
+- **Required:** Yes  
+- **Description:** Status code representing the outcome of the API request.  
+  Valid values: 
+  - `0` = Success  
+  - Any non-zero value indicates an error or failure.  
+- **Default:** `0`  
+- **Example:** `0`
 
-    Error message
-    
-    The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+#### `msg`
+- **Type:** `string`  
+- **Required:** No  
+- **Description:** Message describing the result of the API call. The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** `"success"`  
+- **Example:** `"success"`
 {% endtab %}
 
 {% tab title="Samples" %}
