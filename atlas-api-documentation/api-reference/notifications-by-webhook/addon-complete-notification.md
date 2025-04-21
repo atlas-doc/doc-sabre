@@ -10,25 +10,156 @@ Method : Post
 
 {% tabs %}
 {% tab title="Schema" %}
-*   **cid **<mark style="color:blue;">**string**</mark>
 
-    Identifier of client and user.
-*   **type **<mark style="color:blue;">**string**</mark>
+#### `cid`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Unique client identifier.  
+- **Default:** `null`  
+- **Example:** `"rggat40831"`
 
-    Notification type.
-* **data**
-  *   **addonOrderNo **<mark style="color:blue;">**string**</mark>
+#### `type`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Type of notification event. Must be `"order.addonComplete"`   
+- **Default:** `null`  
+- **Example:** `"order.addonComplete"`
 
-      Order number.
-  *   **originalOrderNo **<mark style="color:blue;">**string**</mark>
+#### `data.addonOrderNo`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Unique identifier for the add-on order.  
+- **Default:** `null`  
+- **Example:** `"BCNQL20201031184148568KLDKS"`
 
-      Order number.
-  *   **orderStatus **<mark style="color:blue;">**int**</mark>
+#### `data.originalOrderNo`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Original main order number associated with the add-on.  
+- **Default:** `null`  
+- **Example:** `"BCNQL20201031184148568"`
 
-      orderStatus=2 means ticketed
-  *   **paxTicketInfos Array<**[**PAXTicketInfo**](broken-reference/)**>**
+#### `data.orderStatus`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Status of the add-on order.  
+  Valid values: 
+  - `"0"` = Unpaid  
+  - `"1"` = Ticketing-in-Process  
+  - `"2"` = Ticketed  
+  - `"-3"` = Cancelled  
+- **Default:** `"0"`  
+- **Example:** `"2"`
 
-      Passengers' ticket information, the same format as the PAXTicketInfo in order response or retrive booking response, click [**here**](broken-reference/) \*\*\*\* to check the schema
+### `data.paxTicketInfos[]`
+
+#### `paxTicketInfos[].name`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Passenger name in `LastName/FirstName MiddleName` format.  
+- **Default:** `null`  
+- **Example:** `"MOREL/JEROME"`
+
+#### `paxTicketInfos[].passengerType`
+- **Type:** `integer`  
+- **Required:** Yes  
+- **Description:** Passenger type.  
+  Valid values: 
+  - `0` = Adult  
+  - `1` = Child  
+  - `2` = Infant  
+- **Default:** `0`  
+- **Example:** `0`
+
+#### `paxTicketInfos[].birthday`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Passenger birth date in `yyyyMMdd` format.  
+- **Default:** `null`  
+- **Example:** `"19661118"`
+
+#### `paxTicketInfos[].gender`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Passenger gender.  
+  Valid values:
+  - `"M"`: Male
+  - `"F"`: Female  
+- **Default:** `null`  
+- **Example:** `"M"`
+
+#### `paxTicketInfos[].cardNum`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Document number (e.g. passport).  
+- **Default:** `null`  
+- **Example:** `"G000000000"`
+
+#### `paxTicketInfos[].cardType`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Type of ID document.  
+  Valid values:
+  - PP - Passport
+  - GA - Hong Kong Macau Pass for China mainland citizens
+  - TW - Taiwan Pass for China mainland citizens
+  - TB - China mainland pass for Taiwanese
+  - HY - International Seaman's Certificate 
+- **Default:** `null`  
+- **Example:** `"PP"`
+
+#### `paxTicketInfos[].cardIssuePlace`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Country that issued the document.  
+- **Default:** `null`  
+- **Example:** `"FR"`
+
+#### `paxTicketInfos[].cardExpired`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Expiry date of the document. Format: `yyyyMMdd`  
+- **Constraints:** Must be a future-valid date.  
+- **Default:** `null`  
+- **Example:** `"20320118"`
+
+#### `paxTicketInfos[].nationality`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Passenger nationality.  
+- **Default:** `null`  
+- **Example:** `"FR"`
+
+#### `paxTicketInfos[].ticketNos`
+- **Type:** `array of string`  
+- **Required:** Yes  
+- **Description:** Ticket numbers issued to the passenger.  
+- **Default:** `[]`  
+- **Example:** `["EDVLRZ"]`
+
+#### `paxTicketInfos[].airlinePNRs`
+- **Type:** `array of string`  
+- **Required:** Yes  
+- **Description:** Airline PNR codes associated with the passenger.  
+- **Default:** `[]`  
+- **Example:** `["EDVLRZ"]`
+
+### `paxTicketInfos[].ancillaries[]`
+
+#### `ancillaries[].productCode`
+- **Type:** `string`  
+- **Required:** Yes  
+- **Description:** Unique product code for the ancillary item.  
+- **Default:** `null`  
+- **Example:** `"SCI_BAG_ID_25KG_AABBBB"`
+
+#### `ancillaries[].segmentIndex`
+- **Type:** `integer`  
+- **Required:** Yes  
+- **Description:** Segment index to which the ancillary applies.  
+- **Default:** `1`  
+- **Example:** `1`
+
 {% endtab %}
 
 {% tab title="Sample" %}
