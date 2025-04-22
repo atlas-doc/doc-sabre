@@ -66,16 +66,21 @@ Steps:
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status code of the response. **0** = success, other values = error or special condition.   
-- **Default:** **0**  
-- **Example:** **212**
+- **Description:** Response status code.  
+  Valid values:
+  - 0: success
+  - 1: request data format error
+  - 2: route is forbidden
+  - 3: unauthorized access
+- **Default:** 0  
+- **Example:** 0  
 
 ### **msg**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Message describing the result. Format: Free text or **null**.  
-- **Default:** **"Success"**  
-- **Example:** **"Success"**
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
 
 ### **data.offerId**
 - **Type:** String  
@@ -222,7 +227,6 @@ Steps:
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of baggage and ancillary options.  
-- **Constraints:** Must contain at least one object if ancillary products are offered.  
 - **Default:** **[]**  
 - **Example:** **[ { ... } ]**
 
