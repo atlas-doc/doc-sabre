@@ -27,7 +27,9 @@ No preceding function needs to be called before this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the type of trip.  
-- **Constraints:** "1" for one-way, "2" for round-trip.  
+  Valid values:
+  - "1" for one-way
+  - "2" for round-trip.  
 - **Default:** None  
 - **Example:** "2"  
 
@@ -35,7 +37,6 @@ No preceding function needs to be called before this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of adult passengers.  
-- **Constraints:** Must be 1 or greater.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -43,7 +44,6 @@ No preceding function needs to be called before this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of child passengers.  
-- **Constraints:** Cannot be negative.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -51,7 +51,6 @@ No preceding function needs to be called before this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of infant passengers.  
-- **Constraints:** Cannot be negative.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -59,7 +58,6 @@ No preceding function needs to be called before this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure city IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "KRK"  
 
@@ -67,7 +65,6 @@ No preceding function needs to be called before this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival city IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "LTN"  
 
@@ -75,15 +72,13 @@ No preceding function needs to be called before this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure date in YYYYMMDD format.  
-- **Constraints:** Must be a valid date.  
 - **Default:** None  
 - **Example:** "20240326"  
 
 ### **retDate**
 - **Type:** String  
 - **Required:** Yes (if round-trip)  
-- **Description:** Return date in YYYYMMDD format.  
-- **Constraints:** Required if tripType is "2" (round-trip).  
+- **Description:** Return date in YYYYMMDD format. Required if tripType is "2" (round-trip).  
 - **Default:** None  
 - **Example:** "20240423"  
 
@@ -91,15 +86,16 @@ No preceding function needs to be called before this call.
 - **Type:** Array of Strings  
 - **Required:** No  
 - **Description:** List of airline codes to include in the search.  
-- **Constraints:** Must be valid IATA airline codes.  
 - **Default:** None  
 - **Example:** ["FR", "W6", "F9"]  
 
 ## **acceptCacheIfTimeout**
 - **Type:** Boolean  
 - **Required:** No  
-- **Description:** Indicates whether cached results should be accepted in case of timeout. If "false", then the request will time-out if it exceeds 120s and no results will be displayed. If "true", then after 120s cache results will be displayed. 
-- **Constraints:** true or false.  
+- **Description:** Indicates whether cached results should be accepted in case of timeout. If "false", then the request will time-out if it exceeds 120s and no results will be displayed. If "true", then after 120s cache results will be displayed.
+Valid values:
+true: Search cache if timed out.
+false: Do not search cache if timed out.
 - **Default:** true  
 - **Example:** true  
 
@@ -107,7 +103,6 @@ No preceding function needs to be called before this call.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Source of the request.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "Organic"  
 
