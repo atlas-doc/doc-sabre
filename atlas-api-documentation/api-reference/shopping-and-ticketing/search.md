@@ -32,6 +32,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the type of trip.
+
   Valid values:
   - "1" = one-way
   - "2" = round-trip
@@ -112,6 +113,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if multiple fare families should be included in the search.
+
   Valid values:
   - true: multiple fare families should be included
   - false: multiple fare families should not be included 
@@ -203,7 +205,7 @@ No preceding function needs to be called before `Search`.
 #### **routings.supportCreditTransPayment**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Indicates if VCC payment is supported.  
+- **Description:** Indicates if VCC payment is supported.
   Valid values:
   - 0: The credit card details will not be passed through and only pre-payment is allowed.
   - 1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment. 
@@ -213,7 +215,8 @@ No preceding function needs to be called before `Search`.
 #### **routings.supportPaymentMethods**
 - **Type:** Array  
 - **Required:** No  
-- **Description:** List of supported payment method identifiers. 1: Deposit 3: VCC Passthrough  5: MOR 
+- **Description:** List of supported payment method identifiers.
+
   Valid values:
   - 1: Deposit
   - 3: VCC Passthrough
@@ -351,6 +354,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Defines how transaction fees are applied.  
+
   Valid values:
   The criteria of calculating the transaction fee as per the contractual agreement.
   - Transaction Fee Mode values:
@@ -365,6 +369,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Defines whether nationality is required.  
+ 
   Valid values
   - 0: No Limitation (optional)
   - 1: Allowed (required)
@@ -390,6 +395,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger type for booking.  
+
   Valid values:
   - "ADT"
   - "CHD"
@@ -472,6 +478,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if the flight is codeshared.  
+
   Valid values: 
   - true : code share
   - false : Not code share
@@ -489,6 +496,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Service grade of the fare.
+
   Valid values:
   - 1 : Economy
   - 2 : Business
@@ -564,6 +572,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if free checked-in or cabin baggage is included.  
+
   Valid values:
   - 1: Included
   - 0: Not included.  
@@ -588,6 +597,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of baggage allowed.  
+
   Valid values:
   - StandardCheckInBaggage: Standard Check-in Baggage.
   - CabinBaggage: Usually refers to the Cabin Baggage Overhead Locker. Transition value. It will gradually transition to CabinBaggageOverheadLocker.
@@ -600,6 +610,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Passenger type for booking.  
+
   Valid values:
   - "ADT"
   - "CHD"
@@ -611,6 +622,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of baggage pieces allowed.  
+
   Valid values:
   - 0: No limitation on the number of pieces
   - Higher than 0: Maximum pieces
@@ -621,6 +633,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Weight of the baggage in kilograms.
+
   Valid values:
   - 0: No free baggage
   - 1: No limitation on weight.
@@ -646,6 +659,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of refund allowed.  
+
   Valid values:
   - 0: Wholly unused ticket
   - 1: Partially used ticket (For example, when the passenger has used an outbound flight and wants to refund an inbound flight.)
@@ -656,6 +670,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Refund eligibility status.
+
   Valid values:
   - "T" for refundable
   - "F" for non-refundable
@@ -683,6 +698,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates if a no-show affects refunds (for the most restrictive condition).
+
   Valid values:
   - T: Non refundable
   - H: Refundable with restrictions
@@ -724,6 +740,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Status of the refund rule.  
+
   Valid values:
   - T: Non refundable
   - H: Refundable with restrictions
@@ -770,6 +787,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of flight change allowed.  
+
   Valid values:
   - 0: Wholly unused ticket
   - 1: Partially used ticket (For example. When the passenger has used an outbound flight and wants to change an inbound flight)  
@@ -780,6 +798,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Change eligibility status  (for the most restrictive condition).  
+
   Valid values:
   - T: Non changeable
   - H: Changeable with restrictions
@@ -805,6 +824,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates if a no-show affects changes (for the most restrictive condition).  
+
   Valid values:
   - T: Non changeable
   - H: Changeable with restrictions
@@ -857,6 +877,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates whether free meal service is available.  
+
   Valid values:
   - 0: Not included
   - 1: Included
@@ -903,6 +924,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of ancillary product.  
+
   Valid values:
   - 1: Check-in baggage
   - 3: Cabin Baggage Overhead Locker
@@ -914,6 +936,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased with the ticket.
+
   Valid values:
   - 1: Yes
   - 0: no.  
@@ -924,6 +947,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased after ticket issuance.  
+
   Valid values:
   - 1: Yes
   - 0: no.  
@@ -969,6 +993,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Mode of applying the technical service fee.  
+
   Valid values:
   - PER_SEGMENT: Each segment of an itinerary (per passenger)
   - PER_TICKET: No. of tickets in a booking
@@ -995,6 +1020,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Weight limit in kilograms.  
+
   Valid values:
   - 0：No Limitation about piece;
   - higher than 0：Maximum pieces
@@ -1005,6 +1031,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Value mentions maximum weight for ancillary baggage; this should be greater than 0.
+
   Valid values:
   true: The weight is for all the pieces
   false: The weight is for each piece
@@ -1099,6 +1126,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if the booking is split into multiple reservations.  
+
   Valid values:
   true: Separate bookings created
   false: Separate bookings not created
@@ -1130,6 +1158,7 @@ No preceding function needs to be called before `Search`.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
+
   Valid values:
   - 0: success
   - 1: request data format error
