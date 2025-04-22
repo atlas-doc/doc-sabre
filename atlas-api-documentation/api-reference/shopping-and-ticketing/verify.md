@@ -33,6 +33,7 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Whether to request realtime luggage price.
+
   Valid values:
   - 0: False
   - 1: True
@@ -44,7 +45,8 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Method of payment selected by the user.  
-  - Valid values:
+
+  Valid values:
   - 1 = Deposit
   - 3 = VCC Passthrough
   - 5 = MoR
@@ -142,9 +144,10 @@ The `search` function should be called prior to this call.
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates whether the booking consists of separate reservations.
+
   Valid values:
-  true: Separate bookings created
-  false: Single booking created. 
+  - true: Separate bookings created
+  - false: Single booking created. 
 - **Default:** false  
 - **Example:** false  
 
@@ -210,6 +213,7 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of passenger (e.g., adult, child, infant).
+
   Valid values:
   - 0 = Adult
   - 1 = Child
@@ -221,6 +225,7 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's gender.
+
   Valid values:
   - "M" for Male
   - "F" for Female.  
@@ -276,6 +281,7 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The card brand/type to which the charge rule applies.
+
   Valid values:
   - Amex
   - Visa
@@ -379,6 +385,7 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
+
   Valid values:
   - 0: success
   - 1: request data format error
