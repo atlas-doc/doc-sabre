@@ -1076,8 +1076,11 @@ CARD = Deduct from credit/debit card
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Response status code.  
-- **Constraints:** 0 indicates success.  
+- **Description:** Response status code.
+   
+  Valid values:
+  - 0: success
+  - 2: system error
 - **Default:** 0  
 - **Example:** 0  
 
