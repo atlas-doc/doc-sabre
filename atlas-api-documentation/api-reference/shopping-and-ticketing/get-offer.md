@@ -24,7 +24,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of adult passengers.  
-- **Constraints:** Must be 1 or more.  
 - **Default:** None  
 - **Example:** `1`  
 
@@ -32,7 +31,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of child passengers.  
-- **Constraints:** Must be 0 or more.  
 - **Default:** `0`  
 - **Example:** `0`  
 
@@ -40,7 +38,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of infant passengers.  
-- **Constraints:** Must be 0 or more.  
 - **Default:** `0`  
 - **Example:** `0`  
 
@@ -51,7 +48,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code of the departure airport.  
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"LON"`  
 
@@ -59,7 +55,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code of the arrival airport.  
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"PAR"`  
 
@@ -67,7 +62,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA two letter code of marketing carrier.
-- **Constraints:** 2-letter airline code.  
 - **Default:** None  
 - **Example:** `"U2"`  
 
@@ -75,7 +69,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Marketing flight number without airline code prefix. 
-- **Constraints:** Numeric flight number.  
 - **Default:** None  
 - **Example:** `"673"`  
 
@@ -92,7 +85,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code of the departure airport.  
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"PAR"`  
 
@@ -100,7 +92,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code of the arrival airport.  
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"LON"`  
 
@@ -108,7 +99,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA two letter code of marketing carrier.
-- **Constraints:** 2-letter airline code.  
 - **Default:** None  
 - **Example:** `"U2"`  
 
@@ -116,7 +106,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Marketing flight number without airline code prefix. 
-- **Constraints:** Numeric flight number.  
 - **Default:** None  
 - **Example:** `"674"`  
 
@@ -124,7 +113,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure date of the flight. We do not require users to specify departure times. We do not support return segments based on specific departure time as well. Considering that the externally transmitted time may not match the actual flight segment time on the supplier's (airline's) side, this can lead to search results being lost. Therefore, we will return flights with the specified flight number departing on the specified date. 
-- **Constraints:** Format `YYYYMMDD`.  
 - **Default:** None  
 - **Example:** `"20250303"`  
 
@@ -132,7 +120,6 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String or Null  
 - **Required:** No  
 - **Description:** Preferred currency for pricing.  
-- **Constraints:** 3-letter currency code or null.  
 - **Default:** `null`  
 - **Example:** `USD`  
 
@@ -174,32 +161,29 @@ No preceding function needs to be called before Get Offer.
 {% tab title="Schema" %}
 
 
-### `status`
+### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status code of the response. The identifier that determines whether the interface has successfully responded, and only when it is 0, it indicates success. Other situations represent different error scenarios, please refer to the error codes listed in ATRIP for details. 
-- **Constraints:** Numeric status code (e.g., 0 for success).  
-- **Default:** `0`  
-- **Example:** `0`
+- **Description:** Response status code.  
+  Valid values:
+  - 0: success
+  - 1: request data format error
+  - 2: route is forbidden
+  - 3: unauthorized access
+- **Default:** 0  
+- **Example:** 0  
 
----
-
-### `msg`
+### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Message associated with the status. As an additional description of the response results. Especially when the interface reports an error (status !=0), it is usually a human readable error message.  
-DO NOT use this field in any programming scenario, such as determining whether the interface responds successfully based on this field. You should always only determine the success of the response based on whether the status is 0.  
-- **Constraints:** None  
-- **Default:** `"string"`  
-- **Example:** `"string"`
-
----
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
 
 ### `data`
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of offer details.  
-- **Constraints:** Array containing objects of offer details.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -213,13 +197,10 @@ DO NOT use this field in any programming scenario, such as determining whether t
   ]
   ```
 
----
-
 ### `data.offer`
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Offer details including ID, fares, penalties, and services.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -234,23 +215,17 @@ DO NOT use this field in any programming scenario, such as determining whether t
   }
   ```
 
----
-
 ### `data.offer.offerID`
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the offer.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"o_b07c7d690aea44889eca1f22ad90841c_1"`
-
----
 
 ### `data.offer.paxFares`
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of passenger fares associated with the offer. Contains ticket prices and taxes corresponding to each passenger type. If there are no elements for certain passenger types in the list, it means that the ticket is not currently being sold for that passenger type. 
-- **Constraints:** Array of passenger fare objects.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -265,8 +240,11 @@ DO NOT use this field in any programming scenario, such as determining whether t
 #### `data.offer.paxFares.paxType`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of passenger (e.g., ADT for adult).  
-- **Constraints:** Must be one of the predefined passenger types (ADT,CHD,INF).
+- **Description:** Type of passenger (e.g., ADT for adult).
+  Valid values:
+  - ADT
+  - CHD
+  - INF
 - **Default:** None  
 - **Example:** `"ADT"`
 
@@ -274,7 +252,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Price details for the passenger fare.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -289,7 +266,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Base fare amount. Basic price, excluding taxes. Up to 2 decimal places.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `100`
 
@@ -297,7 +273,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Taxes applicable to the fare. Up to 2 decimal places.   
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -305,17 +280,13 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the fare (e.g., USD) on capitals. 
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"USD"`
-
----
 
 ### `data.offer.penalties`
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of penalties associated with the offer, including journey reference IDs and rules.  
-- **Constraints:** Array of penalty objects.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -333,7 +304,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of journey reference IDs for which the penalty applies. This may include references to multiple journey IDs (such as round trips), indicating that multiple journeys are applicable to the rule.  
-- **Constraints:** Array of valid journey reference strings.  
 - **Default:** None  
 - **Example:** `["string"]`
 
@@ -341,7 +311,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Amount of penalty. Up to 2 decimal places.   
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -349,7 +318,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the penalty amount (e.g., USD). This currency may be different from the fare currency, depending on the airline. 
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"USD"`
 
@@ -357,7 +325,6 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** The rule governing the penalty (e.g., refund type, percentage, etc.).  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -378,8 +345,10 @@ DO NOT use this field in any programming scenario, such as determining whether t
 ##### `data.offer.penalties.rule.type`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of penalty rule (e.g., Refund).  
-- **Constraints:** Refund, Change  
+- **Description:** Type of penalty rule (e.g., Refund).
+  - Valid values:
+  - Refund
+  - Change
 - **Default:** None  
 - **Example:** `"Refund"`
 
@@ -387,7 +356,10 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of passenger types to which the penalty rule applies.  
-- **Constraints:** Array of valid passenger types (ADT,CHD,INF).  
+  Valid values:
+  - ADT
+  - CHD
+  - INF
 - **Default:** None  
 - **Example:** `["ADT"]`
 
@@ -395,10 +367,9 @@ DO NOT use this field in any programming scenario, such as determining whether t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The level of the penalty (e.g., Full).  
-Full: If it is a refund, it means a full refund. If it is a rescheduling, it means free rescheduling. 
-Partial: If it is a refund, it means a partial refund. If it is a rescheduling, it means that there will be a fee for rescheduling. 
-None: If it is a refund, it means it cannot be refunded. If it is a rescheduling, it means that rescheduling is not possible 
-- **Constraints:** Full, Partial, None   
+  Full: If it is a refund, it means a full refund. If it is a rescheduling, it means free rescheduling. 
+  Partial: If it is a refund, it means a partial refund. If it is a rescheduling, it means that there will be a fee for rescheduling. 
+  None: If it is a refund, it means it cannot be refunded. If it is a rescheduling, it means that rescheduling is not possible 
 - **Default:** None  
 - **Example:** `"Full"`
 
@@ -406,7 +377,6 @@ None: If it is a refund, it means it cannot be refunded. If it is a rescheduling
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** The effective minutes after booking when the penalty applies. It forms a time interval together with expiratorMinutes to indicate the time range within which the rule applies. This value serves as the starting point of the interval, measured in minutes. >= 0 represents the number of minutes before takeoff, <0 represents the number of minutes after takeoff. 
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -414,7 +384,6 @@ None: If it is a refund, it means it cannot be refunded. If it is a rescheduling
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** The expiration time in minutes after booking when the penalty expires. It forms a time interval together with expirationMinutes to indicate the time range within which the rule applies. This value serves as the end point of the interval, measured in minutes. >=0 represents the number of minutes before takeoff, <0 represents the number of minutes after takeoff.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -422,7 +391,6 @@ None: If it is a refund, it means it cannot be refunded. If it is a rescheduling
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Fixed amount of penalty, if applicable.  up to 2 decimal places.
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -430,7 +398,6 @@ None: If it is a refund, it means it cannot be refunded. If it is a rescheduling
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** The airline fee associated with the penalty. Fixed deduction of airline handling fees, with a maximum of 2 decimal places retained. 
-- **Constraints:** Must be a positive integer (>= 0).  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -438,25 +405,22 @@ None: If it is a refund, it means it cannot be refunded. If it is a rescheduling
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the penalty (e.g., USD). This currency may be different from the fare currency, depending on the	airline.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"USD"`
 
 ##### `data.offer.penalties.rule.percent`
 - **Type:** Number  
 - **Required:** Yes  
-- **Description:** Percentage of the penalty, if applicable.  
-- **Constraints:** Must be a positive Number between 0 and 1.  
-- **Default:** `0.2`  
+- **Description:** Percentage of the penalty, if applicable. Must be a positive Number between 0 and 1.   
+- **Default:** None  
 - **Example:** `0.2`
 
 ##### `data.offer.penalties.rule.percentBase`
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The base value for the penalty percentage (e.g., "fare+tax"). 
-Fare + Tax: The base for expressing percentages is the total price including tax. 
-Fare: The base for expressing percentages is the fare. 
-- **Constraints:** Must be a valid string (fare + tax, fare).  
+  Fare + Tax: The base for expressing percentages is the total price including tax. 
+  Fare: The base for expressing percentages is the fare. 
 - **Default:** None  
 - **Example:** `"fare+tax"`
 
@@ -464,7 +428,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Includes various free and chargeable services, including but not limited to baggage, seat selection, meals, etc.   
-- **Constraints:** Array of service objects.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -493,7 +456,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The unique ID of this service. This ID is unique within the context of the current offer.   
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -501,23 +463,28 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of segment reference IDs the service applies to. This is the flight segment ID reference applicable to this service.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `["string"]`
 
 #### `data.offer.services.type`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of service (e.g., Baggage, Seat Selection, etc.).  
-- **Constraints:** Baggage, Seat, Meal   
+- **Description:** Type of service (e.g., Baggage, Seat Selection, etc.).
+  Valid values:
+  - Baggage
+  - Seat
+  - Meal
 - **Default:** None  
 - **Example:** `"Baggage"`
 
 #### `data.offer.services.level`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Service level (e.g., Free, Paid).  
-- **Constraints:** Free，Partial，Chargeable  
+- **Description:** Service level
+  Valid values:
+  - Free
+  - Partial
+  - Chargeable  
 - **Default:** None  
 - **Example:** `"Free"`
 
@@ -525,7 +492,10 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of passenger types applicable to the service.  
-- **Constraints:** ADT, CHD, INF  
+  Valid values:
+  - ADT
+  - CHD
+  - INF
 - **Default:** None  
 - **Example:** `["ADT"]`
 
@@ -533,7 +503,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Additional metadata for the service. This represents different services, such as package weight, quantity, size, and other restrictions. The content of this node may vary depending on the type of service. Users should read the content of the node according to different service types.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -548,8 +517,11 @@ Fare: The base for expressing percentages is the fare.
 ##### `data.offer.services.metadata.type`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of service metadata (e.g., "StandardCheckInBaggage").  
-- **Constraints:** StanardCheckInBaggage, CabinBaggageCabinBaggage, OverheadLocker   
+- **Description:** Type of service metadata (e.g., "StandardCheckInBaggage").
+  Valid values:
+  - StandardCheckInBaggage
+  - CabinBaggageCabinBaggage
+  - OverheadLocker   
 - **Default:** None  
 - **Example:** `"StandardCheckInBaggage"`
 
@@ -557,7 +529,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Maximum weight allowed for the service (e.g., baggage). 0 represents no weight limit.
-- **Constraints:** None
 - **Default:** `20`  
 - **Example:** `20`
 
@@ -565,7 +536,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Maximum number of pieces allowed for the service (e.g., baggage). 0 represents no quantity limit  
-- **Constraints:** None  
 - **Default:** `1`  
 - **Example:** `1`
 
@@ -573,7 +543,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Maximum allowed dimensions (e.g., baggage size). This content is currently not guaranteed to be structured (parsed).
-- **Constraints:** None  
 - **Default:** `"L+W+H<=158cm"`  
 - **Example:** `"L+W+H<=158cm"`
 
@@ -581,7 +550,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Details of the outbound journey, including journey ID and segments.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -595,7 +563,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the outbound journey.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -603,7 +570,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of flight segments for the outbound journey in the flight order.  
-- **Constraints:** Array of segment objects.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -628,7 +594,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight segment.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -636,7 +601,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Marketing carrier code for the flight segment (e.g., airline IATA code).  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -644,7 +608,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Marketing carrier flight number for the outbound journey segment. Do not include airline code prefix.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -652,7 +615,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Operating carrier code for the flight.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -660,7 +622,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Operating flight number for the flight. Do not include airline code prefix. 
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -668,7 +629,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Duration of the flight segment in minutes.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
@@ -676,7 +636,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Details of the flight legs within the segment. The physical flight information that constitutes the flight segment and the stopover information can be obtained from this. The number of elements=1 indicates that there is no stopping point. This will be displayed in flight order.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -697,7 +656,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code for the departure airport.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -705,7 +663,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure time in UTC in the format `YYYYMMDDHHMM`. For flights taking off from transit points, the departure time may not be available. For flights taking off from the starting point, the time will definitely be available.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"202503011100"`
 
@@ -713,7 +670,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Terminal at the departure airport.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -721,7 +677,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code for the arrival airport.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -729,7 +684,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival time in UTC in the format `YYYYMMDDHHMM`. For flights taking off from transit points, the departure time may not be available. For flights taking off from the starting point, the time will definitely be available.
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -737,7 +691,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Terminal at the arrival airport.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -745,7 +698,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of aircraft used for the segment.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -753,7 +705,6 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Fare family for the flight segment.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -761,15 +712,17 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Booking code for the flight segment.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
 ##### `data.offer.outboundJourney.segments.cabinClass`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Class of the cabin for the flight segment (e.g., Economy, Business).  
-- **Constraints:** Economy, Business, First   
+- **Description:** Class of the cabin for the flight segment (e.g., Economy, Business).
+  Valid values:
+  - Economy
+  - Business
+  - First   
 - **Default:** `"Economy"`  
 - **Example:** `"Economy"`
 
@@ -777,17 +730,13 @@ Fare: The base for expressing percentages is the fare.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of seats left in the flight segment.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
-
----
 
 ### `data.offer.inboundJourney`
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Details of the inbound journey, similar to outbound journey.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -799,13 +748,10 @@ Fare: The base for expressing percentages is the fare.
 
 The structure of `inboundJourney` is similar to `outboundJourney`. The same attributes apply to the segments and legs. For brevity, we will not repeat the exact same fields for inbound journey. 
 
----
-
 ### `data.offer.terms`
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Terms and conditions of the offer.  
-- **Constraints:** Array of term objects.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -821,7 +767,6 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Carrier associated with the terms.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -829,17 +774,13 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** URL link for the terms and conditions.  
-- **Constraints:** Must be a valid URL.  
 - **Default:** None  
 - **Example:** `"string"`
-
----
 
 ### `data.serviceFee`
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Service fee for the offer.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -854,15 +795,17 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Amount of service fee per unit (e.g., per segment).  
-- **Constraints:** Must be a positive integer.  
 - **Default:** `0`  
 - **Example:** `0`
 
 #### `data.serviceFee.unit`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unit of the service fee (e.g., "PER_SEGMENT").  
-- **Constraints:** PER_SEGMENT, PER_PAX, PER_BOOKING  
+- **Description:** Unit of the service fee (e.g., "PER_SEGMENT").
+  Valid values:
+  - PER_SEGMENT
+  - PER_PAX
+  - PER_BOOKING  
 - **Default:** `"PER_SEGMENT"`  
 - **Example:** `"PER_SEGMENT"`
 
@@ -870,17 +813,13 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the service fee (e.g., USD).  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** `"USD"`
-
----
 
 ### `data.bookingRequirement`
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Booking requirements for the passenger, including details such as name, type, and card information.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -889,13 +828,10 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
   }
   ```
 
----
-
 ### `data.bookingRequirement.passenger`
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Passenger details required for the booking.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -913,10 +849,9 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
   ```
 
 #### `data.bookingRequirement.passenger.name`
-- **Type:** Object  
+- **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger name details.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -932,7 +867,6 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of passenger name.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"string"`
 
@@ -940,7 +874,6 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Whether the name is required.  
-- **Constraints:** `true` or `false`.  
 - **Default:** `true`  
 - **Example:** `true`
 
@@ -948,7 +881,6 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Description of the name field.  
-- **Constraints:** None  
 - **Default:** `"string"`  
 - **Example:** `"string"`
 
@@ -956,21 +888,15 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Maximum length allowed for the name.  
-- **Constraints:** None  
 - **Default:** `"string"`  
 - **Example:** `"string"`
 
----
-
 The rest of the `passenger` elements (`passengerType`, `birthday`, `gender`, `nationality`, `cardType`, `cardNum`, `cardIssuePlace`, and `cardExpired`) would follow the same structure as `name`, so we will not repeat their attributes here.
-
----
 
 ### `data.paymentOptions`
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of available payment methods.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -984,12 +910,14 @@ The rest of the `passenger` elements (`passengerType`, `birthday`, `gender`, `na
 #### `data.paymentOptions.paymentMethod`
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** The method of payment (e.g., "Deposit").  
-- **Constraints:** Deposit, VCC_Passthrough, BYOA, MoR   
+- **Description:** The method of payment (e.g., "Deposit").
+  Valid values:
+  - Deposit
+  - VCC_Passthrough
+  - BYOA
+  - MoR   
 - **Default:** None  
 - **Example:** `"Deposit"`
-
----
 
 {% endtab %}
 
