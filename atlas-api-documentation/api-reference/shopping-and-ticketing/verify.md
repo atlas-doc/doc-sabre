@@ -22,19 +22,10 @@ The `search` function should be called prior to this call.
 {% tabs %}
 {% tab title="Schema" %}
 
-## **cid**
-- **Type:** String  
-- **Required:** Yes  
-- **Description:** Unique client identifier for the request.  
-- **Constraints:** Must be a valid alphanumeric string.  
-- **Default:** None  
-- **Example:** "xxxxxxxxxx"  
-
 ## **routingIdentifier**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Encrypted identifier representing the routing details.  
-- **Constraints:** Must be a valid encoded string.  
 - **Default:** None  
 - **Example:** "EXsU8XSpfLYTSaQTVCjrJMJvG/...TthTQ=="  
 
@@ -42,30 +33,21 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Whether to request realtime luggage price.
-
   Valid values:
-
-  0: False
-
-  1: True
-
-  Default: 0
-- **Constraints:** 1 for true, 0 for false.  
-- **Default:** 1  
+  - 0: False
+  - 1: True
+  - Default: 0
+- **Default:** 0  
 - **Example:** 1  
 
 ## **paymentMethod**
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Method of payment selected by the user.  
-  Valid values:
-
-  1 = Deposit
-
-  3 = VCC Passthrough
-
-  5 = MoR
-- **Constraints:** None  
+  - Valid values:
+  - 1 = Deposit
+  - 3 = VCC Passthrough
+  - 5 = MoR
 - **Default:** Deposit  
 - **Example:** `3`  
 
@@ -73,7 +55,6 @@ The `search` function should be called prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** MThe maximum response time for the API, in milliseconds. The API will return an accurate quote within this duration. If the processing exceeds this duration, the system will return a standard quote directly. 
-- **Constraints:** Must be a positive integer.  
 - **Default:** 15000  
 - **Example:** 5000
 
@@ -82,11 +63,10 @@ The `search` function should be called prior to this call.
 {% tab title="Samples" %}
 ```
 {
-    "cid": "ttxzp62405",
-    "routingIdentifier": "EXsU8XSpfLYTSaQTVCjrJMJvG/ysDtKYfq1WIi9iKV3RuKGQWRYoLHwlk3d3nfx3CfcndJLEJ0OelZh4CJOznF9aTBiw3WJrCv1w5tPrnLqsrzEwGf6LU4JnimIHlZ8g9Mbw9o1UAsRxu28yDTH1sxCUiQXhe9aQqCnWwMFh28gA/nj6IKNh5/yz0GWbBL6s1yDekyABUkLWmuWriKG76AcSFeTleOVJEjXfFd3mUvpZJe1wsRs5TI/Nma2Sz/cOdhAjhrTIFnOMJEKInVplSW3JYquYRVlKPNaFSuoF5K7IHGWlTR0X2vJysOfDQQZWR7Qv1wj0wUrE1kfV4vUrurLMbC/8XlxjYBc7iz9giHkbTb9r/K5/eabN+BX2cuBjtcmNH0T9SwZdxpCXnsjGxdC6wjGifmzacvdkADFsgfWzqaR6+aEfwt4jQKkit64X8IoXcz9XqDadvtpoFyrQz1tXYb6UK8+doiventK1gdc8oJQnVwpWZNzAt1C0KiFMpLq+sZhmvMISTO8EV73ewgLIMtqPFERy6YPlLhv9P5f1GEmT5TthTQ==",
-    "displayCurrency": "PHP",
+    "routingIdentifier": "Q0VCX01OTF8xXzIwMjUwNTE2X18xXzBfMHx0dHh6cDYyNDA1fDF8MTE3Ljg4XzExNy44OF8xOC40OF8wLjY1XzI1NC44OV9VU0R8Q0VCX01OTF8xXzIwMjUwNTE2X18xXzBfMF5DRUItREc2ODI5LUQtRFZPLTIwMjUwNTE2MDcxNS0yMDI1MDUxNjA4NDUtR08gQmFzaWMtMS0jRFZPLTVKOTY0LUQtTU5MLTIwMjUwNTE2MTI0NS0yMDI1MDUxNjE0NDUtR08gQmFzaWMtMS1eMTE3Ljg4XzExNy44OF8xOC40OF8wLjY1XzI1NC44OV5BREdCMkJfQURHXl5BREcxQ0VCTU5MNDAwMjAyNTA1MTZeUEhQXjY2NzkuNjheNjY3OS42OF4xMDQ3LjIwfDF8MjAyNTA0MjExMjM4MTB8MHwxNzQ1MjEwMjkwMDY3U3ZiR0d8fHx8fDAuNjV8MnwwfEVVUg==.D7WISkk6alaXzQKZ1XvCz5ptSv2oKnOJuI0Frdvx9XE=",
     "realtimeLuggage": 1,
-    "maxResponseTime": 5000
+    "paymentMethod": 3,
+    "maxResponseTime": 15000
 }
 ```
 {% endtab %}
@@ -100,16 +80,14 @@ The `search` function should be called prior to this call.
 ## **sessionId**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unique session identifier for the booking response.  
-- **Constraints:** Must be a valid UUID.  
+- **Description:** Unique session identifier for the booking response. It is required when you call order function to make a reservation to identify which flight and fare the client is choosing. 
 - **Default:** None  
 - **Example:** "c8ba1074-0c3c-47f2-9b86-f99e5d4e6e2e"  
 
 ## **maxSeats**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Maximum number of seats available for booking.  
-- **Constraints:** Must be a positive integer.  
+- **Description:** Maximum number of seats available for booking. Please refer this element and prevent the end-users to choose more passengers than seat count.  
 - **Default:** None  
 - **Example:** 4  
 
@@ -156,16 +134,17 @@ The `search` function should be called prior to this call.
 ## **links**
 - **Type:** Array  
 - **Required:** No  
-- **Description:** List of links related to the booking, such as terms and conditions.  
-- **Constraints:** Can be empty if no links are available.  
+- **Description:** List of links related to the booking, such as terms and conditions.
 - **Default:** []  
 - **Example:** [{"carrier": "F9", "kind": "terms", "link": "https://www.flyfrontier.com/legal/contract-of-carriage?mobile=true", "description": "Carrier terms and conditions"}]  
 
 ## **separateBookings**
 - **Type:** Boolean  
 - **Required:** No  
-- **Description:** Indicates whether the booking consists of separate reservations.  
-- **Constraints:** true or false.  
+- **Description:** Indicates whether the booking consists of separate reservations.
+  Valid values:
+  true: Separate bookings created
+  false: Single booking created. 
 - **Default:** false  
 - **Example:** false  
 
@@ -173,17 +152,15 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Timestamp of the last data refresh in the cache.  
-- **Constraints:** Must be in ISO 8601 format or null if not available.  
 - **Default:** null  
 - **Example:** null  
 
 ## **displayFare**
 - **Type:** Object  
 - **Required:** Yes  
-- **Description:** Pricing details displayed to the user.  
-- **Constraints:** Must contain valid currency and price breakdowns.  
+- **Description:** The converted fare as per the display currency. 
 - **Default:** None  
-- **Example:** {...}  
+- **Example:** { "currency": "PHP" }  
 
 *(Existing fields for displayFare remain unchanged)*
 
@@ -191,7 +168,6 @@ The `search` function should be called prior to this call.
 - **Type:** Array  
 - **Required:** No  
 - **Description:** List of supported ancillary products.  
-- **Constraints:** Can be empty if no ancillaries are supported.  
 - **Default:** []  
 - **Example:** ["seat"]  
 
@@ -199,7 +175,6 @@ The `search` function should be called prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Passenger booking requirements including personal details.  
-- **Constraints:** Must contain required fields for passenger booking.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -207,15 +182,13 @@ The `search` function should be called prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Passenger-specific details required for booking.  
-- **Constraints:** Must contain necessary fields for passenger identification.  
 - **Default:** None  
 - **Example:** {...}
 
 #### **bookingRequirement.passenger.birthday**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's date of birth.  
-- **Constraints:** Must follow YYYY-MM-DD format.  
+- **Description:** Passenger's date of birth. Must follow YYYY-MM-DD format.    
 - **Default:** None  
 - **Example:** "1990-01-01"  
 
@@ -223,7 +196,6 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Place where the passenger's identification card was issued.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "USA"  
 
@@ -231,47 +203,48 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Identification card number of the passenger.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "A12345678"  
 
 #### **bookingRequirement.passenger.passengerType**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Type of passenger (e.g., adult, child, infant).  
-- **Constraints:** 0 = Adult, 1 = Child, 2 = Infant.  
+- **Description:** Type of passenger (e.g., adult, child, infant).
+  Valid values:
+  - 0 = Adult
+  - 1 = Child
+  - 2 = Infant.  
 - **Default:** None  
 - **Example:** 0  
 
 #### **bookingRequirement.passenger.gender**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's gender.  
-- **Constraints:** "M" for Male, "F" for Female.  
+- **Description:** Passenger's gender.
+  Valid values:
+  - "M" for Male
+  - "F" for Female.  
 - **Default:** None  
 - **Example:** "M"  
 
 #### **bookingRequirement.passenger.nationality**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's nationality.  
-- **Constraints:** Must be a valid country code (ISO 3166-1 alpha-3).  
+- **Description:** Passenger's nationality. Must be a valid country code.  
 - **Default:** None  
 - **Example:** "USA"  
 
 #### **bookingRequirement.passenger.cardExpired**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expiration date of the passenger's identification card.  
-- **Constraints:** Must follow YYYY-MM-DD format.  
+- **Description:** Expiration date of the passenger's identification card. Must follow YYYY-MM-DD format.  
 - **Default:** None  
 - **Example:** "2030-12-31"  
 
 #### **bookingRequirement.passenger.name**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Full name of the passenger.  
-- **Constraints:** Maximum length: 30 characters for first name, 30 characters for last name.  
+- **Description:** Full name of the passenger. Maximum length: 30 characters for first name, 30 characters for last name.    
 - **Default:** None  
 - **Example:** "John Doe"  
 
@@ -279,7 +252,6 @@ The `search` function should be called prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of identification card used.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "Passport"  
 
@@ -287,7 +259,6 @@ The `search` function should be called prior to this call.
 - **Type:** Array of Objects  
 - **Required:** No  
 - **Description:** List of credit/debit card surcharge configurations. Each object specifies the card type and either a percentage-based or fixed charge to be applied during payment.  
-- **Constraints:** Can be empty or omitted if no charges apply.  
 - **Default:** `[]`  
 - **Example:**
   ```json
@@ -304,8 +275,14 @@ The `search` function should be called prior to this call.
 #### **cardChargeList[].cardType**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** The card brand/type to which the charge rule applies.  
-- **Constraints:** Must be a supported card type (e.g., `"Visa"`, `"Mastercard"`, `"Amex"`).  
+- **Description:** The card brand/type to which the charge rule applies.
+  Valid values:
+  - Amex
+  - Visa
+  - Mastercard
+  - JCB
+  - Discover
+  - DinersClub
 - **Default:** None  
 - **Example:** `"Amex"`
 
@@ -313,7 +290,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number
 - **Required:** No  
 - **Description:** Percentage of the total transaction to be added as a surcharge.  
-- **Constraints:** None  
 - **Default:** `0.0`  
 - **Example:** `0.05` (i.e., 5%)
 
@@ -321,7 +297,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number or Null  
 - **Required:** No  
 - **Description:** Fixed surcharge amount applied for this card type.  
-- **Constraints:** Can be `null` if a percentage is provided instead.  
 - **Default:** `null`  
 - **Example:** `null`  
 
@@ -329,7 +304,6 @@ The `search` function should be called prior to this call.
 - **Type:** String or Null  
 - **Required:** No  
 - **Description:** Currency in which the fixed charge is denominated.  
-- **Constraints:** Must be a valid ISO 4217 3-letter currency code, or `null` if `charge` is not used.  
 - **Default:** `null`  
 - **Example:** `null`
 
@@ -337,7 +311,6 @@ The `search` function should be called prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Indicates if there has been a change in ticket price.  
-- **Constraints:** Must contain original and new price details.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -345,15 +318,16 @@ The `search` function should be called prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Indicates if there has been a change in ticket pricing.  
-- **Constraints:** Must contain original and new price details.  
 - **Default:** None  
 - **Example:** {...}  
 
 ### **priceChange.isPriceChange**
 - **Type:** Boolean  
 - **Required:** Yes  
-- **Description:** Indicates whether the ticket price has changed.  
-- **Constraints:** true for price change, false for no change.  
+- **Description:** Indicates whether the ticket price has changed.
+  Valid values:
+  true: Price change
+  false: No price change
 - **Default:** false  
 - **Example:** false  
 
@@ -361,7 +335,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for an adult ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 40.85  
 
@@ -369,7 +342,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for an adult ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 0.13  
 
@@ -377,7 +349,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for a child ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 40.85  
 
@@ -385,7 +356,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for a child ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 0.13  
 
@@ -393,7 +363,6 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original price for an infant ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 10.00  
 
@@ -401,27 +370,30 @@ The `search` function should be called prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original tax for an infant ticket.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 0.00  
 
 *(Fields for new prices remain similar to original prices.)*
 
-## **status**
+### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status code of the response.  
-- **Constraints:** Must be a valid status code.  
+- **Description:** Response status code.  
+  Valid values:
+  - 0: success
+  - 1: request data format error
+  - 2: route is forbidden
+  - 3: unauthorized access
 - **Default:** 0  
 - **Example:** 0  
 
-## **msg**
+### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
-- **Constraints:** Must be a valid message string.  
-- **Default:** "success"  
-- **Example:** "success" 
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
+
     
 {% endtab %}
 
