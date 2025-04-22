@@ -16,7 +16,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Original order number.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"ZNMKU20220119160129691"`  
 
@@ -24,7 +23,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** The record locator of the airline. Either `orderNo` or `airlinePNR` is required for the request.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"S24933"`  
 
@@ -32,7 +30,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** 2-character IATA airline code.  
-- **Constraints:** Must be a valid 2-letter airline code.  
 - **Default:** None  
 - **Example:** `"G9"`  
 
@@ -40,7 +37,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The code of the refund transaction received in the refund.do response.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"7961ab5b202642628e9595498ffea083"`  
 
@@ -48,7 +44,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Alternative currency in which the fare and taxes should be displayed. The display currency remains unchanged throughout the refund process.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"EUR"`
     
@@ -94,7 +89,8 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** The present status of the refund process. If the ticket is paid by deposit: the status can be 0,1,2,3,4. If the ticket is paid by VCC pass through: the status can be 0,1,4,5,6. Withdrew is only in the refund claim.
-- **Constraints:** Possible values:
+
+  Valid values:
   - `0`: Atlas Processing
   - `1`: Airline Processing (Submitted to airline by Atlas)
   - `2`: Refunded
@@ -109,7 +105,6 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of refund orders requested.  
-- **Constraints:** Must contain at least one refund order.  
 - **Default:** None  
 - **Example:** See `refundTickets` array below.  
 
@@ -117,7 +112,6 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Original order number.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"ZNMKU20220119160129691"`  
 
@@ -125,7 +119,6 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Refund order number generated for this refund request.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"7961ab5b202642628e9595498ffea083"`  
 
@@ -133,7 +126,6 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The currency of the fares and amounts below.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -141,31 +133,29 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** String  
 - **Required:** No  
 - **Description:** Alternative currency for displaying fare and tax amounts.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"EUR"`  
 
 ## **expectedConfirmationDate**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expected date of receiving airline refund confirmation.  
-- **Constraints:** Format `YYYYMMDD`.  
+- **Description:** Expected date of receiving airline refund confirmation. Format `YYYYMMDD`. 
 - **Default:** None  
 - **Example:** `"20241217"`  
 
 ## **expectedRefundDate**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expected date of refund processing completion.  
-- **Constraints:** Format `YYYYMMDD`.  
+- **Description:** Expected date of refund processing completion. Format `YYYYMMDD`. 
 - **Default:** None  
 - **Example:** `"20241220"`  
 
 ## **refundQuoteType**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of refund quote.  
-- **Constraints:** Possible values:
+- **Description:** Type of refund quote.
+
+  Valid values:
   - `AccurateQuote`: Based on the calculated amount.
   - `CannotQuote`: Refund amount is unknown, based on airline rates.
   - `NonRefundable`: Ticket is non-refundable.  
@@ -179,7 +169,6 @@ The refund calculation for each of the passengers whose refund quote has been re
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** First name of the passenger requesting a refund.  
-- **Constraints:** Alphabetic characters only.  
 - **Default:** None  
 - **Example:** `"SAN"`  
 
@@ -187,7 +176,6 @@ The refund calculation for each of the passengers whose refund quote has been re
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Last name of the passenger requesting a refund.  
-- **Constraints:** Alphabetic characters only.  
 - **Default:** None  
 - **Example:** `"ZHANG"`  
 
@@ -195,7 +183,6 @@ The refund calculation for each of the passengers whose refund quote has been re
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Ticket number received from the airline.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"S43484"`  
 
@@ -206,7 +193,6 @@ The refund calculation for fl.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency used for the refund calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -214,7 +200,6 @@ The refund calculation for fl.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The original fare amount before refund calculations.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `200.00`  
 
@@ -222,7 +207,6 @@ The refund calculation for fl.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The estimated refundable amount after deductions.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `150.00`  
 
@@ -230,7 +214,6 @@ The refund calculation for fl.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The original fare amount displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `250.00`  
 
@@ -238,7 +221,6 @@ The refund calculation for fl.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The estimated refundable amount displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `180.00`  
 
@@ -249,7 +231,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number for post-ticketing services such as baggage or seat selection.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"BAFAU20241220110246534"`  
 
@@ -257,7 +238,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency for post-ticketing service calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -265,7 +245,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The original amount charged for the post-ticketing service.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `141.19`  
 
@@ -273,7 +252,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The estimated refund amount for the post-ticketing service.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`  
 
@@ -281,7 +259,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The original post-ticketing service amount displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `241.19`  
 
@@ -289,7 +266,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The estimated refund amount displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`
 
@@ -298,7 +274,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency used for service fee calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -306,7 +281,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The transaction fee applied to the refund.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `5.00`  
 
@@ -314,7 +288,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The transaction fee displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `5.50`
 
@@ -324,15 +297,18 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** No  
 - **Description:** The airline associated with the refund rule.  
-- **Constraints:** 2-letter IATA airline code.  
 - **Default:** None  
 - **Example:** `"LJ"`
 
 ## **passengerType**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Type of passenger for which the refund applies.  
-- **Constraints:** Possible values: `ADT` (Adult), `CHD` (Child), `INF` (Infant).  
+- **Description:** Type of passenger for which the refund applies.
+
+  Valid values:
+  - `ADT` (Adult)
+  - `CHD` (Child)
+  - `INF` (Infant).  
 - **Default:** None  
 - **Example:** `"ADT"`
 
@@ -340,7 +316,11 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** No  
 - **Description:** The reason for the refund request.  
-- **Constraints:** Predefined reason codes such as `0` (Involuntary), `1` (Voluntary), `4` (Void).  
+
+  Valid values:
+  - 0: Involuntary
+  - 1: Voluntary
+  - 4: Void 
 - **Default:** None  
 - **Example:** `"1"`  
 
@@ -348,7 +328,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The penalty amount charged for the refund.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `480.00`  
 
@@ -356,7 +335,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** The percentage penalty applied to the refund.  
-- **Constraints:** Must be a positive number.  
 - **Default:** `0.0`  
 - **Example:** `0.0`  
 
@@ -364,7 +342,10 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String or Null  
 - **Required:** No  
 - **Description:** The base amount on which the penalty percentage is applied.  
-- **Constraints:** Can be `fare`, `fare+tax`.  
+
+  Valid values:
+  - `fare`
+  - `fare+tax`
 - **Default:** `null`  
 - **Example:** `null`  
 
@@ -372,7 +353,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Additional airline fee for processing the refund.  
-- **Constraints:** Positive number.  
 - **Default:** `0.0`  
 - **Example:** `0.0`  
 
@@ -380,15 +360,21 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates whether the tax is refundable.  
-- **Constraints:** `true` or `false`.  
+
+  Valid values:
+  - `true`: tax is refundable
+  - `false`: tax is non-refundable
 - **Default:** None  
 - **Example:** `true`  
 
 ### **refundRules[].fareRefundable**
 - **Type:** Boolean  
 - **Required:** No  
-- **Description:** Indicates whether the fare is refundable.  
-- **Constraints:** `true` or `false`.  
+- **Description:** Indicates whether the fare is refundable.
+
+  Valid values:
+  - `true`: fare refundable
+  - `false`: fare non-refundable
 - **Default:** None  
 - **Example:** `true`  
 
@@ -397,12 +383,12 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Required:** No  
 - **Description:** List of refundable ancillary services, if any.  
 - **Constraints:** Array of service identifiers or empty if none.  
-  The options are:
 
-	- StandardCheckInBaggage
-	- CabinBaggage
-	- CabinBaggageUnderSeat
-	- CabinBaggageOverheadLocker
+  Valid values:
+  - StandardCheckInBaggage
+  - CabinBaggage
+  - CabinBaggageUnderSeat
+  - CabinBaggageOverheadLocker
 - **Default:** `[]`  
 - **Example:** `[CabinBaggageUnderSeat]`  
 
@@ -410,7 +396,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Starting time of rule application. Positive numbers represent XXX minutes before departure. Negative numbers represent XXX minutes after departure.  
-- **Constraints:** Positive or negative integer representing minutes.  
 - **Default:** None  
 - **Example:** `525600`  
 
@@ -418,15 +403,15 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Ending time of rule application. Positive numbers represent XXX minutes before departure. Negative numbers represent XXX minutes after departure.
-- **Constraints:** Positive or negative integer representing minutes.  
 - **Default:** None  
 - **Example:** `50`
 
 ## **cancelReason**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Reason for refund rejection.  
-- **Constraints:** Predefined reasons such as:
+- **Description:** Reason for refund rejection.
+
+  Valid values:
   - Does not match airline policy.
   - No schedule change from the airline.
   - Non-refundable cancellation.
@@ -440,18 +425,21 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 ## **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status code of the request.  
-- **Constraints:** `0`: Success, `2`: System error.  
-- **Default:** None  
-- **Example:** `0`  
+- **Description:** Response status code.  
+
+  Valid values:
+  - 0: success
+  - 2: system error
+- **Default:** 0  
+- **Example:** 0  
 
 ## **msg**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Error message describing the response.  
-- **Constraints:** Should not be used to determine success or failure (use `status` instead).  
-- **Default:** None  
-- **Example:** `"Invalid request format."`
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
+
 
 {% endtab %}
 
