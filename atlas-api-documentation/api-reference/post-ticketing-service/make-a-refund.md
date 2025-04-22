@@ -17,7 +17,6 @@ Refund quotation function should be called in prior of this call
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Original order number. You can choose request orderNo or airlinePNR.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"ZNMKU20220119160129691"`  
 
@@ -25,7 +24,6 @@ Refund quotation function should be called in prior of this call
 - **Type:** String  
 - **Required:** No  
 - **Description:** The record locator of the airline. You can choose to requst either orderNo or airlinePNR.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"S24933"`  
 
@@ -33,7 +31,6 @@ Refund quotation function should be called in prior of this call
 - **Type:** String  
 - **Required:** No  
 - **Description:** Airline carrier code.  
-- **Constraints:** 2-letter airline code.  
 - **Default:** None  
 - **Example:** `"G9"`  
 
@@ -41,7 +38,6 @@ Refund quotation function should be called in prior of this call
 - **Type:** String  
 - **Required:** No  
 - **Description:** Get this from the refund quotation response. You can request with refundOfferId or refundRequest.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"7961ab5b202642628e9595498ffea083"`  
 
@@ -52,7 +48,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Last name of the passenger requesting a refund.  
-- **Constraints:** Alphabetic characters only.  
 - **Default:** None  
 - **Example:** `"ZHANG"`  
 
@@ -60,7 +55,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** First name of the passenger requesting a refund.  
-- **Constraints:** Alphabetic characters only.  
 - **Default:** None  
 - **Example:** `"SAN"`  
 
@@ -69,8 +63,7 @@ Ticket selection of the passengers and flights which is going to refund.
 #### **refundRequestList[].segments[].depDate**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Departure date of the segment which the passenger wants to refund.  
-- **Constraints:** Format `YYYYMMDD`.  
+- **Description:** Departure date of the segment which the passenger wants to refund. Format `YYYYMMDD`.  
 - **Default:** None  
 - **Example:** `"20240827"`  
 
@@ -78,7 +71,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number of the segment which the passenger wants to refund.  
-- **Constraints:** Alphanumeric flight number.  
 - **Default:** None  
 - **Example:** `"LJ820"`  
 
@@ -86,7 +78,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure airport of the segment which the passenger wants to refund.  
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"PVG"`  
 
@@ -94,7 +85,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival airport of the segment which the passenger wants to refund.
-- **Constraints:** 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"CJU"`  
 
@@ -102,10 +92,11 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code representing the reason for the refund request. 
-- **Constraints:** Numeric string.  
-	- 0: Involuntary
-	- 1: Voluntary
-	- 4: Void 
+
+  Valid values:
+  - 0: Involuntary
+  - 1: Voluntary
+  - 4: Void 
 - **Default:** None  
 - **Example:** `"1"`  
 
@@ -113,7 +104,6 @@ Ticket selection of the passengers and flights which is going to refund.
 - **Type:** String  
 - **Required:** No  
 - **Description:** The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered. The display currency requested when making a refund remains unchanged throughout the entire refund process.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"EUR"`
 
@@ -178,14 +168,15 @@ Please note that the below fields are now deprecated. New fields have been intro
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** The present status of the refund.  
-- **Constraints:** Possible values:
-	- `0`: Atlas Processing
-	- `1`: Airline Processing (Submitted to airline by Atlas)
-	- `2`: Refunded
-	- `3`: Airline Refunding
-	- `4`: Rejected
-	- `5`: Fulfillment Done
-	- `6`: Withdrew
+
+  Valid values:
+  - `0`: Atlas Processing
+  - `1`: Airline Processing (Submitted to airline by Atlas)
+  - `2`: Refunded
+  - `3`: Airline Refunding
+  - `4`: Rejected
+  - `5`: Fulfillment Done
+  - `6`: Withdrew
 
 If the ticket is paid by deposit: `0,1,2,3,4`
 
@@ -199,7 +190,8 @@ If the ticket is paid by VCC pass-through: `0,1,4,5,6`
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
-- **Constraints:** Possible values:
+
+  Valid val;ues:
   - `0`: Success
   - `2`: System error  
 - **Default:** None  
@@ -209,15 +201,17 @@ If the ticket is paid by VCC pass-through: `0,1,4,5,6`
 - **Type:** String  
 - **Required:** No  
 - **Description:** Error message describing the response. Please do not use this field to check the success or failure of the request. Only use the ‘status’ code to check the result.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"Invalid request"`  
 
 ## **isRefundable**
 - **Type:** Boolean  
 - **Required:** Yes  
-- **Description:** Indicates if the ticket is refundable.  
-- **Constraints:** `true`: Refundable, `false`: Non-refundable.  
+- **Description:** Indicates if the ticket is refundable.
+
+  Valid values:
+  - true: Refundable
+  - false: Non-refundable.  
 - **Default:** None  
 - **Example:** `true`  
 
@@ -225,7 +219,6 @@ If the ticket is paid by VCC pass-through: `0,1,4,5,6`
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency used for fare and amounts.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -233,7 +226,6 @@ If the ticket is paid by VCC pass-through: `0,1,4,5,6`
 - **Type:** String  
 - **Required:** No  
 - **Description:** Alternative currency for displaying fare and tax amounts.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"EUR"`  
 
@@ -241,7 +233,8 @@ If the ticket is paid by VCC pass-through: `0,1,4,5,6`
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of refund quote.  
-- **Constraints:** Possible values:
+
+  Valid values:
   - `AccurateQuote`: Based on the calculated amount.
   - `CannotQuote`: Refund amount unknown, dependent on airline rates.
   - `NonRefundable`: The ticket is non-refundable.  
@@ -255,7 +248,6 @@ The refund calculation for flight fare and inflow ancillaries.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency used for refund calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -263,7 +255,6 @@ The refund calculation for flight fare and inflow ancillaries.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original fare of the flight.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `141.19`  
 
@@ -271,7 +262,6 @@ The refund calculation for flight fare and inflow ancillaries.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Estimated refundable amount.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`  
 
@@ -279,7 +269,6 @@ The refund calculation for flight fare and inflow ancillaries.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Original fare amount in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `241.19`  
 
@@ -287,7 +276,6 @@ The refund calculation for flight fare and inflow ancillaries.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Estimated refund amount in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`  
 
@@ -298,7 +286,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number for post-ticketing services (e.g., baggage, seat selection).  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"BAFAU20241220110246534"`  
 
@@ -306,7 +293,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency for post-ticketing service calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -314,7 +300,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Original amount charged for the post-ticketing service.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `141.19`  
 
@@ -322,7 +307,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Estimated refund amount for the post-ticketing service.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`  
 
@@ -330,7 +314,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Displayed original post-ticketing service amount in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `241.19`  
 
@@ -338,7 +321,6 @@ The refund calculation for Post-ticketing Servrice, including baggage, seat, etc
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Displayed estimated refund amount in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `74.99`
 
@@ -350,7 +332,6 @@ Service fee of refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency used for service fee calculations.  
-- **Constraints:** 3-letter ISO currency code.  
 - **Default:** None  
 - **Example:** `"USD"`  
 
@@ -358,7 +339,6 @@ Service fee of refund.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Transaction fee applied to the refund.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `1.00`  
 
@@ -366,7 +346,6 @@ Service fee of refund.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Transaction fee displayed in the display currency.  
-- **Constraints:** Positive number.  
 - **Default:** None  
 - **Example:** `1.50`  
 
@@ -374,7 +353,6 @@ Service fee of refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Refund offer ID used for future refund requests.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"7961ab5b202642628e9595498ffea083"`  
 
@@ -382,25 +360,21 @@ Service fee of refund.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Refund order number generated for the request.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"R123456789"`  
 
 ## **cancelReason**
 - **Type:** String  
 - **Required:** No  
-- **Description:** The reason for canceling the ticket or service.  
-- **Constraints:** Predefined cancellation reason codes or free text depending on the system's requirements.  
-The reason why the refund was cancelled.
-
-- The cancel reasons are:
-    -    Does not match airline policy
-    -    There is no schedule change from the airline side. Please refer the ticket Fare Rules available in ATRIP flight deck for cancellation charges.
-     untary Cancellation - Non-Refundable
-    -    As per airline policy, only voucher refund is available for the ticket
-    -    Refund request cancelled by the user
-    -    Travel has been completed by the passenger
-    -    Refund not yet received from the airline. Please try again later.
+- **Description:** The reason for canceling the ticket or service. Predefined cancellation reason codes or free text depending on the system's requirements.  
+  The cancel reasons are:
+  -    Does not match airline policy
+  -    There is no schedule change from the airline side. Please refer the ticket Fare Rules available in ATRIP flight deck for cancellation charges.
+  untary Cancellation - Non-Refundable
+  -    As per airline policy, only voucher refund is available for the ticket
+  -    Refund request cancelled by the user
+  -    Travel has been completed by the passenger
+  -    Refund not yet received from the airline. Please try again later.
 - **Default:** None  
 - **Example:** `"Customer Request"`
 
@@ -408,7 +382,8 @@ The reason why the refund was cancelled.
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Reason code for the refund.  
-- **Constraints:** Possible values:
+
+  Valid values:
   - `0`: Involuntary
   - `1`: Voluntary
   - `4`: Void  
