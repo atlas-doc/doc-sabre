@@ -19,8 +19,7 @@ description: Tentative stopping ticket issuance.
 ### **orderNo**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** The unique identifier for the order.  
-- **Constraints:** Must be a valid order number issued by the system.  
+- **Description:** The unique identifier for the order. Must be a valid order number issued by the system.    
 - **Default:** None  
 - **Example:** "ZNMKU20220119160129691"
 
@@ -45,10 +44,8 @@ description: Tentative stopping ticket issuance.
 - **Description:** Status code indicating the processing state.  
 
   Valid values:
-
-  0: success
-
-  2: System error
+  - 0: success
+  - 2: System error
 
   Success does not mean that the ticket issuance has been stopped successfully. It only means that the system will attempt to stop the ticket issuance.
 
@@ -59,17 +56,15 @@ description: Tentative stopping ticket issuance.
   orderStatus: 2, means stop issuance failed, the order is issued.
 
   The definition of the queryOrderDetails order status will be different when the request is sent after the "Stop Ticket Issuance" request.
-- **Constraints:** Must be a valid status code. Typically, `0` indicates a processing state.  
 - **Default:** None  
 - **Example:** `0`
 
 ### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Message providing additional details about the status. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
-- **Constraints:** Must be a descriptive message related to the status.  
-- **Default:** None  
-- **Example:** "We are trying to intercept the ticket issuance. Please check the order status for result after 8 minutes"
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
 
 {% endtab %}
 
