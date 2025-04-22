@@ -164,7 +164,8 @@ No preceding function needs to be called before Get Offer.
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Response status code.  
+- **Description:** Response status code.
+  
   Valid values:
   - 0: success
   - 1: request data format error
@@ -241,6 +242,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of passenger (e.g., ADT for adult).
+
   Valid values:
   - ADT
   - CHD
@@ -346,7 +348,8 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of penalty rule (e.g., Refund).
-  - Valid values:
+
+  Valid values:
   - Refund
   - Change
 - **Default:** None  
@@ -356,7 +359,8 @@ No preceding function needs to be called before Get Offer.
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of passenger types to which the penalty rule applies.  
-  Valid values:
+
+   Valid values:
   - ADT
   - CHD
   - INF
@@ -470,6 +474,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of service (e.g., Baggage, Seat Selection, etc.).
+
   Valid values:
   - Baggage
   - Seat
@@ -481,6 +486,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Service level
+
   Valid values:
   - Free
   - Partial
@@ -492,6 +498,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of passenger types applicable to the service.  
+
   Valid values:
   - ADT
   - CHD
@@ -518,6 +525,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of service metadata (e.g., "StandardCheckInBaggage").
+
   Valid values:
   - StandardCheckInBaggage
   - CabinBaggageCabinBaggage
@@ -719,6 +727,7 @@ No preceding function needs to be called before Get Offer.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Class of the cabin for the flight segment (e.g., Economy, Business).
+
   Valid values:
   - Economy
   - Business
@@ -802,6 +811,7 @@ The structure of `inboundJourney` is similar to `outboundJourney`. The same attr
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unit of the service fee (e.g., "PER_SEGMENT").
+
   Valid values:
   - PER_SEGMENT
   - PER_PAX
@@ -911,6 +921,7 @@ The rest of the `passenger` elements (`passengerType`, `birthday`, `gender`, `na
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The method of payment (e.g., "Deposit").
+
   Valid values:
   - Deposit
   - VCC_Passthrough
