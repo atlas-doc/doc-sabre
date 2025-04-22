@@ -101,21 +101,22 @@ Identify the source of the search traffic. E.g. Google Flights, Oganic Search, S
 
 {% tabs %}
 {% tab title="Schema" %}
-**`status`  **<mark style="color:blue;">**int**</mark>
-
-0: success
-
-1: request data format error
-
-2: route is forbidden
-
-3: unauthorized access
-
-**`msg`  **<mark style="color:blue;">**string**</mark>
-
-Error message
-
-The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
+### **status**
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Response status code.  
+  Valid values:
+  - 0: success
+  - 2: system error
+- **Default:** 0  
+- **Example:** 0
+  
+### **msg**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null 
 
 **`routings` Array <**[**Routing Element**](search.md#route-element-schema)**>**
 
