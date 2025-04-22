@@ -22,44 +22,33 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Defines the seat assignment strategy if the preferred seat is already occupied.  
-- **Constraints:** Must be "SIMILAR_SEAT" or another predefined strategy.  
 
   Valid values:
-
-  SIMILAR_SEAT: Default, select a similar seat automatically
-
-  STOP_SEAT: Stop seat and continue ticketing
-
-  STOP_TICKET: Stop ticketing and cancel the order
+  - SIMILAR_SEAT: Default, select a similar seat automatically
+  - STOP_SEAT: Stop seat and continue ticketing
+  - STOP_TICKET: Stop ticketing and cancel the order
 - **Default:** SIMILAR_SEAT  
 - **Example:** "SIMILAR_SEAT"  
 
-### **sessionId**
+## **sessionId**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unique session identifier for the booking request.  
-- **Constraints:** Must be a valid UUID.  
+- **Description:** Unique session identifier for the booking response. It is required when you call order function to make a reservation to identify which flight and fare the client is choosing. 
 - **Default:** None  
-- **Example:** "43c3c07e-2b05-4fc9-8832-29a71075a097"  
+- **Example:** "c8ba1074-0c3c-47f2-9b86-f99e5d4e6e2e"  
 
 ### **payment[].cardType**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The card brand/type to which the charge rule applies.  
+
   Valid values:
-
-  Amex
-
-  Visa
-
-  Mastercard
-
-  JCB
-
-  Discover
-
-  DinersClub
-- **Constraints:** Must be a supported card type (e.g., `"Visa"`, `"Mastercard"`, `"Amex"`).  
+  - Amex
+  - Visa
+  - Mastercard
+  - JCB
+  - Discover
+  - DinersClub
 - **Default:** None  
 - **Example:** `"Amex"`
 
@@ -67,39 +56,43 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of passengers included in the booking. Each passenger object contains their personal details and ancillaries.  
-- **Constraints:** Must contain at least one passenger object.  
 - **Default:** None  
 - **Example:** [{...}]  
 
 ### **passengers.name**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's full name in uppercase format.  
-- **Constraints:** Must follow "LASTNAME/FIRSTNAME MIDDLENAME" format.  
+- **Description:** Passenger's full name in uppercase format. Must follow "LASTNAME/FIRSTNAME MIDDLENAME" format.   
 - **Default:** None  
 - **Example:** "TEST/ONE"  
 
 ### **passengers.passengerType**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Passenger type.  
-- **Constraints:** 0 = Adult, 1 = Child, 2 = Infant.  
-- **Default:** None  
-- **Example:** 0  
+- **Description:** Passenger type for booking.  
+
+  Valid values:
+  - "ADT"
+  - "CHD"
+  - "INF"  
+- **Default:** "ADT"  
+- **Example:** "ADT"  
 
 ### **passengers.birthday**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's date of birth in YYYYMMDD format.  
-- **Constraints:** Must be a valid date.  
 - **Default:** None  
 - **Example:** "19900101"  
 
 ### **passengers.gender**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's gender.  
-- **Constraints:** "M" for Male, "F" for Female.  
+- **Description:** Passenger's gender.
+
+  Valid values:
+  - "M" for Male
+  - "F" for Female.  
 - **Default:** None  
 - **Example:** "M"  
 
@@ -118,16 +111,11 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Constraints:** Must be a valid card type (e.g., "PP" for passport).  
 
   Valid values:
-
-  PP - Passport
-
-  GA - Hong Kong Macau Pass for China mainland citizens
-
-  TW - Taiwan Pass for China mainland citizens
-
-  TB - China mainland pass for Taiwanese
-
-  HY - International Seaman's Certificate
+  - PP - Passport
+  - GA - Hong Kong Macau Pass for China mainland citizens
+  - TW - Taiwan Pass for China mainland citizens
+  - TB - China mainland pass for Taiwanese
+  - HY - International Seaman's Certificate
 - **Default:** None  
 - **Example:** "PP"  
 
@@ -135,15 +123,13 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Country where the identification card was issued.  
-- **Constraints:** Must be a valid ISO country code.  
 - **Default:** None  
 - **Example:** "SG"  
 
 ### **passengers.cardExpired**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expiration date of the identification card in YYYYMMDD format.  
-- **Constraints:** Must be a future date.  
+- **Description:** Expiration date of the identification card in YYYYMMDD format. Must be a future date.    
 - **Default:** None  
 - **Example:** "20301231"  
 
@@ -151,7 +137,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's nationality.  
-- **Constraints:** Must be a valid ISO country code.  
 - **Default:** None  
 - **Example:** "SG"  
 
@@ -159,7 +144,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Frequent flyer program card number.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "123456"  
 
@@ -167,7 +151,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Frequent flyer program carrier code.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "JT"  
 
@@ -175,7 +158,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** Array  
 - **Required:** No  
 - **Description:** Additional services selected by the passenger.  
-- **Constraints:** Can be empty if no ancillaries are selected.  
 - **Default:** []  
 - **Example:** [{...}]  
 
@@ -183,7 +165,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code representing the ancillary service. This is received from routing element in the search/revalidation response.
-- **Constraints:** Must be a valid product code.  
 - **Default:** None  
 - **Example:** "BAG_5J_PH-PH_1_1P_20KG"  
 
@@ -191,7 +172,6 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Segment to which the ancillary applies.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -199,15 +179,13 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contact details for the booking.  
-- **Constraints:** Must include at least an email or phone number.  
 - **Default:** None  
 - **Example:** {...}  
 
 ### **contact.name**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Contact person's name.  
-- **Constraints:** Format : LastName/FirstName MiddleName
+- **Description:** Contact person's name. Format : LastName/FirstName MiddleName  
 - **Default:** None  
 - **Example:** "Way/Su"  
 
@@ -215,15 +193,13 @@ The booking requirements need to be read from the "bookingRequirement" array in 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Contact email address.  
-- **Constraints:** Must be a valid email format.  
 - **Default:** None  
 - **Example:** "xxxxxxxxx@xxx.com"  
 
 ### **contact.mobile**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Contact phone number.  
-- **Constraints:** Must include country code. Format: XXXX(digital country code)-XXXXXXXX(phone number). Example: 0001-87291810, 0086-13928109091, 0971-19201998  
+- **Description:** Contact phone number. Must include country code. Format: XXXX(digital country code)-XXXXXXXX(phone number). Example: 0001-87291810, 0086-13928109091, 0971-19201998    
 - **Default:** None  
 - **Example:** "0065-81234567"  
 
