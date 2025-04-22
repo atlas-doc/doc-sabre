@@ -4,7 +4,23 @@ To get seats availability, characteristic and price.
 
 ### Dependency
 
-Verify function should be called in prior to this call.
+Verify or getOffer function should be called in prior to this call.
+
+{% hint style="info" %}
+
+In a booking process, please call the 'seatAvailability' API to get seat availability information after price verification via 'verify' or 'getOffer'.  
+
+Steps:
+
+1. API sequence
+    - Search - Verify- seatAvailability - Order - Pay
+    - getOffer - seatAvailability - Order - Pay
+2. Pass 'offerId' in 'seatAvailability' requests:
+    - From 'verify': Use sessionId directly.
+    - From 'getOffer': Use its offerId.
+5. In the Order step, use the productCode to add specific seat to the ticket order.
+
+{% endhint %}
 
 ### Endpoint {% debug uid="seatAvailability_1.0" %}{% enddebug %}
 
@@ -17,12 +33,10 @@ Verify function should be called in prior to this call.
 ### **sessionId**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unique session identifier for retrieving seat map information.  
-- **Constraints:** Must be a valid UUID.  
+- **Description:** Unique session identifier for the booking response. It is required when you call order function to make a reservation to identify which flight and fare the client is choosing. 
 - **Default:** None  
-- **Example:** "eb3c94a7-ede4-4675-a7bb-a99ba1e10223"  
-
-    **Please note that the sessionID needs to be the same throughout the order.**
+- **Example:** "c8ba1074-0c3c-47f2-9b86-f99e5d4e6e2e"  
+  **Please note that the sessionID needs to be the same throughout the order.**
 
 {% endtab %}
 
@@ -43,7 +57,6 @@ Verify function should be called in prior to this call.
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of cabin details per segment.  
-- **Constraints:** Must contain at least one cabin entry.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -51,7 +64,6 @@ Verify function should be called in prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Flight segment for which seat map is returned.
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -59,7 +71,6 @@ Verify function should be called in prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Cabin details, including deck and seat arrangement. This is a list and will be repeated once for upper deck and once for the main deck when the requested cabin is spread across the upper and main deck.
-- **Constraints:** Must contain valid seat information.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -67,31 +78,22 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Deck level of the cabin.  
-
   Valid values:
-
-  “Upper deck”: Upper deck
-
-  “Main”: Main deck (default)
-- **Constraints:** Must be a valid deck name.  
+  - “Upper deck”: Upper deck
+  - “Main”: Main deck (default)
 - **Default:** "main"  
 - **Example:** "main"  
 
 ### **cabin.cabinClass**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:**  Service grade of the fare.
+- **Description:** Service grade of the fare.
 
   Valid values:
-
-  1 : Economy
-
-  2 : Business
-
-  3 : First Class
-
-  4:  Premium Economy
-- **Constraints:** Must be a positive integer.  
+  - 1: Economy
+  - 2: Business
+  - 3: First Class
+  - 4: Premium Economy
 - **Default:** 1  
 - **Example:** 1  
 
@@ -99,7 +101,6 @@ Verify function should be called in prior to this call.
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Layout of the cabin, including seat rows and columns.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -107,7 +108,6 @@ Verify function should be called in prior to this call.
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of column identifiers and their characteristics. Contains columns and seat information for seat display purposes. Returns the characteristics for each column.  
-- **Constraints:** Must contain at least one column entry.  
 - **Default:** None  
 - **Example:** [{"designator": "A", "characteristics": "W"}]  
 
@@ -115,7 +115,6 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Column designator for seat arrangement. This identifies a seat column position on an aircraft.  
-- **Constraints:** Must be a valid character.  
 - **Default:** None  
 - **Example:** "F"  
 
@@ -125,22 +124,16 @@ Verify function should be called in prior to this call.
 - **Description:** Characteristics of the seat column.
 
   Valid values:
-
-  A: column by the aisle
-
-  M: middle column  
-
-  W: column by the window
-- **Constraints:** Must be a valid identifier (e.g., W for Window, A for Aisle).  
+  - A: column by the aisle
+  - M: middle column  
+  - W: column by the window
 - **Default:** None  
 - **Example:** "A"  
-
 
 ### **cabinLayout.rows**
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Defines the first and last row numbers in the cabin.  
-- **Constraints:** Must contain valid row numbers.  
 - **Default:** None  
 - **Example:** {"first": 4, "last": 20}  
 
@@ -148,7 +141,6 @@ Verify function should be called in prior to this call.
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Returns the exit row information, if applicable. This must be returned regardless of whether exit row seats are open or are returned as valid seats.
-- **Constraints:** Must contain valid row numbers.  
 - **Default:** None  
 - **Example:** [{"first": 4, "last": 5}]  
 
@@ -156,7 +148,6 @@ Verify function should be called in prior to this call.
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of seat rows and their characteristics.  
-- **Constraints:** Must contain at least one row.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -164,7 +155,6 @@ Verify function should be called in prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Seat row number in the cabin.  
-- **Constraints:** Must be a valid row number.  
 - **Default:** None  
 - **Example:** 4  
 
@@ -172,7 +162,6 @@ Verify function should be called in prior to this call.
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of seats in the row with their details.  
-- **Constraints:** Must contain at least one seat.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -180,15 +169,17 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Column identifier for the seat.  
-- **Constraints:** Must be a valid column designator.  
 - **Default:** None  
 - **Example:** "A"  
 
 ### **seats.seatStatus**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Availability status of the seat.  
-- **Constraints:** "F" for free, "O" for occupied.  
+- **Description:** Availability status of the seat.
+
+  Valid values:
+  - "F" for free
+  - "O" for occupied.  
 - **Default:** None  
 - **Example:** "F"  
 
@@ -197,36 +188,23 @@ Verify function should be called in prior to this call.
 - **Required:** Yes  
 - **Description:** Characteristics of the seat (e.g., Window, Aisle).
 
-    Valid values:
-
-    A: Aisle seat
-    
-    E: Exit and emergency exit
-    
-    I:  Seat suitable for adult with an infant
-    
-    IE：Seat not suitable for child
-    
-    L:  Leg space seat
-    
-    U：Seat suitable for unaccompanied minors
-    
-    V：Seat to be left vacant or offered last
-    
-    W:  Window seat  
-- **Constraints:** None  
+   Valid values:
+    - A: Aisle seat
+    - E: Exit and emergency exit
+    - I:  Seat suitable for adult with an infant
+    - IE：Seat not suitable for child
+    - L:  Leg space seat
+    - U：Seat suitable for unaccompanied minors
+    - V：Seat to be left vacant or offered last
+    - W:  Window seat  
 - **Default:** None  
-- **Example:** ["W", "L", "E"]  
-
-**Example**: refer to IATA definition from codeset 9825, reference 825
-    
-**Document link**: https://pnr.lt/Failai/Code set Directory v13 2.pdf
+- **Example:** ["W", "L", "E"] Refer to IATA definition from codeset 9825, reference 825
+- **Document link**: https://pnr.lt/Failai/Code set Directory v13 2.pdf
 
 ### **seats.price**
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the seat.
-- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 23.52  
 
@@ -234,7 +212,6 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency for the seat price.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None
 - **Example:** "USD"  
 
@@ -242,7 +219,6 @@ Verify function should be called in prior to this call.
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the seat from the vendor.  
-- **Constraints:** Must be a positive Number value.  
 - **Default:** None  
 - **Example:** 593907.25  
 
@@ -250,7 +226,6 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Vendor's currency for the seat price.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "VND"  
 - **Example:** "VND"  
 
@@ -258,7 +233,6 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique product code for the seat selection. For seat, the format is SCI_SEAT_seatNumber_carrier_depAirport_arrAirport 
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "SCI_SEAT_4A_VJ_HND_SGN"  
 
@@ -266,7 +240,6 @@ Verify function should be called in prior to this call.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Currency used for displaying seat price in the display currancy.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** "USD"  
 
@@ -274,7 +247,6 @@ Verify function should be called in prior to this call.
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Seat price displayed in the display currency.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** 50.35  
 
@@ -282,17 +254,21 @@ Verify function should be called in prior to this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
-- **Constraints:** 0 indicates success.  
+  Valid values:
+  - 0: success
+  - 1: request data format error
+  - 2: route is forbidden
+  - 3: unauthorized access
 - **Default:** 0  
 - **Example:** 0  
 
 ## **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Response message.  
-- **Constraints:** None  
-- **Default:** "success"  
-- **Example:** "success"
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
+
 {% endtab %}
 
 {% tab title="Samples" %}
