@@ -25,8 +25,7 @@ Order function should be called in prior to this call.
 ### **originalOrderNo**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** The unique identifier for the original order.  
-- **Constraints:** Must be a valid order number issued by the system.  
+- **Description:** The unique identifier for the original order. Must be a valid order number issued by the system.    
 - **Default:** None  
 - **Example:** "ZNMKU20220119160129691"
 
