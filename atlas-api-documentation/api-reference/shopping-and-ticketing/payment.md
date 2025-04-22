@@ -54,7 +54,6 @@
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight booking order. It can be an order for ticketing, or an order for add bags. The format of each kind of order is different.
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "TESTT20250324162613982"  
     
@@ -110,15 +109,17 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight booking order. It can be an order for ticketing, or an order for add bags. The format of each kind of order is different. 
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "TESTF20250324204900551"  
 
 ### **supportCreditTransPayment**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Indicates whether credit transfer payment is supported.  
-- **Constraints:** "0" = Payment with Deposit, "1" = Payment with credit card pass through to the airline.  
+- **Description:** Indicates whether credit transfer payment is supported.
+
+  Valid values:
+  - "0" = Payment with Deposit
+  - "1" = Payment with credit card pass through to the airline.  
 - **Default:** "1"  
 - **Example:** "1"  
 
@@ -126,7 +127,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains credit card details for the payment.  
-- **Constraints:** Must contain valid credit card information.  
 - **Default:** None  
 - **Example:** {...}  
 
@@ -134,31 +134,27 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Masked credit card number.  
-- **Constraints:** Must be a valid credit card number format.  
 - **Default:** None  
 - **Example:** "XXXXXXXXXXXXXXXX"  
 
 #### **creditCard.cardExpireMonth**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expiry month of the credit card.  
-- **Constraints:** Must be a valid two-digit month (01-12).  
+- **Description:** Expiry month of the credit card. Must be a valid two-digit month (01-12).   
 - **Default:** None  
 - **Example:** "09"  
 
 #### **creditCard.cardExpireYear**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expiry year of the credit card.  
-- **Constraints:** Must be a valid two-digit year (e.g., 26 for 2026).  
+- **Description:** Expiry year of the credit card. Must be a valid two-digit year (e.g., 26 for 2026).    
 - **Default:** None  
 - **Example:** "26"  
 
 #### **creditCard.cardCVV**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Masked CVV security code.  
-- **Constraints:** Must be a valid three-digit or four-digit CVV.  
+- **Description:** Masked CVV security code. Must be a valid three-digit or four-digit CVV.    
 - **Default:** None  
 - **Example:** "***"  
 
@@ -166,7 +162,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Last name of the cardholder.  
-- **Constraints:** Must be a valid name.  
 - **Default:** None  
 - **Example:** "T*****"  
 
@@ -174,7 +169,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** First name of the cardholder.  
-- **Constraints:** Must be a valid name.  
 - **Default:** None  
 - **Example:** "A**"  
 
@@ -182,7 +176,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Country of the cardholder.  
-- **Constraints:** Must be a valid country code.  
 - **Default:** None  
 - **Example:** "S*"  
 
@@ -190,7 +183,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** No  
 - **Description:** The province or state of the card holder. For example; use "CA" and not "California".
-- **Constraints:** Can be null.  
 - **Default:** null  
 - **Example:** ""  
 
@@ -198,7 +190,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** City of the cardholder.  
-- **Constraints:** Must be a valid city name.  
 - **Default:** None  
 - **Example:** "HOUSTON"  
 
@@ -206,7 +197,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Postal code of the cardholder.  
-- **Constraints:** Must be a valid postal code.  
 - **Default:** None  
 - **Example:** "20001"  
 
@@ -214,7 +204,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Address of the cardholder.  
-- **Constraints:** Must be a valid address.  
 - **Default:** None  
 - **Example:** "BASKET STREET"  
 
@@ -222,7 +211,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** No  
 - **Description:** Phone number of the cardholder.  
-- **Constraints:** Can be null.  
 - **Default:** null  
 - **Example:** 0065-4578278254  
 
@@ -230,7 +218,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** No  
 - **Description:** Email address of the cardholder.  
-- **Constraints:** Can be null.  
 - **Default:** null  
 - **Example:** test@ai.com  
 
@@ -242,7 +229,6 @@ Cardholder country, province, city, postcode and address are required only for a
   If this parameter is 'null', our system will automatically set the maximum acceptable amount as the greater of either 5% of the order price or 5 USD (converted to the transacting currency) per 
   passenger. When the amount entered by the customer is lower than 5% of the order price or 5 USD (converted to the transacting currency) per passenger, the information sent to Atlas by the 
   customer will be used.  
-- **Constraints:** Can be null.  
 - **Default:** null  
 - **Example:** null  
 
@@ -250,14 +236,11 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Method of payment selected by the user. For MoR, the card type must be same as that in order.do RQ.
+
   Valid values:
-
-  1 = Deposit
-
-  3 = VCC Passthrough
-
-  5 = MoR
-- **Constraints:** None  
+  - 1 = Deposit
+  - 3 = VCC Passthrough
+  - 5 = MoR
 - **Default:** Deposit  
 - **Example:** `3`  
 {% endtab %}
@@ -319,7 +302,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight booking order.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "TESTX20250324195425088"  
 
@@ -327,7 +309,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The pnrCode is the single reference for the booking. This is the Atlas PNR.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "QVWFIN"  
 
@@ -343,7 +324,6 @@ Cardholder country, province, city, postcode and address are required only for a
   3: VCC
 
   5: MOR
-- **Constraints:** Must be a valid payment method identifier.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -351,7 +331,6 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of airline codes associated with the booking.  
-- **Constraints:** Must contain at least one airline code.  
 - **Default:** None  
 - **Example:** ["JM"]  
 
@@ -359,17 +338,21 @@ Cardholder country, province, city, postcode and address are required only for a
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
-- **Constraints:** 0 indicates success.  
+  Valid values:
+  - 0: success
+  - 1: request data format error
+  - 2: route is forbidden
+  - 3: unauthorized access
 - **Default:** 0  
 - **Example:** 0  
 
 ### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Response message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result. 
-- **Constraints:** Must be a valid string.  
-- **Default:** "success"  
-- **Example:** "success"  
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
+
 {% endtab %}
 
 {% tab title="Samples" %}
