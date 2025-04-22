@@ -47,7 +47,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the ticket order.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "TESTA20240618162411631"  
 
@@ -55,7 +54,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** PNR code assigned by the airline.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "S74883"  
 
@@ -63,7 +61,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be a valid airline code.  
 - **Default:** None  
 - **Example:** "MM"  
 
@@ -71,7 +68,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of ancillary service requested. Different categories of ancillaries need to be separately requested. Currently we only support "BAGGAGE".
-- **Constraints:** Must be a valid ancillary category (e.g., "BAGGAGE").  
 - **Default:** None  
 - **Example:** "BAGGAGE"  
 
@@ -79,7 +75,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The alternative currency in which the fare and taxes amount needs to be displayed. The 3-letter currency code should be entered.
-- **Constraints:** Must be a valid three-letter currency code (ISO 4217).  
 - **Default:** None  
 - **Example:** "CNY"
     
@@ -106,24 +101,25 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status code of the response (0 indicates success).  
-- **Constraints:** Must be a valid status code.  
-- **Default:** None  
-- **Example:** "0"  
+- **Description:** Response status code.  
+
+  Valid values:
+  - 0: success
+  - 2: system error
+- **Default:** 0  
+- **Example:** 0  
 
 ### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Message indicating success or failure of the request. The 'msg' element is for the description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
-- **Constraints:** None  
-- **Default:** None  
-- **Example:** "success"  
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null  
 
 ### **sessionId**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique session identifier.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "90223f62-fd87-45b4-9a32-68f03f9f85c8"  
 
@@ -131,7 +127,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique ticket order number.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "TESTA20240618162411631"  
 
@@ -141,11 +136,8 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Description:** Indicates if credit transaction payment is supported (0 for no, 1 for yes).  
 
   Valid values:
-
-  0: The credit card details will not be passed through and only pre-payment is allowed.
-
-  1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment.
-- **Constraints:** Must be 0 or 1.  
+  - 0: The credit card details will not be passed through and only pre-payment is allowed.
+  - 1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment.
 - **Default:** "0"  
 - **Example:** "0"  
 
@@ -153,7 +145,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency code for the transaction.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "USD"  
 
@@ -163,7 +154,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Index of the flight segment.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** "1"  
 
@@ -171,7 +161,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be a valid airline code.  
 - **Default:** None  
 - **Example:** "5F"  
 
@@ -179,7 +168,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number assigned by the carrier.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "5F617"  
 
@@ -187,15 +175,13 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure airport IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "RMO"  
 
 ### **depTime**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Departure time of the flight.  
-- **Constraints:** Format: YYYYMMDDHHMM.  
+- **Description:** Departure time of the flight. Format: YYYYMMDDHHMM.   
 - **Default:** None  
 - **Example:** "202408200810"  
 
@@ -203,15 +189,13 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival airport IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "LTN"  
 
 ### **arrTime**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Arrival time of the flight.  
-- **Constraints:** Format: YYYYMMDDHHMM.  
+- **Description:** Arrival time of the flight. Format: YYYYMMDDHHMM.    
 - **Default:** None  
 - **Example:** "202408200940"  
 
@@ -219,7 +203,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** List of stopover cities if applicable.  
-- **Constraints:** Can be empty if no stopovers.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -227,15 +210,17 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Flight duration in minutes.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** "210"  
 
 ### **codeShare**
 - **Type:** Boolean  
 - **Required:** Yes  
-- **Description:** Indicates if the flight is operated under a codeshare agreement.  
-- **Constraints:** Must be true or false.  
+- **Description:** Indicates if the flight is operated under a codeshare agreement.
+
+  Valid values:
+  - true: codeshare
+  - false: not codeshare
 - **Default:** false  
 - **Example:** false  
 
@@ -243,7 +228,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Cabin class of the flight segment.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -253,15 +237,10 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Description:** Numeric representation of cabin class (e.g., 1 for economy, 2 for business).  
 
   Valid values:
-
-  1 : Economy
-
-  2 : Business
-
-  3 : First Class
-
-  4: Premium Economy
-- **Constraints:** Must be a valid class indicator.  
+  - 1 : Economy
+  - 2 : Business
+  - 3 : First Class
+  - 4: Premium Economy
 - **Default:** None  
 - **Example:** "1"  
 
@@ -269,7 +248,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of available seats on the flight segment.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** "4"  
 
@@ -277,7 +255,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Aircraft model code if available.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -285,7 +262,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Departure terminal of the airport.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -293,7 +269,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Arrival terminal of the airport.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -301,7 +276,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Carrier actually operating the flight if different from the marketing carrier.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** None  
 - **Example:** "5F"  
 
@@ -309,7 +283,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** No  
 - **Description:** Flight number assigned by the operating carrier.  
-- **Constraints:** Can be empty if not specified.  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -317,7 +290,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Fare family category of the ticket.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "LOYAL"  
 
@@ -327,7 +299,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Index of the flight segment to which this product applies.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** "1"  
 
@@ -335,7 +306,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer | Null  
 - **Required:** No  
 - **Description:** Index of the last segment if applicable.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** Null  
 - **Example:** null  
 
@@ -343,7 +313,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code identifying the ancillary product.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "SCI_BAG_1PC_10KG"  
 
@@ -353,11 +322,8 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Description:** Name of the ancillary product.  
 
   Valid values:
-
-  StandardCheckInBaggage
-
-  CabinBaggageOverheadLocker
-- **Constraints:** Cannot be null or empty.  
+  - StandardCheckInBaggage
+  - CabinBaggageOverheadLocker
 - **Default:** None  
 - **Example:** "Standard Check-in Baggage"  
 
@@ -367,15 +333,10 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Description:** Type of ancillary product.  
 
   Valid values:
-
-  1: Standard Check-in baggage
-
-  3: Cabin Baggage Overhead Locker
-
-  6: Seat
-
+  - 1: Standard Check-in baggage
+  - 3: Cabin Baggage Overhead Locker
+  - 6: Seat
   Currently only "Standard Check-in Baggage" and "Cabin Baggage Overhead Locker" are available.
-- **Constraints:** Must be a valid product type identifier.  
 - **Default:** None  
 - **Example:** "1"  
 
@@ -383,7 +344,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased with the ticket (0 for no, 1 for yes).  
-- **Constraints:** Must be 0 or 1.  
 - **Default:** "0"  
 - **Example:** "0"  
 
@@ -391,7 +351,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased after ticket issuance (0 for no, 1 for yes).  
-- **Constraints:** Must be 0 or 1.  
 - **Default:** "1"  
 - **Example:** "1"  
 
@@ -399,7 +358,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the product in the base currency.  
-- **Constraints:** Must be a positive number.  
 - **Default:** None  
 - **Example:** "22.88"  
 
@@ -407,7 +365,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency of the product price.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "USD"  
 
@@ -415,7 +372,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Number | Null  
 - **Required:** No  
 - **Description:** Vendor-specific price if available.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** Null  
 - **Example:** null  
 
@@ -423,7 +379,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String | Null  
 - **Required:** No  
 - **Description:** Vendor-specific currency if available.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** Null  
 - **Example:** null  
 
@@ -431,7 +386,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Additional service fee charged to the client.  
-- **Constraints:** Must be a non-negative number.  
 - **Default:** "0.00"  
 - **Example:** "0.00"  
 
@@ -441,15 +395,10 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Description:** Mode of applying service fee (e.g., PER_PAX).  
 
   Valid values:
-
-  PER_SEGMENT: Each segment of an itinerary (per passenger)
-
-  PER_TICKET: No. of tickets in a booking
-
-  PER_PAX: Per passenger
-
-  PER_BOOKING: Per atlas booking (order #)
-- **Constraints:** Can be empty if not applicable.  
+  - PER_SEGMENT: Each segment of an itinerary (per passenger)
+  - PER_TICKET: No. of tickets in a booking
+  - PER_PAX: Per passenger
+  - PER_BOOKING: Per atlas booking (order #)
 - **Default:** "PER_PAX"  
 - **Example:** "PER_PAX"  
 
@@ -457,30 +406,24 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Additional details if the product is baggage-related.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** None  
 - **Example:** See below.  
 
 #### **Baggage Element Fields**
 - **piece**  
-  - **Type:** Integer  
-  - **Required:** Yes  
-  - **Description:** Number of baggage pieces.  
-
+- **Type:** Integer  
+- **Required:** Yes  
+- **Description:** Number of baggage pieces.  
   Valid values:
-
-  0：No Limitation about piece;
-
-  greater than 0：Maximum pieces
-  - **Constraints:** Must be a positive integer.  
-  - **Default:** None  
-  - **Example:** "1"  
+  - 0：No Limitation about piece;
+  - greater than 0：Maximum pieces
+- **Default:** None  
+- **Example:** "1"  
 
 - **weight**  
   - **Type:** Integer  
   - **Required:** Yes  
   - **Description:** Weight of baggage in kilograms.  
-  - **Constraints:** Must be a positive number.  
   - **Default:** None  
   - **Example:** "10"  
 
@@ -489,12 +432,9 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
   - **Required:** Yes  
   - **Description:** Indicates if the weight is cumulative.  
 
-  Valid values:
-
-  True: The weight is for all the pieces
-
-  False: The weight is for each piece
-  - **Constraints:** Must be true or false.  
+    Valid values:
+    - True: The weight is for all the pieces
+    - False: The weight is for each piece
   - **Default:** true  
   - **Example:** true  
 
@@ -502,7 +442,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
   - **Type:** String  
   - **Required:** No  
   - **Description:** Dimensions of baggage if applicable.  
-  - **Constraints:** Can be empty if not specified.  
   - **Default:** ""  
   - **Example:** ""  
 
@@ -510,7 +449,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String | Null  
 - **Required:** No  
 - **Description:** Unique identifier for the offer. This will be "null" in the booking flow but will have an id in the post-ticketing flow.
-- **Constraints:** Can be null if not applicable.  
 - **Default:** Null  
 - **Example:** null  
 
@@ -518,7 +456,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Category of the ancillary product.  
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "StandardCheckInBaggage"  
 
@@ -526,7 +463,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code representing the ancillary product. This will be identical to the "product code". 
-- **Constraints:** Cannot be null or empty.  
 - **Default:** None  
 - **Example:** "SCI_BAG_1PC_10KG"  
 
@@ -534,7 +470,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Object | Null  
 - **Required:** No  
 - **Description:** Additional details if the product is related to seat selection.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** Null  
 - **Example:** null  
 
@@ -542,7 +477,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the product in the display currency.  
-- **Constraints:** Must be a positive number.  
 - **Default:** None  
 - **Example:** "165.89"  
 
@@ -550,7 +484,6 @@ Please note the below "Rules & Restrictions" while initiating a post-ticketing t
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Display currency of the price.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "CNY"  
 
