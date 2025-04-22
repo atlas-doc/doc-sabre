@@ -66,7 +66,8 @@ Steps:
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Response status code.  
+- **Description:** Response status code.
+  
   Valid values:
   - 0: success
   - 1: request data format error
@@ -149,6 +150,7 @@ Steps:
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Whether the flight is operated under a codeshare agreement. 
+
   Valid values:
   - true: codeshare flight
   - false: not a codeshare flight
@@ -166,6 +168,7 @@ Steps:
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Cabin class level. 
+
   Valid values:
   - **1** = Economy  
   - **2** = Premium Economy 
@@ -327,7 +330,8 @@ Steps:
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Weight limit in kilograms.  
- Valid values:
+
+Valid values:
   0：No Limitation about piece;
   higher than 0：Maximum pieces
 - **Default:** 18  
@@ -338,6 +342,7 @@ Steps:
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Indicates whether the total weight is distributed among all pieces.
+
   Valid values:
   true: Weight is for all the pieces of baggage.
   false: Weight is only for a single piece of baggage.
