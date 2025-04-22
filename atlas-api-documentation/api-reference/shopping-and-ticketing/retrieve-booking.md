@@ -38,7 +38,7 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 ### **orderNo**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unique identifier for the flight booking order.  
+- **Description:** Unique identifier for the flight booking order. It can be an order for ticketing, or an order for add bags. The format of each kind of order is different.  
 - **Default:** None  
 - **Example:** "TESTA20240627114717735"  
 
@@ -136,10 +136,11 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 ### **isCompletedOrder**
 - **Type:** Boolean  
 - **Required:** Yes  
-- **Description:** Indicates if the order is completed.  
+- **Description:** Indicates if the order is completed.
+  
   Valid values:
-  true: Show the full details of main order and post-booking order
-  false: Only show the details of given order
+  - true: Show the full details of main order and post-booking order
+  - false: Only show the details of given order
 - **Default:** "false"  
 - **Example:** "true"  
 
@@ -182,9 +183,9 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 ### **orderNo**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Unique identifier for the flight booking order.  
+- **Description:** Unique identifier for the flight booking order. It can be an order for ticketing, or an order for add bags. The format of each kind of order is different.  
 - **Default:** None  
-- **Example:** "TESTA20240627114717735"  
+- **Example:** "TESTA20240627114717735" 
 
 ### **orderList** (Array)
 - **Type:** Array  
@@ -203,12 +204,13 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 #### **orderList.orderStatus**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Status of the order.  
+- **Description:** Status of the order.
+  
   Valid values:
-  0: Unpaid
-  1: Ticketing-in-Process
-  2: Ticketed
-  -3: Cancelled(When the booking is failed due to the request information) Order number
+  - 0: Unpaid
+  - 1: Ticketing-in-Process
+  - 2: Ticketed
+  - -3: Cancelled(When the booking is failed due to the request information) Order number
 - **Default:** None  
 - **Example:** "2"  
 
@@ -216,9 +218,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Status of ticket issuance.
+  
   Valid values:
-  0: Ticket not issued
-  1: Ticket issued  
+  - 0: Ticket not issued
+  - 1: Ticket issued  
 - **Default:** None  
 - **Example:** "1"  
 
@@ -316,11 +319,12 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 #### **orderList.supportPaymentMethod**
 - **Type:** **integer**  
 - **Required:** Yes  
-- **Description:** Code for allowed payment method.  
+- **Description:** Code for allowed payment method.
+  
   Valid values:
-  1: Pre-payment
-  3: VCC
-  5: MOR
+  - 1: Pre-payment
+  - 3: VCC
+  - 5: MOR
 - **Default:** **1**  
 - **Example:** **3**
 
@@ -496,9 +500,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** No  
 - **Description:** Indicates the method used for purchasing ancillary services.
+
   Valid values:
-  0 = pre-purchase
-  1 = post-purchase.  
+  - 0 = pre-purchase
+  - 1 = post-purchase.  
 - **Default:** "0"  
 - **Example:** "0"  
 
@@ -552,10 +557,11 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Method of payment selected by the user.  
+
   Valid values:
-  1 = Deposit
-  3 = VCC Passthrough
-  5 = MoR
+  - 1 = Deposit
+  - 3 = VCC Passthrough
+  - 5 = MoR
 - **Default:** Deposit  
 - **Example:** `3`  
 
@@ -590,9 +596,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the account source for fee deduction.  
+
   Valid values:
-  DEPOSIT = Deduct from pre-funded deposit  
-  CARD = Deduct from credit/debit card  
+  - DEPOSIT = Deduct from pre-funded deposit  
+  - CARD = Deduct from credit/debit card  
 - **Default:** `"CARD"`  
 - **Example:** `"DEPOSIT"`
 
@@ -628,9 +635,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates where the fare amount is deducted from.  
+
   Valid values:
-  DEPOSIT = Deduct from pre-funded deposit  
-  CARD = Deduct from credit/debit card  
+  - DEPOSIT = Deduct from pre-funded deposit  
+  - CARD = Deduct from credit/debit card  
 - **Default:** `"CARD"`  
 - **Example:** `"CARD"`
 
@@ -667,9 +675,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the source from which the fee will be deducted.  
+
   Valid values:
-  DEPOSIT = Deduct from pre-funded deposit  
-  CARD = Deduct from credit/debit card  
+  - DEPOSIT = Deduct from pre-funded deposit  
+  - CARD = Deduct from credit/debit card  
 - **Default:** `"CARD"`  
 - **Example:** `"CARD"`
 
@@ -684,9 +693,10 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code. 
+
   Valid values:
-  0: success
-  2: System error 
+  - 0: success
+  - 2: System error 
 - **Default:** 0  
 - **Example:** 0  
 
