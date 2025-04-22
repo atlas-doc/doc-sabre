@@ -388,9 +388,7 @@ The `search` function should be called prior to this call.
 
   Valid values:
   - 0: success
-  - 1: request data format error
-  - 2: route is forbidden
-  - 3: unauthorized access
+  - 2: system error
 - **Default:** 0  
 - **Example:** 0  
 
