@@ -17,7 +17,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline's Passenger Name Record (PNR) code.  
-- **Constraints:** Must be a valid alphanumeric PNR code.  
 - **Default:** None  
 - **Example:** `"S1BE6Z"`  
 
@@ -25,7 +24,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Email address associated with the booking. This is the contact email in the booking. 
-- **Constraints:** Must be a valid email address format.  
 - **Default:** None  
 - **Example:** `"TESTABC22Oct@pnrclaim.com"`  
 
@@ -35,7 +33,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's full name in the format LASTNAME/FIRSTNAME MiddleName.  
-- **Constraints:** Must match airline naming conventions.  
 - **Default:** None  
 - **Example:** `"test/abc"`  
 
@@ -43,7 +40,8 @@ No preceding function needs to be carried out.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Passenger type indicator.  
-- **Constraints:**  
+
+  Valid values:
   - `0` = Adult  
   - `1` = Child  
   - `2` = Infant  
@@ -53,8 +51,7 @@ No preceding function needs to be carried out.
 #### **passengers[].birthday**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger's date of birth.  
-- **Constraints:** Format: `YYYYMMDD`  
+- **Description:** Passenger's date of birth. Format: `YYYYMMDD` . 
 - **Default:** None  
 - **Example:** `"20001010"`  
 
@@ -62,7 +59,10 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's gender.  
-- **Constraints:** `M` for Male, `F` for Female  
+
+  Valid values:
+  - `M`: Male
+  - `F`: Female  
 - **Default:** None  
 - **Example:** `"M"`  
 
@@ -70,7 +70,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Document number (passport or ID).  
-- **Constraints:** Can be empty if not available.  
 - **Default:** `""`  
 - **Example:** `""`  
 
@@ -78,7 +77,8 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Type of identification document.  
-- **Constraints:**  
+
+  Valid values:
   - `"PP"` = Passport  
   - `"ID"` = National ID  
 - **Default:** None  
@@ -88,15 +88,13 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Country or authority that issued the document.  
-- **Constraints:** ISO 2-letter country code or empty.  
 - **Default:** `""`  
 - **Example:** `""`  
 
 #### **passengers[].cardExpired**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Expiry date of the document.  
-- **Constraints:** Format: `YYYYMMDD`  
+- **Description:** Expiry date of the document. Format: `YYYYMMDD`   
 - **Default:** None  
 - **Example:** `"20241010"`  
 
@@ -104,7 +102,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Passenger's nationality.  
-- **Constraints:** ISO 2-letter country code or empty.  
 - **Default:** `""`  
 - **Example:** `""`  
 
@@ -114,7 +111,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be valid IATA airline code.  
 - **Default:** None  
 - **Example:** `"AK"`  
 
@@ -122,7 +118,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number.  
-- **Constraints:** Alphanumeric string including airline prefix.  
 - **Default:** None  
 - **Example:** `"AK128"`  
 
@@ -130,7 +125,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure airport code (IATA).  
-- **Constraints:** Must be a valid 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"DEL"`  
 
@@ -138,23 +132,20 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival airport code (IATA).  
-- **Constraints:** Must be a valid 3-letter airport code.  
 - **Default:** None  
 - **Example:** `"BOM"`  
 
 #### **fromSegments[].depTime**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Scheduled departure time.  
-- **Constraints:** Format `YYYYMMDDHHmm`. 202203100300 means 10MAR2022 03:00 A.M.
+- **Description:** Scheduled departure time. Format `YYYYMMDDHHmm`. 202203100300 means 10MAR2022 03:00 A.M.  
 - **Default:** None  
 - **Example:** `"202411201600"`  
 
 #### **fromSegments[].arrTime**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Scheduled arrival time.  
-- **Constraints:** Format `YYYYMMDDHHmm`. 202203100300 means 10MAR2022 03:00 A.M.  
+- **Description:** Scheduled arrival time. Format `YYYYMMDDHHmm`. 202203100300 means 10MAR2022 03:00 A.M.  
 - **Default:** None  
 - **Example:** `"202411201820"`  
 
@@ -162,7 +153,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Comma-separated stopover cities, if any. Name of cities from where the passengers will take connecting flights. Include IATA code of cities and use a comma in case of multiple cities to separate if transfer airports count is higher than 1. For example: CGK, SUB. Blank means non-stop flight.
-- **Constraints:** Can be empty.  
 - **Default:** `""`  
 - **Example:** `""`  
 
@@ -170,7 +160,8 @@ No preceding function needs to be carried out.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if this is a codeshare flight.  
-- **Constraints:**  
+
+  Valid values:
   - `0` = No  
   - `1` = Yes  
 - **Default:** `0`  
@@ -180,7 +171,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Operating airline carrier for codeshare flights. It is blank when codeshare=false  
-- **Constraints:** Can be empty.  
 - **Default:** `""`  
 - **Example:** `""`  
 
@@ -188,7 +178,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Operating carrier's flight number. It is blank when codeshare=false  
-- **Constraints:** Can be empty.  
 - **Default:** `""`  
 - **Example:** `""`  
 
@@ -196,7 +185,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Departure terminal.  
-- **Constraints:** Can be empty or alphanumeric.  
 - **Default:** `""`  
 - **Example:** `"T2"`  
 
@@ -204,7 +192,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Arrival terminal.  
-- **Constraints:** Can be empty or alphanumeric.  
 - **Default:** `""`  
 - **Example:** `"T1"`  
 
@@ -214,15 +201,10 @@ No preceding function needs to be carried out.
 - **Description:** Cabin class code (e.g., Economy, Business). Service grade of the fare.
 
   Valid values:
-
-  1: Economy
-
-  2: Business
-
-  3: First Class
-
-  4: Premium Economy  
-- **Constraints:** Usually numeric or letter based on GDS.  
+  - 1: Economy
+  - 2: Business
+  - 3: First Class
+  - 4: Premium Economy  
 - **Default:** None  
 - **Example:** `"1"`  
 
@@ -230,7 +212,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** No  
 - **Description:** Fare family name associated with the ticket.  
-- **Constraints:** Text label based on airline fare branding.  
 - **Default:** `""`  
 - **Example:** `"Flexi"`  
 
@@ -238,7 +219,6 @@ No preceding function needs to be carried out.
 - **Type:** Integer / Null  
 - **Required:** No  
 - **Description:** Index of the flight in multi-leg itineraries.  
-- **Constraints:** Can be null if not used.  
 - **Default:** `null`  
 - **Example:** `null`  
 
@@ -246,7 +226,6 @@ No preceding function needs to be carried out.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Duration of the flight in minutes.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** `140`  
 
@@ -254,7 +233,6 @@ No preceding function needs to be carried out.
 - **Type:** Null or Array  
 - **Required:** No  
 - **Description:** Return flight segments (if round-trip). All the elements are the same as the "fromSegments" information.  
-- **Constraints:** Can be `null` for one-way bookings.  
 - **Default:** `null`  
 - **Example:** `null`  
 
@@ -314,7 +292,6 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number generated after successful booking.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** `"TESTC20241022100111040"`  
 
@@ -322,27 +299,26 @@ No preceding function needs to be carried out.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Atlas PNR.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** `"RCOFMU"`  
 
-#### **status**
+### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Status of the booking operation.  
-- **Constraints:**  
-  - `0` = Success  
-  - Non-zero = Error codes 
-- **Default:** None  
-- **Example:** `0`  
+- **Description:** Response status code.  
 
-#### **msg**
-- **Type:** String or Null  
+  Valid values:
+  - 0: success
+  - 2: system error
+- **Default:** 0  
+- **Example:** 0  
+
+### **msg**
+- **Type:** String  
 - **Required:** No  
-- **Description:** Optional message providing additional info (typically error detail on failure).  
-- **Constraints:** Can be `null` or a descriptive string.  
-- **Default:** `null`  
-- **Example:** `null`  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null
 
 {% endtab %}
 
