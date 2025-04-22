@@ -61,18 +61,13 @@ Steps:
 {% tabs %}
 {% tab title="Schema" %}
 
-
-
 ### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Response status code.
-  
+- **Description:** Response status code.  
   Valid values:
   - 0: success
-  - 1: request data format error
-  - 2: route is forbidden
-  - 3: unauthorized access
+  - 2: system error
 - **Default:** 0  
 - **Example:** 0  
 
