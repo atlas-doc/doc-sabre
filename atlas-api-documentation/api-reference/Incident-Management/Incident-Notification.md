@@ -15,19 +15,18 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier submitting the email notification event.  
-- **Constraints:** Alphanumeric string.  
 - **Default:** None  
 - **Example:** `"rggat40831"`
 
 ### **type**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Type of notification event. 
+- **Description:** Type of notification event.
+  
   Valid values:
   - email.schedulechange: Schedule Change-Email Notification
   - abnormal.cancelled: Unacounted Cancellation
   - order.schedulechange: Schedule Change-API Notification. 
-- **Constraints:** Must match one of the predefined event types. 
 - **Default:** None  
 - **Example:** `"email.schedulechange"`
 
@@ -35,7 +34,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the email notification event.  
-- **Constraints:** Must be unique across all events.  
 - **Default:** None  
 - **Example:** `"20230323113246035DNIDD"`
 
@@ -43,7 +41,7 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Status of the notification event.  
-- **Constraints:**  
+  Valid values:
   - `0` = Success  
   - Non-zero values can indicate error 
 - **Default:** `0`  
@@ -53,7 +51,6 @@ Method : Post
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains details of the email content and metadata.  
-- **Constraints:** Must include all subfields.  
 - **Default:** None  
 - **Example:**
   ```json
@@ -68,15 +65,13 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The order number to which the email notification relates.  
-- **Constraints:** Alphanumeric, system-generated.  
 - **Default:** None  
 - **Example:** `"TESTS20230323103458265"`
 
 #### **data.emailReceivingDate**
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Date and time when the email was received by Atlas.  
-- **Constraints:** Format: `YYYY-MM-DD HH:mm:ss`  
+- **Description:** Date and time when the email was received by Atlas. Format: `YYYY-MM-DD HH:mm:ss`    
 - **Default:** None  
 - **Example:** `"2022-12-11 18:33:33"`
 
@@ -84,7 +79,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The subject line of the email that was received.  
-- **Constraints:** Free text.  
 - **Default:** `""`  
 - **Example:** `"IMPORTANT: Flight delay notice. Confirmation Code KDK7QG"`
 
@@ -92,7 +86,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** URL link to view the full email content in the system.  
-- **Constraints:** Must be a valid URL.  
 - **Default:** None  
 - **Example:** `"https://theatlas/#/email-detail/4378270"`
 
