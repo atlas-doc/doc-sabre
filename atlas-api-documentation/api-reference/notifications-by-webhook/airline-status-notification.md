@@ -17,7 +17,6 @@ Method : Post
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains airline information including the airline codes and their status.  
-- **Constraints:** Must be a valid JSON object.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -31,7 +30,6 @@ Method : Post
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of airline codes associated with the response.  
-- **Constraints:** Each item must be a valid airline code (IATA or ICAO).  
 - **Default:** None  
 - **Example:** `["TO", "HV"]`  
 
@@ -41,21 +39,16 @@ Method : Post
 - **Description:** Indicates the operational status of the airline(s).  
 
   Valid values:
-
-  Active = Online
-
-  Maintenance = Airline is under maintenance
-
-  Inactive = Offline
-- **Constraints:** Can be "Active" or "Inactive".  
+  - Active = Online
+  - Maintenance = Airline is under maintenance
+  - Inactive = Offline
 - **Default:** None  
 - **Example:** `"Active"`
 
 #### **status**  
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Indicates the response status.  
-- **Constraints:** -1 indicates an error or inactive status.  
+- **Description:** Indicates the response status. Only for internal use by Atlas.  
 - **Default:** None  
 - **Example:** `-1`  
 
@@ -65,9 +58,7 @@ Method : Post
 - **Description:** Specifies the type of response message. 
 
   Valid value:
-
-  airline.status 
-- **Constraints:** Must be a valid response type string.  
+  - airline.status 
 - **Default:** None  
 - **Example:** `"airline.status"`  
 
