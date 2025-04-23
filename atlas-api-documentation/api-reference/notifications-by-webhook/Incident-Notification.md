@@ -14,7 +14,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier for tracking the request.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Example:** `"xxxxxxxxxx"`
 
 ### **type**  
@@ -23,20 +22,15 @@ Method : Post
 - **Description:** Incident type.  
 
   Valid values:
-
-  email.schedulechange: Schedule Change-Email Notification
-
-  abnormal.cancelled: Unaccounted Cancellation
-
-  order.schedulechange: Schedule Change-API Notification
-- **Constraints:** Must be `"email.schedulechange"`.  
+  - email.schedulechange: Schedule Change-Email Notification
+  - abnormal.cancelled: Unaccounted Cancellation
+  - order.schedulechange: Schedule Change-API Notification
 - **Example:** `"email.schedulechange"`
 
 ### **notificationId**  
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the notification event.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Example:** `"20230323113246035DNIDD"`
 
 ### **status**  
@@ -45,11 +39,8 @@ Method : Post
 - **Description:** Incident status.
 
   Valid values:
-
-  0: Unconfirmed 
-
-  1: Confirmed  
-- **Constraints:** None   
+  - 0: Unconfirmed
+  - 1: Confirmed  
 - **Example:** `0`
 
 ### **data**  
@@ -61,21 +52,18 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number associated with the flight booking.  
-- **Constraints:** Must be a valid order identifier.  
 - **Example:** `"TESTS20230323103458265"`
 
 #### **data.emailSubject**  
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Subject line of the email notification sent to the customer.  
-- **Constraints:** Must be a valid text string.  
 - **Example:** `"IMPORTANT: Flight delay notice. Confirmation Code KDK7QG"`
 
 #### **data.emailLink**  
 - **Type:** String (URL)  
 - **Required:** Yes  
 - **Description:** Direct link to the email details page for further information.  
-- **Constraints:** Must be a valid URL.  
 - **Example:** `"https://theatlas/#/email-detail/4378270"`
 
 {% endtab %}
