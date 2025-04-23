@@ -43,6 +43,7 @@ Method : Post
 - **Type:** `string`  
 - **Required:** Yes  
 - **Description:** Status of the add-on order.  
+
   Valid values: 
   - `"0"` = Unpaid  
   - `"1"` = Ticketing-in-Process  
@@ -64,6 +65,7 @@ Method : Post
 - **Type:** `integer`  
 - **Required:** Yes  
 - **Description:** Passenger type.  
+
   Valid values: 
   - `0` = Adult  
   - `1` = Child  
@@ -82,6 +84,7 @@ Method : Post
 - **Type:** `string`  
 - **Required:** Yes  
 - **Description:** Passenger gender.  
+
   Valid values:
   - `"M"`: Male
   - `"F"`: Female  
@@ -99,6 +102,7 @@ Method : Post
 - **Type:** `string`  
 - **Required:** Yes  
 - **Description:** Type of ID document.  
+
   Valid values:
   - PP - Passport
   - GA - Hong Kong Macau Pass for China mainland citizens
@@ -118,8 +122,7 @@ Method : Post
 #### `paxTicketInfos[].cardExpired`
 - **Type:** `string`  
 - **Required:** Yes  
-- **Description:** Expiry date of the document. Format: `yyyyMMdd`  
-- **Constraints:** Must be a future-valid date.  
+- **Description:** Expiry date of the document. Must be a future-valid date.  Format: `yyyyMMdd`.  
 - **Default:** `null`  
 - **Example:** `"20320118"`
 
