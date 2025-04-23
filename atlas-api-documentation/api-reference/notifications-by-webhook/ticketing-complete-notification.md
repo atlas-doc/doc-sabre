@@ -16,7 +16,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier for tracking requests.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** `"XXXXXXX"`
 
@@ -24,7 +23,6 @@ Method : Post
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains order-related information.  
-- **Constraints:** Must be a valid JSON object.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -39,7 +37,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number associated with the ticket purchase.  
-- **Constraints:** Must be a valid order identifier.  
 - **Default:** None  
 - **Example:** `"TESTL20230922153224323"`
 
@@ -47,14 +44,12 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Status of the order.  
-- **Constraints:**  
-  0: Unpaid
 
-  1: Ticketing-in-Process
-
-  2: Ticketed
-
- -3: Cancelled(When the booking is failed due to the request information) Order number
+  Valid values:
+  - 0: Unpaid
+  - 1: Ticketing-in-Process
+  - 2: Ticketed
+  - -3: Cancelled(When the booking is failed due to the request information) Order number
 - **Default:** None  
 - **Example:** `2`
 
@@ -62,14 +57,12 @@ Method : Post
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Contains details of passengers and their associated ticket information.  
-- **Constraints:** Must contain at least one valid passenger entry.  
 - **Default:** None  
 
 ##### **data.paxTicketInfos[]**  
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Individual passenger ticket details.  
-- **Constraints:** Each entry must be a valid passenger information object.  
 - **Example:**  
   ```json
   {
@@ -91,8 +84,7 @@ Method : Post
 ##### **data.paxTicketInfos[].name**  
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Passenger name in standard airline format (SURNAME/GIVENNAME).  
-- **Constraints:** Must follow `LASTNAME/FIRSTNAME` format.  
+- **Description:** Passenger name in standard airline format (LastName/FirstName MiddleName).  
 - **Default:** None  
 - **Example:** `"zhang/lisi"`
 
@@ -100,7 +92,8 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of passenger.  
-- **Constraints:**  
+
+  Valid values:
   - `0` = Adult  
   - `1` = Child  
   - `2` = Infant  
@@ -111,7 +104,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger's date of birth in `YYYYMMDD` format.  
-- **Constraints:** Must be a valid date in the past.  
 - **Default:** None  
 - **Example:** `"20160202"`
 
@@ -119,7 +111,9 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger gender.  
-- **Constraints:** `M` for Male, `F` for Female.  
+  Valid values:
+  - `M` for Male
+  - `F` for Female 
 - **Default:** None  
 - **Example:** `"F"`
 
@@ -127,7 +121,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Identification document number (passport or national ID).
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** `"123458"`
 
@@ -137,17 +130,11 @@ Method : Post
 - **Description:** Type of identification document.  
 
   Valid values:
-
-  PP - Passport
-
-  GA - Hong Kong Macau Pass for China mainland citizens
-
-  TW - Taiwan Pass for China mainland citizens
-
-  TB - China mainland pass for Taiwanese
-
-  HY - International Seaman's Certificate  
-- **Constraints:** As above 
+  - PP - Passport
+  - GA - Hong Kong Macau Pass for China mainland citizens
+  - TW - Taiwan Pass for China mainland citizens
+  - TB - China mainland pass for Taiwanese
+  - HY - International Seaman's Certificate  
 - **Default:** None  
 - **Example:** `"PP"`
 
@@ -155,15 +142,13 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Country or authority that issued the identification document.  
-- **Constraints:** Must be a valid country code (e.g., `"CN"` for China).  
 - **Default:** None  
 - **Example:** `"CN"`
 
 ##### **data.paxTicketInfos[].cardExpired**  
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Expiry date of the identification document in `YYYYMMDD` format.  
-- **Constraints:** Must be a valid date in the future.  
+- **Description:** Expiry date of the identification document in `YYYYMMDD` format. Must be a valid date in the future.    
 - **Default:** None  
 - **Example:** `"20400101"`
 
@@ -171,7 +156,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger’s nationality using country codes (ISO 3166-1 alpha-2).  
-- **Constraints:** Must be a valid country code.  
 - **Default:** None  
 - **Example:** `"CN"`
 
@@ -179,7 +163,6 @@ Method : Post
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of issued ticket numbers associated with the passenger.  
-- **Constraints:** Must contain at least one valid ticket number.  
 - **Default:** None  
 - **Example:** `["S30814"]`
 
@@ -187,7 +170,6 @@ Method : Post
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of Passenger Name Record (PNR) codes.  
-- **Constraints:** Must contain at least one valid PNR.  
 - **Default:** None  
 - **Example:** `["S30814"]`
 
@@ -195,7 +177,6 @@ Method : Post
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of ancillary services associated with the passenger (e.g., extra baggage, seat selection).  
-- **Constraints:** Can be empty if no ancillaries are purchased.  
 - **Default:** `[]`  
 - **Example:** `[]`
 
@@ -203,7 +184,6 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates the response status.  
-- **Constraints:** -1 indicates an error or inactive status.  
 - **Default:** None  
 - **Example:** `-1`
 
@@ -211,7 +191,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Specifies the type of response message.  
-- **Constraints:** Must be a valid response type string.  
 - **Default:** None  
 - **Example:** `"order.ticketed"`
 
