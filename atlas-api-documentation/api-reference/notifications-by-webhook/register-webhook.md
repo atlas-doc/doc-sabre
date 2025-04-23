@@ -12,7 +12,6 @@
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** "XXXXXXXX"  
 
@@ -20,7 +19,6 @@
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The URL address to receive webhook message.  
-- **Constraints:** Must be a valid URL format.  
 - **Default:** None  
 - **Example:** "https://xxx.com/xxxx"  
 
@@ -40,27 +38,23 @@
 
 {% tabs %}
 {% tab title="Schema" %}
-##### **status**
+#### **status**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Indicates the status of the request. 
+- **Description:** Response status code.  
 
   Valid values:
+  - 0: success
+  - 2: system error
+- **Default:** 0  
+- **Example:** 0  
 
-  0 = success
-
-  2 = System error
-- **Constraints:** Must be `0` for success.  
-- **Default:** None  
-- **Example:** `0`  
-
-##### **msg**
+#### **msg**
 - **Type:** String  
-- **Required:** Yes  
-- **Description:** Message indicating the request result. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.
-- **Constraints:** Must be a descriptive success or error message.  
-- **Default:** None  
-- **Example:** "success"
+- **Required:** No  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
+- **Default:** null  
+- **Example:** null
 
 {% endtab %}
 
