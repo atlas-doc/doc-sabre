@@ -14,7 +14,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier for tracking requests.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** `"XXXXXXX"`
 
@@ -22,7 +21,6 @@ Method : Post
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains order-related details, including previous and revised flight segments.  
-- **Constraints:** Must be a valid JSON object.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -38,7 +36,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique order number associated with the flight booking.  
-- **Constraints:** Must be a valid order identifier.  
 - **Default:** None  
 - **Example:** `"ATXFQ20230720193244809"`
 
@@ -46,14 +43,12 @@ Method : Post
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Contains details of the original flight segments before any schedule change.  
-- **Constraints:** Must contain at least one flight segment.  
 - **Default:** None  
 
 ##### **data.previousSegs[]**  
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Individual flight segment details before the schedule change.  
-- **Constraints:** Each entry must be a valid flight segment.  
 - **Example:**  
   ```json
   {
@@ -73,7 +68,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure airport code (IATA).  
-- **Constraints:** Must be a valid three-letter airport code.  
 - **Default:** None  
 - **Example:** `"HKG"`
 
@@ -81,7 +75,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival airport code (IATA).  
-- **Constraints:** Must be a valid three-letter airport code.  
 - **Default:** None  
 - **Example:** `"SGN"`
 
@@ -89,7 +82,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure time in `YYYY-MM-DD HH:MM:SS` format.  
-- **Constraints:** Must be a valid timestamp.  
 - **Default:** None  
 - **Example:** `"2023-07-24 19:50:00"`
 
@@ -97,7 +89,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival time in `YYYY-MM-DD HH:MM:SS` format.  
-- **Constraints:** Must be a valid timestamp.  
 - **Default:** None  
 - **Example:** `"2023-07-24 21:30:00"`
 
@@ -105,7 +96,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be a valid airline code.  
 - **Default:** None  
 - **Example:** `"VJ"`
 
@@ -113,15 +103,17 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number assigned by the airline.  
-- **Constraints:** Must be a valid alphanumeric flight number.  
 - **Default:** None  
 - **Example:** `"VJ877"`
 
 ##### **data.previousSegs[].codeShare**  
 - **Type:** Boolean  
 - **Required:** Yes  
-- **Description:** Indicates if the flight is a codeshare.  
-- **Constraints:** `true` = Codeshare flight, `false` = Not a codeshare flight.  
+- **Description:** Indicates if the flight is a codeshare.
+
+  Valid values:
+  - `true` = Codeshare flight
+  - `false` = Not a codeshare flight.  
 - **Default:** `false`  
 - **Example:** `false`
 
@@ -129,7 +121,6 @@ Method : Post
 - **Type:** String  
 - **Required:** No  
 - **Description:** Departure terminal information.  
-- **Constraints:** Can be an empty string if no terminal information is available.  
 - **Default:** `""`  
 - **Example:** `""`
 
@@ -137,7 +128,6 @@ Method : Post
 - **Type:** String  
 - **Required:** No  
 - **Description:** Arrival terminal information.  
-- **Constraints:** Can be an empty string if no terminal information is available.  
 - **Default:** `""`  
 - **Example:** `""`
 
@@ -145,14 +135,12 @@ Method : Post
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Contains details of the flight segments after the schedule change.  
-- **Constraints:** Must contain at least one flight segment.  
 - **Default:** None  
 
 ##### **data.revisedSegs[]**  
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Individual flight segment details after the schedule change.  
-- **Constraints:** Each entry must be a valid flight segment.  
 - **Example:**  
   ```json
   {
@@ -172,13 +160,10 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of schedule change.  
-- **Constraints:**  
-  
+
   Valid values:
-
-  1: Schedule change
-
-  2: Flight cancel
+  - 1: Schedule change
+  - 2: Flight cancel
 - **Default:** None  
 - **Example:** `1`
 
@@ -186,7 +171,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the notification event.  
-- **Constraints:** Must be a valid alphanumeric string.  
 - **Default:** None  
 - **Example:** `"20230917143240511TATVO"`
 
@@ -194,12 +178,10 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Incident staus.  
-- **Constraints:**  
+
   Valid values:
-
-  0: Unconfirmed 
-
-  1: Confirmed  
+  - 0: Unconfirmed
+  - 1: Confirmed  
 - **Default:** None  
 - **Example:** `0`
 
@@ -207,7 +189,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Notification type.  
-- **Constraints:** Must be a valid response type string.  
 - **Default:** None  
 - **Example:** `"order.schedulechange"`
 {% endtab %}
