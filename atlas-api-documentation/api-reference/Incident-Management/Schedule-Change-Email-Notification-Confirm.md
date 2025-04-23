@@ -116,7 +116,8 @@ No preceding function needs to be carried out.
 - **Type:** `integer`  
 - **Required:** Yes  
 - **Description:** Status code representing the outcome of the API request.  
-  Valid values: 
+
+   Valid values: 
   - `0` = Success  
   - Any non-zero value indicates an error or failure.  
 - **Default:** `0`  
