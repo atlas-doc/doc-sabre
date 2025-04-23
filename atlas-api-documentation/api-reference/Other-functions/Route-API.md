@@ -22,11 +22,8 @@ There is no dependency for this call.
 - **Description:** Type of route being queried.  
 
   Valid values:
-
-  1 = Airline routes
-
-  2 = Atlas routes
-- **Constraints:**  
+  - 1 = Airline routes
+  - 2 = Atlas routes
 - **Default:** None  
 - **Example:** `1`
 
@@ -34,7 +31,6 @@ There is no dependency for this call.
 - **Type:** Array of Strings  
 - **Required:** No  
 - **Description:** List of preferred airline codes to filter routes.  
-- **Constraints:** Must be valid 2-letter IATA airline codes.  
 - **Default:** `[]`  
 - **Example:** `["EI"]`
 
@@ -42,7 +38,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA airport or city code representing the departure location.  
-- **Constraints:** Must be a valid 3-letter IATA code.  
 - **Default:** None  
 - **Example:** `"DUB"`
 
@@ -50,7 +45,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** ISO 3166-1 alpha-2 country code of the departure location.  
-- **Constraints:** Must be a valid 2-letter country code.  
 - **Default:** None  
 - **Example:** `"IE"`
 
@@ -58,7 +52,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA airport or city code representing the destination location.  
-- **Constraints:** Must be a valid 3-letter IATA code.  
 - **Default:** None  
 - **Example:** `"SAN"`
 
@@ -66,7 +59,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** ISO 3166-1 alpha-2 country code of the destination location.  
-- **Constraints:** Must be a valid 2-letter country code.  
 - **Default:** None  
 - **Example:** `"IE"`
 
@@ -95,7 +87,6 @@ There is no dependency for this call.
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of available route schedules matching the search criteria.  
-- **Constraints:** Can be empty if no routes are available.  
 - **Default:** `[]`  
 - **Example:**
   ```json
@@ -118,7 +109,6 @@ There is no dependency for this call.
 - **Type:** Array of Strings  
 - **Required:** Yes  
 - **Description:** List of airline codes operating the route.  
-- **Constraints:** Must be valid 2-letter IATA airline codes.  
 - **Default:** `[]`  
 - **Example:** `["EI"]`
 
@@ -126,7 +116,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code for the departure city/airport.  
-- **Constraints:** Must be a valid 3-letter code.  
 - **Default:** None  
 - **Example:** `"DUB"`
 
@@ -134,7 +123,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** ISO 3166-1 alpha-2 code of the departure country.  
-- **Constraints:** Must be a valid 2-letter country code.  
 - **Default:** None  
 - **Example:** `"IE"`
 
@@ -142,7 +130,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** IATA code for the destination city/airport.  
-- **Constraints:** Must be a valid 3-letter code.  
 - **Default:** None  
 - **Example:** `"SAN"`
 
@@ -150,7 +137,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** ISO 3166-1 alpha-2 code of the destination country.  
-- **Constraints:** Must be a valid 2-letter country code.  
 - **Default:** None  
 - **Example:** `"IE"`
 
@@ -160,13 +146,9 @@ There is no dependency for this call.
 - **Description:** Indicates whether the route is a direct flight.  
 
   Valid values:
-
-  True: Direct Flight 
-
-  False: Transfer Flight 
-
+  - true: Direct Flight
+  - false: Transfer Flight 
   This data will only be available when the "routeType" = 2 (Atlas Routes)
-- **Constraints:** `true` = direct flight, `false` = includes stops or connections.  
 - **Default:** `false`  
 - **Example:** `false`
 
@@ -174,7 +156,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The start date of the booking window. The format is YYYYMMDD.  
-- **Constraints:** Must be a valid date string.  
 - **Default:** None  
 - **Example:** `"20241024"`
 
@@ -182,7 +163,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:**  The end date of the booking window. The format is YYYYMMDD.
-- **Constraints:** Must be a valid date string.  
 - **Default:** None  
 - **Example:** `"20250428"`
 
@@ -190,7 +170,6 @@ There is no dependency for this call.
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The date when the routing data was updated. The format is YYYYMMDD.
-- **Constraints:** Must be a valid date string.  
 - **Default:** None  
 - **Example:** `"20241031"`
 
@@ -198,15 +177,17 @@ There is no dependency for this call.
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Response status code.  
-- **Constraints:** 0 indicates success.  
+
+  Valid values:
+  - 0: success
+  - 2: system error
 - **Default:** 0  
 - **Example:** 0  
 
 ### **msg**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Response message.  
-- **Constraints:** Can be null.  
+- **Description:** Error message. The 'msg' element is for description of the results. Please DO NOT use this field to check the success or failure of the request. Only use the 'status' code to check the result.  
 - **Default:** null  
 - **Example:** null  
     
