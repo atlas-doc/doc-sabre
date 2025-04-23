@@ -14,7 +14,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier.  
-- **Constraints:** Max length: 50 characters.  
 - **Default:** None  
 - **Example:** `"XXXXX"`  
 
@@ -22,7 +21,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the notification event.  
-- **Constraints:** Max length: 50 characters.  
 - **Default:** None  
 - **Example:** `"20240105105430470MJMOR"`  
 
@@ -30,7 +28,6 @@ Method : Post
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** In this type of notification status always = -1. This is an internal field and should be ignored.  
-- **Constraints:** None
 - **Default:** None  
 - **Example:** `-1`  
 
@@ -38,7 +35,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Notification type.  
-- **Constraints:** Must be `"email.all"`.  
 - **Default:** None  
 - **Example:** `"email.all"`  
 
@@ -46,7 +42,6 @@ Method : Post
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains email-related details.  
-- **Constraints:** Cannot be empty.  
 - **Default:** None  
 - **Example:** `{ ... }`  
 
@@ -54,15 +49,13 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Order number associated with the email.  
-- **Constraints:** Max length: 50 characters.  
 - **Default:** None  
 - **Example:** `"XXXXXX"`  
 
 ##### `data.emailReceivingDate`  
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Date and time when the email was received by Atlas (UTC).  
-- **Constraints:** Format: `YYYY-MM-DD HH:mm:ss`.  
+- **Description:** Date and time when the email was received by Atlas (UTC). Format: `YYYY-MM-DD HH:mm:ss`.  
 - **Default:** None  
 - **Example:** `"2024-01-05 10:54:21"`  
 
@@ -70,7 +63,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique code for identifying the email.  
-- **Constraints:** Must be exactly 32 characters.  
 - **Default:** None  
 - **Example:** `"e4afbecfd5727817ff73a71a94a2a64d"`  
 
@@ -80,33 +72,19 @@ Method : Post
 - **Description:** Atlas email categories. Atlas categorizes emails but does not guarantee accuracy in classification.
 
   Valid values:
-
-  Schedule change
-
-  Receipt
-
-  Payment Success
-
-  Verification
-
-  Trip Reminder
-
-  Promo code
-
-  Travel Itinerary
-
-  Advertisement
-
-  PNR Cancellation Success
-
-  Payment Due
-
-  Unidentified
-
-  Duplicated Schedule Change
-
-  Unaccounted Cancellation  
-- **Constraints:** Possible values: `"Payment Success"`, `"Booking Confirmation"`, `"Cancellation"`.  
+  - Schedule change
+  - Receipt
+  - Payment Success
+  - Verification
+  - Trip Reminder
+  - Promo code
+  - Travel Itinerary
+  - Advertisement
+  - PNR Cancellation Success
+  - Payment Due
+  - Unidentified
+  - Duplicated Schedule Change
+  - Unaccounted Cancellation  
 - **Default:** None  
 - **Example:** `"Payment Success"`  
 
@@ -114,7 +92,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Sender’s email address.  
-- **Constraints:** Must be a valid email format.  
 - **Default:** None  
 - **Example:** `"donotreply@easyjet.com"`  
 
@@ -122,7 +99,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Recipient’s email address.  
-- **Constraints:** Must be a valid email format.  
 - **Default:** None  
 - **Example:** `"NSDLZCQTGJTEYXOMFOD@gorn.top"`  
 
@@ -130,7 +106,6 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Subject of the email.  
-- **Constraints:** Max length: 100 characters.  
 - **Default:** None  
 - **Example:** `"easyJet booking reference: XXXXX"`  
 
@@ -138,15 +113,13 @@ Method : Post
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** URL link to access the email content. Email Link is only valid for 10 mins.
-- **Constraints:** Must be a valid URL format.  
 - **Default:** None  
 - **Example:** `"http://order-oss-sg.oss-ap-southeast-1.aliyuncs.com/...eml?Expires=1704426870..."`  
 
 ##### `data.createTime`  
 - **Type:** String  
 - **Required:** Yes  
-- **Description:** Create Time is the time when Atlas created this email record in the Email list. Generally, it will be later than the receiving time.  
-- **Constraints:** Format: `YYYY-MM-DD HH:mm:ss`.  
+- **Description:** Create Time is the time when Atlas created this email record in the Email list. Generally, it will be later than the receiving time. Format: `YYYY-MM-DD HH:mm:ss`.    
 - **Default:** None  
 - **Example:** `"2024-01-05 10:54:26"`  
 {% endtab %}
