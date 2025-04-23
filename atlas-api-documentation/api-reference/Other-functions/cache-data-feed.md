@@ -119,23 +119,20 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique client identifier used for authentication or tracking the request. This is the Access key (AK) of the customer.
-- **Constraints:** Alphanumeric string, typically provided by the platform.  
 - **Default:** None  
 - **Example:** `"xxxxxxxxxxx"`
 
 ### **startTimestamp**
 - **Type:** Integer (Unix Timestamp in milliseconds)  
 - **Required:** Yes  
-- **Description:** Start time for filtering orders. Represents the beginning of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago.  
-- **Constraints:** Must be a valid Unix timestamp in milliseconds (13 digits).  
+- **Description:** Start time for filtering orders. Represents the beginning of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago. Must be a valid Unix timestamp in milliseconds (13 digits).    
 - **Default:** None  
 - **Example:** `1696631580000`
 
 ### **endTimestamp**
 - **Type:** Integer (Unix Timestamp in milliseconds)  
 - **Required:** Yes  
-- **Description:** End time for filtering orders. Represents the end of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago. The time range cannot exceed one hour.  
-- **Constraints:** Must be a valid Unix timestamp in milliseconds (13 digits). Must be equal to or greater than `startTimestamp`.  
+- **Description:** End time for filtering orders. Represents the end of the time window (inclusive). Unix Timestamp. When not filled in, defaults to one hour ago. The time range cannot exceed one hour. Must be a valid Unix timestamp in milliseconds (13 digits). Must be equal to or greater than `startTimestamp`.   
 - **Default:** None  
 - **Example:** `1696631580000`
     
@@ -186,7 +183,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** 2-letter IATA code of the airline operating the flight.  
-- **Constraints:** Must be a valid IATA airline code.  
 - **Default:** None  
 - **Example:** `"W4"`
 
@@ -194,7 +190,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The time when the cache was refreshed. Format: yyyy-MM-dd HH:mm 
-- **Constraints:** Format `YYYY-MM-DD HH:mm:ss`.  
 - **Default:** None  
 - **Example:** `"2024-10-29 12:54:00"`
 
@@ -202,7 +197,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** List of available flight itineraries, each containing segment, price, and ancillary data.  
-- **Constraints:** Must contain at least one itinerary object.  
 - **Default:** `[]`  
 - **Example:** `[ { ... } ]`
 
@@ -210,14 +204,12 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** No  
 - **Description:** Ancillary product information available for a specific segment.  
-- **Constraints:** Optional if no ancillaries are present.  
 - **Default:** `[]`  
 
 ### **ancillaryList[].segmentIndex**
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Index of the segment the ancillary applies to.  
-- **Constraints:** Must be ≥ 1.  
 - **Default:** None  
 - **Example:** `1`
 
@@ -225,14 +217,12 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Ancillary definitions grouped by fare family and currency.  
-- **Constraints:** At least one per segment if available.  
 - **Default:** `[]`
 
 ### **outputAncillary[].currency**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency code used for the ancillary pricing.  
-- **Constraints:** Must be a valid ISO 4217 code.  
 - **Default:** None  
 - **Example:** `"EUR"`
 
@@ -240,7 +230,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Fare family to which the ancillaries apply.  
-- **Constraints:** Free-text, airline-defined.  
 - **Default:** None  
 - **Example:** `"Basic"`
 
@@ -248,14 +237,15 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Array defining types of ancillary services. (e.g., baggage, seat).  
-- **Constraints:** At least one category with details.  
 - **Default:** `[]`
 
 ### **categoryEntity[].categoryCode**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code defining the ancillary category.  
-- **Constraints:** Examples: `"StandardCheckInBaggage"`, `"CabinBaggageOverheadLocker"`  
+  Valid values:
+  - `"StandardCheckInBaggage"`
+  - `"CabinBaggageOverheadLocker"`  
 - **Default:** None  
 - **Example:** `"StandardCheckInBaggage"`
 
@@ -263,21 +253,21 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Details of each category, such as piece count and weight.
-- **Constraints:** At least one option must exist.  
 - **Default:** `[]`
 
 ### **categoryDetail[].auxBaggageElement**
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Structure containing baggage specifications.  
-- **Constraints:** Must include piece and weight.  
 - **Default:** None
 
 ### **auxBaggageElement.isAllWeight**
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Indicates if weight is total for all pieces or per piece.  
-- **Constraints:** true = all pieces, false = per piece  
+  Valid values:
+  - true = all pieces
+  - false = per piece  
 - **Default:** true  
 - **Example:** `true`
 
@@ -285,7 +275,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of baggage pieces allowed.  
-- **Constraints:** ≥ 0  
 - **Default:** 0  
 - **Example:** `3`
 
@@ -293,7 +282,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Total or per-piece weight allowed in kilograms.  
-- **Constraints:** ≥ 0  
 - **Default:** 0  
 - **Example:** `96`
 
@@ -301,7 +289,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String or Null  
 - **Required:** No  
 - **Description:** Size of baggage if applicable (empty if not). 
-- **Constraints:** Text format, can be empty.  
 - **Default:** `""`  
 - **Example:** `""`
 
@@ -309,7 +296,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Max/min quantity allowed for purchase.  
-- **Constraints:** ≥ 1  
 - **Default:** `1`  
 - **Example:** `1`
 
@@ -317,7 +303,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Ancillary item price.  
-- **Constraints:** ≥ 0  
 - **Default:** 0.0  
 - **Example:** `199.44`
 
@@ -325,14 +310,12 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Fare prices by passenger type and fare family.  
-- **Constraints:** Must contain at least one entry.  
 - **Default:** `[]`
 
 ### **prices[].bookingCode**
 - **Type:** String  
 - **Required:** No  
 - **Description:** Booking class code used by the airline (optional).  
-- **Constraints:** Free-text, can be empty.  
 - **Default:** `""`  
 - **Example:** `""`
 
@@ -340,7 +323,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency for price and tax fields.  
-- **Constraints:** ISO 4217 format.  
 - **Default:** None  
 - **Example:** `"EUR"`
 
@@ -348,7 +330,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Fare category for the passenger (e.g., STANDARD).
-- **Constraints:** Free-text, airline-defined.  
 - **Default:** None  
 - **Example:** `"Basic"`
 
@@ -356,7 +337,10 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger type.  
-- **Constraints:** Must be one of: `"ADT"` (Adult), `"CHD"` (Child), `"INF"` (Infant)  
+  Valid values:
+  - `"ADT"` (Adult)
+  - `"CHD"` (Child)
+  - `"INF"` (Infant)  
 - **Default:** `"ADT"`  
 - **Example:** `"ADT"`
 
@@ -364,7 +348,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Number 
 - **Required:** Yes  
 - **Description:** Base fare price.  
-- **Constraints:** ≥ 0  
 - **Default:** 0.0  
 - **Example:** `49.9`
 
@@ -372,7 +355,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of seats available at this fare.  
-- **Constraints:** ≥ 0  
 - **Default:** 0  
 - **Example:** `2`
 
@@ -380,7 +362,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Number 
 - **Required:** Yes  
 - **Description:** Tax associated with the fare.  
-- **Constraints:** ≥ 0  
 - **Default:** 0.0  
 - **Example:** `9.46`
 
@@ -388,14 +369,12 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Array of Objects  
 - **Required:** Yes  
 - **Description:** Flight segment details.  
-- **Constraints:** At least one segment must be present.  
 - **Default:** `[]`
 
 ### **segments[].airline**
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline code for the segment.  
-- **Constraints:** Valid 2-letter IATA code.  
 - **Default:** None  
 - **Example:** `"W4"`
 
@@ -403,7 +382,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number.  
-- **Constraints:** Alphanumeric, includes airline prefix.  
 - **Default:** None  
 - **Example:** `"W46070"`
 
@@ -411,7 +389,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure / arrival airport IATA code.  
-- **Constraints:** 3-letter IATA code.  
 - **Default:** None  
 - **Example:** `"SPX"` / `"FCO"`
 
@@ -419,7 +396,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure / arrival time in `YYYYMMDDHHmm` format.  
-- **Constraints:** Valid timestamp.  
 - **Default:** None  
 - **Example:** `"202411261100"` / `"202411261345"`
 
@@ -427,7 +403,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Flight duration in minutes.  
-- **Constraints:** ≥ 0  
 - **Default:** 0  
 - **Example:** `225`
 
@@ -435,7 +410,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Direction of travel (1 = outbound, 2 = return).  
-- **Constraints:** Must be either 1 or 2  
 - **Default:** `1`  
 - **Example:** `1`
 
@@ -443,7 +417,9 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Indicates if the flight is operated under a codeshare agreement.  
-- **Constraints:** true or false  
+  Valid values:
+  - true: Codeshare flight
+  - false: Not a codeshare flight  
 - **Default:** false  
 - **Example:** `false`
 
@@ -451,7 +427,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Actual airline operating the flight.  
-- **Constraints:** Valid IATA code.  
 - **Default:** None  
 - **Example:** `"W4"`
 
@@ -459,7 +434,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** No  
 - **Description:** Operating carrier's flight number if different from marketing carrier.  
-- **Constraints:** Can be empty.  
 - **Default:** `""`  
 - **Example:** `""`
 
@@ -467,7 +441,6 @@ VJ1900, USD 145, USD 156, USD 167
 - **Type:** String  
 - **Required:** No  
 - **Description:** Comma-separated IATA codes of stopover cities.  
-- **Constraints:** Empty if no stops.  
 - **Default:** `""`  
 - **Example:** `""`
 
