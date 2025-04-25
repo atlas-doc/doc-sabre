@@ -67,7 +67,10 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Indicates the type of trip.  
-- **Constraints:** "1" for one-way, "2" for round-trip.  
+
+  Valid values:
+  -"1" for one-way
+  - "2" for round-trip
 - **Default:** None  
 - **Example:** "2"  
 
@@ -75,7 +78,6 @@ Accept-Encoding: gzip
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of adult passengers.  
-- **Constraints:** Must be 1 or greater.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -83,7 +85,6 @@ Accept-Encoding: gzip
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of child passengers.  
-- **Constraints:** Cannot be negative.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -91,7 +92,6 @@ Accept-Encoding: gzip
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of infant passengers.  
-- **Constraints:** Cannot be negative.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -99,7 +99,6 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure city IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "KRK"  
 
@@ -107,7 +106,6 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival city IATA code.  
-- **Constraints:** Must be a valid IATA airport code.  
 - **Default:** None  
 - **Example:** "LTN"  
 
@@ -115,15 +113,13 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure date in YYYYMMDD format.  
-- **Constraints:** Must be a valid date.  
 - **Default:** None  
 - **Example:** "20240326"  
 
 ### **retDate**
 - **Type:** String  
 - **Required:** Yes (if round-trip)  
-- **Description:** Return date in YYYYMMDD format.  
-- **Constraints:** Required if tripType is "2" (round-trip).  
+- **Description:** Return date in YYYYMMDD format. Required if tripType is "2" (round-trip).   
 - **Default:** None  
 - **Example:** "20240423"  
 
@@ -131,7 +127,6 @@ Accept-Encoding: gzip
 - **Type:** Array of Strings  
 - **Required:** No  
 - **Description:** List of airline codes to include in the search.  
-- **Constraints:** Must be valid IATA airline codes.  
 - **Default:** None  
 - **Example:** ["FR", "W6", "F9"]  
 
@@ -139,7 +134,6 @@ Accept-Encoding: gzip
 - **Type:** Array of Strings  
 - **Required:** No  
 - **Description:** List of preferred departure flight numbers.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** ["FR123", "FR456"]  
 
@@ -147,7 +141,6 @@ Accept-Encoding: gzip
 - **Type:** Array of Strings  
 - **Required:** No  
 - **Description:** List of preferred return flight numbers.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** ["FR123", "FR456"]  
 
@@ -155,7 +148,9 @@ Accept-Encoding: gzip
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if multiple fare families should be included in the search.  
-- **Constraints:** true or false  
+  Valid values:
+  - true: include fare families
+  - false: do not include fare families  
 - **Default:** false  
 - **Example:** true  
 
@@ -163,7 +158,6 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** No  
 - **Description:** Currency in which pricing should be calculated.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "GBP"  
 
@@ -171,7 +165,6 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** No  
 - **Description:** Currency to be displayed in results.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "PHP"  
 
@@ -179,7 +172,6 @@ Accept-Encoding: gzip
 - **Type:** String  
 - **Required:** No  
 - **Description:** Source of the request.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "Organic"  
 {% endtab %}
@@ -251,7 +243,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of available flight options.  
-- **Constraints:** Must contain at least one routing option.  
 - **Default:** None  
 - **Example:** [{...}]  
 
@@ -259,7 +250,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique identifier for the flight.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "2ex3fC8fhO9-tp5yRHzmmfaFZTmKk-AmiileVzjrMn03uznhGSbRVdhdb239v6gV"  
 
@@ -267,7 +257,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Identifier for the routing.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "TEFYX0xBU18xXzIwMjUwNDE5X18xXzBfMHx0dHh6cDYyNDA1fDF8NDAuOThfNDAuOThfMTAuMDBfMC42NV85Mi42MV9VU0R8TEFYX0xBU18xXzIwMjUwNDE5X18xXzBfMF5PTlQtRjk0MjA2LS1MQVMtMjAyNTA0MTkyMjAyLTIwMjUwNDE5MjMxMy1CYXNpYyBGYXJlLTEtXjQwLjk4XzQwLjk4XzEwLjAwXzAuNjVfOTIuNjFeQUY5X0FGOV5eQUY5MUxBWExBUzIwMDIwMjUwNDE5XlVTRF40MC45OF40MC45OF4xMC4wMHwxfDIwMjUwMzIwMTkwMjMyfDB8MTc0MjQ2ODU1MjIzMGt0Q2hxfHx8fHwwLjY1fDJ8MHxVU0Q=.nE15gqdNlu6fdhXI0uiKGp1JfLfNw0zWSSGNxIkY7gQ="  
 
@@ -275,11 +264,10 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** String  
 - **Required:** No  
 - **Description:** Indicates if VCC payment is supported.  
-- **Constraints:**
 
-    0: The credit card details will not be passed through and only pre-payment is allowed.
-
-    1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment. 
+  Valid values:
+  - 0: The credit card details will not be passed through and only pre-payment is allowed.
+  - 1: The API will allow you to pass through client’s credit card details for payment. The customer can also use pre-payment as a method of payment. 
 - **Default:** "0"  
 - **Example:** "1"  
 
@@ -287,7 +275,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Array  
 - **Required:** No  
 - **Description:** List of supported payment method identifiers. 1: Deposit 3: VCC Passthrough  5: MOR 
-- **Constraints:** Must be a valid list of numeric payment method identifiers.  
 - **Default:** None  
 - **Example:** [1, 5, 3]  
 
@@ -295,7 +282,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency code for the flight pricing. This is the currency in which Atlas settles transactions with you. 
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** None  
 - **Example:** "USD"  
 
@@ -303,7 +289,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The base fare price for an adult passenger.  
-- **Constraints:** Must be a positive number.  
 - **Default:** None  
 - **Example:** 96.03  
 
@@ -311,7 +296,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The tax amount applicable to an adult ticket.  
-- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
 - **Example:** 0.18  
 
@@ -319,7 +303,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Breakdown of adult fare and tax details.  
-- **Constraints:** Must contain objects with valid pricing details.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -333,7 +316,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The base fare price for a child passenger.  
-- **Constraints:** Must be a positive number.  
 - **Default:** None  
 - **Example:** 96.03  
 
@@ -341,7 +323,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The tax amount applicable to a child ticket.  
-- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
 - **Example:** 0.18  
 
@@ -349,7 +330,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Breakdown of child fare and tax details.  
-- **Constraints:** Must contain objects with valid pricing details.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -363,7 +343,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The base fare price for an infant passenger.  
-- **Constraints:** Must be a positive number.  
 - **Default:** None  
 - **Example:** 51.04  
 
@@ -371,7 +350,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The tax amount applicable to an infant ticket.  
-- **Constraints:** Must be a positive number or zero.  
 - **Default:** None  
 - **Example:** 0  
 
@@ -379,7 +357,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Breakdown of infant fare and tax details.  
-- **Constraints:** Must contain objects with valid pricing details.  
 - **Default:** None  
 - **Example:**  
   ```json
@@ -408,7 +385,9 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if infants are allowed.  
-- **Constraints:** True or False  
+  Valid values:
+  - true: Infants supported
+  - false: Infants not supported 
 - **Default:** True  
 - **Example:** true  
 
@@ -416,7 +395,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Technical service fee per passenger as per the signed contract.  
-- **Constraints:** Must be a positive number.  
 - **Default:** 0.0  
 - **Example:** 0.65  
 
@@ -424,7 +402,6 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** Number  
 - **Required:** No  
 - **Description:** Technical service fee as per "transactionFeeMode". 
-- **Constraints:** Must be a positive number.  
 - **Default:** 0.0  
 - **Example:** 0.65  
 
@@ -432,19 +409,12 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Type:** String  
 - **Required:** No  
 - **Description:** Defines how transaction fees are applied.  
-- **Constraints:**
 
-  The criteria of calculating the transaction fee as per the contractual agreement.
-
-  Transaction Fee Mode values:
-
-  PER_SEGMENT: Each segment of an itinerary (per passenger)
-
-  PER_TICKET: No. of tickets in a booking
-
-  PER_PAX: Per passenger
-
-  PER_BOOKING: Per atlas booking (order #)  
+  Valid values:
+  - PER_SEGMENT: Each segment of an itinerary (per passenger)
+  - PER_TICKET: No. of tickets in a booking
+  - PER_PAX: Per passenger
+  - PER_BOOKING: Per atlas booking (order #)  
 - **Default:** None  
 - **Example:** "PER_TICKET"  
 
@@ -454,13 +424,10 @@ The 'msg' element is for description of the results. Please DO NOT use this fiel
 - **Description:** Defines whether nationality is required.  
 - **Constraints:**
 
-Nationality limitation values
-
-0 No Limitation (optional)
-
-1 Allowed (required)
-
-2 Forbidden (not to be entered)
+  Valid values:
+  - 0 No Limitation (optional)
+  - 1 Allowed (required)
+  - 2 Forbidden (not to be entered)
 - **Default:** 0  
 - **Example:** 0  
 
@@ -468,7 +435,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Passenger nationality.  
-- **Constraints:** This is the nationality of the passenger. Pass the IATA country code and use a comma if there is more than one country. 
 - **Default:** ""  
 - **Example:** "US"  
 
@@ -476,7 +442,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Deprecated Field. Ignore it.  
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -484,16 +449,18 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Passenger type for booking.  
-- **Constraints:** Example values: "ADT", "CHD", "INF"  
+
+  Valid values:
+  - "ADT"
+  - "CHD"
+  - "INF"
 - **Default:** "ADT"  
 - **Example:** "ADT"  
-
 
 ## **fromSegments**
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of segments for outbound flights.  
-- **Constraints:** Must contain at least one segment.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -501,7 +468,6 @@ Nationality limitation values
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Segment sequence. Starts from 1. If it is return trip, sequence for outbound trip and inbound trip would be together.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -509,7 +475,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Airline carrier code.  
-- **Constraints:** Must be a valid IATA airline code.  
 - **Default:** None  
 - **Example:** "F9"  
 
@@ -517,7 +482,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Flight number for the segment.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "F92232"  
 
@@ -525,7 +489,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure airport IATA code.  
-- **Constraints:** Must be a valid IATA code.  
 - **Default:** None  
 - **Example:** "ONT"  
 
@@ -533,7 +496,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Departure time in YYYYMMDDHHMM format.  
-- **Constraints:** Must follow the format YYYYMMDDHHMM.  
 - **Default:** None  
 - **Example:** "202504101502"  
 
@@ -541,7 +503,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival airport IATA code.  
-- **Constraints:** Must be a valid IATA code.  
 - **Default:** None  
 - **Example:** "LAS"  
 
@@ -549,7 +510,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Arrival time in YYYYMMDDHHMM format.  
-- **Constraints:** Must follow the format YYYYMMDDHHMM.  
 - **Default:** None  
 - **Example:** "202504101615"  
 
@@ -557,7 +517,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Stopover cities (if applicable). Name of cities from where the passengers will take connecting flights. Include IATA code of cities and use a comma in case of multiple cities to separate transfer airports count is higher than 1. Blank means non-stop flight.
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** "SUB"  
 
@@ -565,7 +524,6 @@ Nationality limitation values
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Duration of the flight segment in minutes.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 73  
 
@@ -573,11 +531,10 @@ Nationality limitation values
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if the flight is codeshared.  
-- **Constraints:** True or False  
 
-  True : code share
-
-  False : Not code share
+  Valid values:  
+  - True : code share
+  - False : Not code share
 - **Default:** false  
 - **Example:** false  
 
@@ -585,7 +542,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Booking code for the fare. For the LCCs which do not provide cabin options, the cabin string will be blank.
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** "Y"  
 
@@ -596,14 +552,10 @@ Nationality limitation values
 - **Constraints:** Must be a positive integer. 
 
   Valid values:
-
-  1 : Economy
-
-  2 : Business
-
-  3 : First Class
-
-  4: Premium Economy 
+  - 1 : Economy
+  - 2 : Business
+  - 3 : First Class
+  - 4: Premium Economy 
 - **Default:** None  
 - **Example:** 1  
 
@@ -611,7 +563,6 @@ Nationality limitation values
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Available seat count.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 4  
 
@@ -619,7 +570,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** This value identifies the aircraft model, which is the IATA aircraft code. For example, Airbus A380 = 388, Airbus A350 = 351.
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** "388"  
 
@@ -627,7 +577,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Departure terminal information.  
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** "T1"  
 
@@ -635,7 +584,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Arrival terminal information.  
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** "T3"  
 
@@ -643,7 +591,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Operating airline carrier code. 
-- **Constraints:** Must be a valid IATA airline code.  
 - **Default:** None  
 - **Example:** "F9"  
 
@@ -651,7 +598,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Operating airline flight number.  
-- **Constraints:** None  
 - **Default:** ""  
 - **Example:** ""  
 
@@ -659,7 +605,6 @@ Nationality limitation values
 - **Type:** String  
 - **Required:** No  
 - **Description:** Fare Family as per the information received from the airline.
-- **Constraints:** None  
 - **Default:** "Basic Fare"  
 - **Example:** "Basic Fare"  
 
@@ -667,7 +612,6 @@ Nationality limitation values
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of segments for return flights.  
-- **Constraints:** Must contain at least one segment.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -675,7 +619,6 @@ Nationality limitation values
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Contains baggage-related information and policies.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** {...}
 
@@ -683,7 +626,10 @@ Nationality limitation values
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if free checked-in or cabin baggage is included.  
-- **Constraints:** 1 for included, 0 for not included.  
+
+  Valid values:
+  - 1 for included
+  - 0 for not included.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -691,7 +637,6 @@ Nationality limitation values
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of free baggage allowances and restrictions per segment.  
-- **Constraints:** Must contain at least one baggage element.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -699,7 +644,6 @@ Nationality limitation values
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Segment number to which the baggage applies. Segment sequence, start from 1. If it is roundtrip, sequence outbound and inbound will be together. 
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -708,16 +652,11 @@ Nationality limitation values
 - **Required:** Yes  
 - **Description:** Type of baggage allowed.  
 
-There are 4 options for baggage:
-
-StandardCheckInBaggage: Standard Check-in Baggage.
-
-CabinBaggage: Usually refers to the Cabin Baggage Overhead Locker. Transition value. It will gradually transition to CabinBaggageOverheadLocker.
-
-CabinBaggageOverheadLocker: Cabin Baggage Overhead Locker.
-
-CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal item.
-- **Constraints:** Accepts predefined baggage types (e.g., "CabinBaggageUnderSeat", "StandardCheckInBaggage").  
+  Valid values:
+  - StandardCheckInBaggage: Standard Check-in Baggage.
+  - CabinBaggage: Usually refers to the Cabin Baggage Overhead Locker. Transition value. It will gradually transition to CabinBaggageOverheadLocker.
+  - CabinBaggageOverheadLocker: Cabin Baggage Overhead Locker.
+  - CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal item.
 - **Default:** None  
 - **Example:** "CabinBaggageUnderSeat"  
 
@@ -725,7 +664,11 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Passenger type for baggage allowance.  
-- **Constraints:** 0 for ADT, 1 for CHD and 2 for INF.
+
+  Valid values:
+  -  0 for ADT
+  -  1 for CHD
+  -  2 for INF.
 - **Default:** 0  
 - **Example:** 0  
 
@@ -734,10 +677,9 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Required:** Yes  
 - **Description:** Number of baggage pieces allowed.  
 
-  0: No limitation on the number of pieces
-
-  higher than 0: Maximum pieces
-- **Constraints:** Must be a non-negative integer.  
+  Valid values:
+  - 0: No limitation on the number of pieces
+  - higher than 0: Maximum pieces
 - **Default:** 1  
 - **Example:** 1  
 
@@ -745,28 +687,24 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Weight of the baggage in kilograms.  
-  0: No free baggage
 
-  -1: No limitation on weight.
-- **Constraints:** -1 indicates no weight limit, positive values indicate a weight restriction.  
+  Valid values:
+  - 0: No free baggage
+  - 1: No limitation on weight.
 - **Default:** -1  
 - **Example:** -1  
 
 #### **rule.baggageElements.baggageSize**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Dimensions of the baggage allowed.  
-- **Constraints:** Format should be L*W*H (e.g., 45*35*20cm). Empty means no limitations. 
+- **Description:** Dimensions of the baggage allowed. Format should be L*W*H (e.g., 45*35*20cm). Empty means no limitations.  
 - **Default:** ""  
 - **Example:** "45*35*20cm"  
-
-
 
 ## **refundRules**
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Refund policy details associated with the flight booking. This function is used to fetch the refund rules of the selected airline. There is only one array for one way, and two arrays for round-trip. The first array is for the outbound, and the second array is for the inbound. 
-- **Constraints:** None.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -774,11 +712,9 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of refund allowed.  
-- **Constraints:** 
-
-0: Wholly unused ticket
-
-1: Partially used ticket (For example, when the passenger has used an outbound flight and wants to refund an inbound flight.)
+  Valid values:
+  - 0: Wholly unused ticket
+  - 1: Partially used ticket (For example, when the passenger has used an outbound flight and wants to refund an inbound flight.)
 - **Default:** 0  
 - **Example:** 0  
 
@@ -786,7 +722,11 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Refund eligibility status.  
-- **Constraints:** "T" for refundable, "F" for non-refundable, "H" for refundable with restrictions
+
+  Valid values:
+  - "T" for refundable
+  - "F" for non-refundable
+  - "H" for refundable with restrictions
 - **Default:** "T"  
 - **Example:** "T"  
 
@@ -798,7 +738,6 @@ CabinBaggageUnderSeat: Cabin Baggage Under Seat. Usually refers to the personal 
 If refundStatus = H, it should not be null
 
 If refundStatus = T/F, it can be null  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0.0  
 - **Example:** 0.0  
 
@@ -806,7 +745,6 @@ If refundStatus = T/F, it can be null
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The currency of airline's rule, if refundStatus = H, it should not be "null".
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -815,12 +753,10 @@ If refundStatus = T/F, it can be null
 - **Required:** Yes  
 - **Description:** Indicates if a no-show affects refunds (for the most restrictive condition).
 
-T: Non refundable
-
-H: Refundable with restrictions
-
-F: Free for refund  
-- **Constraints:** "T" for non-refundable, "F" for free for refund, "H" for refundable with restrictions.  
+  Valid values:
+  - T: Non refundable
+  - H: Refundable with restrictions
+  - F: Free for refund  
 - **Default:** "T"  
 - **Example:** "T"  
 
@@ -828,7 +764,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Time before scheduled flight departure.  
-- **Constraints:** Must be a valid predefined condition code.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -840,7 +775,6 @@ F: Free for refund
 If refNoshow = H, it should not be "null".
 
 This value includes the refund fee and no-show penalty
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0.0  
 - **Example:** 0.0  
 
@@ -848,7 +782,6 @@ This value includes the refund fee and no-show penalty
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of all rules. Inside the ruleList are detailed airline rules for time periods, while outside the ruleList are the strictest rules before and after Noshow.
-- **Constraints:** None.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -856,7 +789,6 @@ This value includes the refund fee and no-show penalty
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Unique identifier for the refund rule.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 36608  
 
@@ -865,12 +797,10 @@ This value includes the refund fee and no-show penalty
 - **Required:** Yes  
 - **Description:** Status of the refund rule.  
 
-T: Non refundable
-
-H: Refundable with restrictions
-
-F: Free for refund  
-- **Constraints:** "T" for non-refundable, "F" for free for refund, "H" for refundable with restrictions.  
+  Valid values:
+  - T: Non refundable
+  - H: Refundable with restrictions
+  - F: Free for refund  
 - **Default:** "T"  
 - **Example:** "T"  
 
@@ -878,7 +808,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Starting time of rule application. Positive numbers represent XXX minutes before departure. Negative numbers represent XXX minutes after departure. 
-- **Constraints:** Can be negative (past flights) or positive (future flights).  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -886,7 +815,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Ending time of rule application. Positive numbers represent XXX minutes before departure. Negative numbers represent XXX minutes after departure.
-- **Constraints:** Negative values indicate rules valid in the past.  
 - **Default:** -525600  
 - **Example:** -525600  
 
@@ -894,7 +822,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Refund amount associated with the rule.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0.0  
 - **Example:** 0.0  
 
@@ -902,7 +829,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** The currency of airline's rule. If refundStatus = H, it should not be "null".
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -910,7 +836,6 @@ F: Free for refund
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Rules defining ticket changes, including fees and conditions. This function is used to fetch the change rules of the selected airline. There is only one array for one way, and two arrays for round-trip. The first array is for the outbound, and the second array is for the inbound.
-- **Constraints:** None.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -918,11 +843,10 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Type of flight change allowed.  
-- **Constraints:** 
 
-  0: Wholly unused ticket
-
-  1: Partially used ticket (For example. When the passenger has used an outbound flight and wants to change an inbound flight)  
+  Valid values:
+  - 0: Wholly unused ticket
+  - 1: Partially used ticket (For example. When the passenger has used an outbound flight and wants to change an inbound flight)  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -930,13 +854,10 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Change eligibility status  (for the most restrictive condition).  
-
-  T: Non changeable
-
-  H: Changeable with restrictions
-
-  F: Free flight change
-- **Constraints:** "T" for non-changeable, "H" for changeable with restrictions, "F" for free flight change.  
+  Valid values:
+  - T: Non changeable
+  - H: Changeable with restrictions
+  - F: Free flight change
 - **Default:** "T"  
 - **Example:** "T"  
 
@@ -944,7 +865,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Fee applied for making changes to the ticket (for the most restrictive condition).  If changesStatus = H, it should not be "null" and if changesStatus = T/F, it can be "null"
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0.0  
 - **Example:** 0.0  
 
@@ -952,7 +872,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which change fees are applied. If changesStatus = H, it should not be "null". 
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -961,11 +880,10 @@ F: Free for refund
 - **Required:** Yes  
 - **Description:** Indicates if a no-show affects changes (for the most restrictive condition).  
 
-  T: Non changeable
-
-  H: Changeable with restrictions
-
-  F: Free flight change
+  Valid values:
+  - T: Non changeable
+  - H: Changeable with restrictions
+  - F: Free flight change
 - **Constraints:** "T" for non-changeable, "H" for changeable with restrictions, "F" for free flight change.  
 - **Default:** "T"  
 - **Example:** "T"  
@@ -974,7 +892,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Time before scheduled flight departure.  
-- **Constraints:** Must be a valid predefined condition code.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -982,7 +899,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The total fee charged to change flight in case of no show. If revNoshow = H, it should not be "null." This value includes the change flight fee and no-show penalty.
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0.0  
 - **Example:** 0.0  
 
@@ -990,7 +906,6 @@ F: Free for refund
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Detailed change policies applied at different time frames.  
-- **Constraints:** Must contain at least one rule detail entry.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -1000,7 +915,6 @@ F: Free for refund
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** Additional service elements included in the booking. This function is used to fetch the other service rules of the selected airline. There is only one array for one way, and two arrays for round-trip. The first array is for the outbound, and the second array is for the inbound.
-- **Constraints:** Must contain at least one service element.  
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -1009,24 +923,21 @@ F: Free for refund
 - **Required:** Yes  
 - **Description:** Indicates whether free seat selection is available.  
 
-  0: Not included
-
-  1: All included
-
-  2：Part included
-- **Constraints:** 0 for no free seat, 1 for free seat, 2 for part included.  
+  Valid values:
+  - 0: Not included
+  - 1: All included
+  - 2：Part included
 - **Default:** 0  
 - **Example:** 0  
 
 ### **serviceElements.hasFreeMeal**
 - **Type:** Integer  
 - **Required:** Yes  
-- **Description:** Indicates whether free meal service is available.  
 
-  0: Not included
-
-  1: Included
-- **Constraints:** 0 for no free meal, 1 for free meal.  
+  Valid values:
+  - Indicates whether free meal service is available.
+  - 0: Not included
+  - 1: Included
 - **Default:** 0  
 - **Example:** 0  
 
@@ -1035,7 +946,6 @@ F: Free for refund
 - **Type:** Array  
 - **Required:** Yes  
 - **Description:** List of ancillary products available for purchase. The details of the extra baggage offering are available in the ancillaryProductElements within both “search” and the “verify” response.
-- **Constraints:** None 
 - **Default:** None  
 - **Example:** [{...}]
 
@@ -1043,7 +953,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Segment number to which the ancillary product applies. Starts from 1. If it is return trip, sequence for outbound trip and inbound trip would be together. 
-- **Constraints:** Must be a positive integer.  
 - **Default:** None  
 - **Example:** 1  
 
@@ -1051,7 +960,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** No  
 - **Description:** Last segment index for multi-segment applicability.  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** null  
 
@@ -1059,7 +967,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Unique code identifying the ancillary product. It would be used in the order request. 
-- **Constraints:** Must be a valid product code.  
 - **Default:** None  
 - **Example:** "SCI_BAG_1PC_18KG"  
 
@@ -1067,7 +974,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Name of the ancillary product.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "StandardCheckInBaggage"  
 
@@ -1076,12 +982,11 @@ F: Free for refund
 - **Required:** Yes  
 - **Description:** Type of ancillary product.  
 
-  1: Check-in baggage
-
-  3: Cabin Baggage Overhead Locker
+  Valid values:
+  - 1: Check-in baggage
+  - 3: Cabin Baggage Overhead Locker
 
   Currently, only baggage is available.
-- **Constraints:** Must be a valid predefined type.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -1089,7 +994,10 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased with the ticket.  
-- **Constraints:** 1 for yes, 0 for no.  
+
+  Valid values:
+  - 1 for yes
+  - 0 for no.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -1097,7 +1005,9 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Indicates if the product can be purchased after ticket issuance.  
-- **Constraints:** 1 for yes, 0 for no.  
+  Valid values:
+  - 1 for yes
+  - 0 for no.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -1105,7 +1015,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price of the ancillary product.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 68.00  
 
@@ -1113,7 +1022,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which the ancillary product is priced.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -1121,7 +1029,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Vendor price of the ancillary product.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 68.00  
 
@@ -1129,7 +1036,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which the vendor prices the ancillary product.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -1137,7 +1043,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** The service fee charged by Atlas for the purchase of the ancillary.
-- **Constraints:** Must be a non-negative value.  
 - **Default:** 0  
 - **Example:** 0  
 
@@ -1146,15 +1051,11 @@ F: Free for refund
 - **Required:** No  
 - **Description:** Mode of applying the technical service fee.  
 
-  Transaction Fee Mode values:
-
-  PER_SEGMENT: Each segment of an itinerary (per passenger)
-
-  PER_TICKET: No. of tickets in a booking
-
-  PER_PAX: Per passenger
-
-  PER_BOOKING: Per atlas booking (order #)  
+  Valid values:
+  - PER_SEGMENT: Each segment of an itinerary (per passenger)
+  - PER_TICKET: No. of tickets in a booking
+  - PER_PAX: Per passenger
+  - PER_BOOKING: Per atlas booking (order #)  
 - **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** null  
@@ -1163,7 +1064,6 @@ F: Free for refund
 - **Type:** Object  
 - **Required:** Yes  
 - **Description:** Additional details related to baggage ancillary products.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** {...}
 
@@ -1171,7 +1071,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Number of baggage pieces allowed.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -1180,10 +1079,9 @@ F: Free for refund
 - **Required:** Yes  
 - **Description:** Weight limit in kilograms.  
 
-  0：No Limitation about piece;
-
-  higher than 0：Maximum pieces
-- **Constraints:** Must be a positive integer.  
+  Valid values:
+  - 0：No Limitation about piece;
+  - higher than 0：Maximum pieces
 - **Default:** 18  
 - **Example:** 18  
 
@@ -1191,15 +1089,16 @@ F: Free for refund
 - **Type:** Boolean  
 - **Required:** Yes  
 - **Description:** Value mentions maximum weight for ancillary baggage; this should be greater than 0.
-- **Constraints:** true or false.  
+  Valid values:
+  - true
+  - false
 - **Default:** true  
 - **Example:** true  
 
 ### **auxBaggageElement.size**
 - **Type:** String  
 - **Required:** No  
-- **Description:** Dimensions of the baggage allowed.  
-- **Constraints:** Format should be L*W*H (e.g., 45*35*20cm).  
+- **Description:** Dimensions of the baggage allowed. Format should be L*W*H (e.g., 45*35*20cm).    
 - **Default:** ""  
 - **Example:** "45*35*20cm"  
 
@@ -1207,7 +1106,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** No  
 - **Description:** The identifier of the offer of ancillary product. This will be "null" in the booking flow but will have an id in the post-ticketing flow.
-- **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** null  
 
@@ -1215,7 +1113,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Maximum quantity of the ancillary product that can be purchased.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -1223,7 +1120,6 @@ F: Free for refund
 - **Type:** Integer  
 - **Required:** Yes  
 - **Description:** Minimum quantity of the ancillary product that must be purchased.  
-- **Constraints:** Must be a positive integer.  
 - **Default:** 1  
 - **Example:** 1  
 
@@ -1231,7 +1127,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Category classification of the ancillary product.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "StandardCheckInBaggage"  
 
@@ -1239,7 +1134,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Code uniquely identifying the ancillary product.  
-- **Constraints:** None  
 - **Default:** None  
 - **Example:** "SCI_BAG_1PC_18KG"  
 
@@ -1247,7 +1141,6 @@ F: Free for refund
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Additional details related to seat selection (if applicable).  
-- **Constraints:** Can be null if not applicable.  
 - **Default:** null  
 - **Example:** null  
 
@@ -1255,7 +1148,6 @@ F: Free for refund
 - **Type:** Number  
 - **Required:** Yes  
 - **Description:** Price displayed to the user for the ancillary product in display currency.  
-- **Constraints:** Must be a non-negative value.  
 - **Default:** None  
 - **Example:** 68.00  
 
@@ -1263,7 +1155,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Currency in which the display price is shown.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "USD"  
 - **Example:** "USD"  
 
@@ -1271,7 +1162,6 @@ F: Free for refund
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Vendor-specific fare details.  
-- **Constraints:** Can be null if not available.  
 - **Default:** null  
 - **Example:** null  
 
@@ -1287,7 +1177,6 @@ F: Free for refund
 - **Type:** Object  
 - **Required:** No  
 - **Description:** Links to additional resources related to the booking.  
-- **Constraints:** Can be null if no links are available.  
 - **Default:** null  
 - **Example:** null  
 
@@ -1295,7 +1184,10 @@ F: Free for refund
 - **Type:** Boolean  
 - **Required:** No  
 - **Description:** Indicates if the booking is split into multiple reservations.  
-- **Constraints:** true or false.  
+
+  Valid values:
+  - true
+  - false
 - **Default:** false  
 - **Example:** false  
 
@@ -1303,7 +1195,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** Yes  
 - **Description:** Timestamp of when the data was last refreshed in cache.  
-- **Constraints:** Must be in ISO 8601 format.  
 - **Default:** None  
 - **Example:** "2025-03-21T06:37:46Z"  
 
@@ -1311,7 +1202,6 @@ F: Free for refund
 - **Type:** Object  
 - **Required:** YNo 
 - **Description:** Pricing details displayed to the user in the display fare currency.  
-- **Constraints:** Must contain a valid currency field.  
 - **Default:** None  
 - **Example:** { "currency": "PHP" }  
 
@@ -1319,7 +1209,6 @@ F: Free for refund
 - **Type:** String  
 - **Required:** No  
 - **Description:** Currency in which the fare is displayed.  
-- **Constraints:** Must be a valid ISO 4217 currency code.  
 - **Default:** "PHP"  
 - **Example:** "PHP"  
 {% endtab %}
