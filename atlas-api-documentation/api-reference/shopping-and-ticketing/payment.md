@@ -230,7 +230,18 @@ Cardholder country, province, city, postcode and address are required only for a
   passenger. When the amount entered by the customer is lower than 5% of the order price or 5 USD (converted to the transacting currency) per passenger, the information sent to Atlas by the 
   customer will be used.  
 - **Default:** null  
-- **Example:** null  
+- **Example:** null
+
+#### **creditCard.reusable**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** Atlas expects this information as Atlas is cautious when making payments for multiple cards. When encountering unknown errors in payment to the airline, Atlas will not easily attempt to retry, as this may result in multiple deductions.
+
+  Valid values:
+  - true: multiple-use card
+  - false: single-use card
+- **Default:** false  
+- **Example:** true  
 
 #### **paymentMethod**
 - **Type:** Integer  
@@ -242,7 +253,7 @@ Cardholder country, province, city, postcode and address are required only for a
   - 3 = VCC Passthrough
   - 5 = MoR
 - **Default:** Deposit  
-- **Example:** `3`  
+- **Example:** `3`
 {% endtab %}
 
 {% tab title="Samples" %}
