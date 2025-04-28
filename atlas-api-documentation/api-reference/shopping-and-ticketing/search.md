@@ -1133,6 +1133,13 @@ No preceding function needs to be called before `Search`.
 - **Default:** false  
 - **Example:** false  
 
+## **expireTime**
+- **Type:** String  
+- **Required:** No  
+- **Description:** Cache expiration time (UTC time). Please note that this time is estimated, which means Atlas may refresh the cache before or after that time. Format: yyyy-MM-dd'T'HH: mm: ss-Z 
+- **Default:** None  
+- **Example:** "2025-03-21T06:37:46Z"  
+
 ## **refreshTime**
 - **Type:** String  
 - **Required:** Yes  
