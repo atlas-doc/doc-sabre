@@ -563,7 +563,16 @@ Please refer to the below information for the usage of the queryOrderDetails.do 
   - 3 = VCC Passthrough
   - 5 = MoR
 - **Default:** Deposit  
-- **Example:** `3`  
+- **Example:** `3`
+
+### **paymentOptions[].paymentAttempted**
+- **Type:** Boolean  
+- **Required:** No  
+- **Description:** Only used for VCC transparent transmission, indicating whether Atlas has initiated payment operations with the airline using your VCC. True/false/null (meaningless).
+
+    Note that a "true" value in this field only indicates that Atlas has previously initiated a payment operation with the airline, and does not represent the payment result (successful or failed)
+- **Default:** None  
+- **Example:** `true`  
 
 ### **paymentOptions[].serviceFee**
 - **Type:** Object  
