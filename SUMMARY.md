@@ -56,6 +56,7 @@
       * [Unaccounted Cancellation](atlas-api-documentation/api-reference/Incident-Management/Unaccounted-Cancellation-Confirm.md)    
       * [Schedule Change – API Notification](atlas-api-documentation/api-reference/Incident-Management/Schedule-Change-API-Notification-Confirm.md)
       * [Incident List](atlas-api-documentation/api-reference/Incident-Management/Incident-List.md)
+* [API Reference(New)](atlas-api-documentation/Api-Reference-New.md)
 * [Advanced](atlas-api-documentation/advanced/README.md)
   
     <!--   * [Add Ancillaries](atlas-api-documentation/advanced/add-ancillaries.md) -->
